@@ -10,9 +10,6 @@
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 
-def jdkHome = System.getenv("JAVA_HOME")
-
-
 // In this section you declare where to find the dependencies of your project
 repositories {
    jcenter()
@@ -20,7 +17,6 @@ repositories {
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
-//   compile files("$jdkHome/lib/tools.jar")
 }
 
 sourceSets {
@@ -41,4 +37,13 @@ jar {
    manifest {
       attributes 'Main-Class': 'AuctionCentral'
    }
+}
+
+task runJar(dependsOn:jar) << {
+  javaexec { 
+    main="-jar";
+    args = [
+            "build/libs/group1.jar"
+           ]
+  } 
 }
