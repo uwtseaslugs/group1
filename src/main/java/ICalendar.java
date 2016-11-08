@@ -1,9 +1,9 @@
-
-
 import java.util.Date;
 import java.util.List;
 
-public interface ICalendar {
+import java.io.Serializable;
+
+public interface ICalendar extends Serializable {
     boolean canAddAuction(Auction a);
     void addAuction(Auction a);
     void removeAuction(Auction a);
