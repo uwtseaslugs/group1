@@ -21,7 +21,7 @@ public abstract class AbstractMenu {
     }
 
     public final String getStatus() {
-        User user = AuctionCentral.currentUser;
+        User user = AuctionCentral.loginManager.getCurrentUser();
         if (user == null) {
             return "Not Logged in";
         }
@@ -33,12 +33,20 @@ public abstract class AbstractMenu {
     public abstract String getBody();
 
     public void show() {
+        for (int i = 0; i < 6; i++) {
+            System.out.println("");
+        }
         System.out.println(getTitle());
         System.out.println(getStatus());
         System.out.println("");
         System.out.println(getHeading());
         System.out.println("");
-        System.out.println(getBody());
+        String body = getBody();
+        System.out.println(body);
+        int bodyLines = (int) body.chars().filter(c -> c == '\n').count();
+        for (int i = 0; i < 20 - bodyLines; i++) {
+            System.out.println("");
+        }
         System.out.println("");
         System.out.print("> ");
         Scanner scanner = new Scanner(System.in);
