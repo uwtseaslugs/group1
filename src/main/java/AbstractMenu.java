@@ -44,7 +44,7 @@ public abstract class AbstractMenu {
         String body = getBody();
         System.out.println(body);
         int bodyLines = (int) body.chars().filter(c -> c == '\n').count();
-        for (int i = 0; i < 20 - bodyLines; i++) {
+        for (int i = 0; i < 22 - bodyLines; i++) {
             System.out.println("");
         }
         System.out.println("");

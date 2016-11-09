@@ -1,6 +1,7 @@
+import java.io.*;
 import java.math.*;
 
-public interface IItem {
+public interface IItem extends Serializable {
 
     String getName();
     ItemCondition getCondition();
