@@ -13,6 +13,10 @@ public enum ItemSize {
         this.description = description;
     }
 
+    /**
+     *
+     * @return a description of the requirements for this size
+     */
     public String getDescription() {
         return description;
     }
