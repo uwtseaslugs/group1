@@ -50,7 +50,7 @@ public abstract class AbstractMenu {
         System.out.println("");
         System.out.print("> ");
         Scanner scanner = new Scanner(System.in);
-        onResponse(scanner.next());
+        onResponse(scanner.nextLine());
     }
 
     public abstract void onResponse(String response);
