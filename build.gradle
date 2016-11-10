@@ -35,7 +35,7 @@ sourceSets {
 
 jar {
    manifest {
-      attributes 'Main-Class': 'AuctionCentral'
+      attributes 'Main-Class': 'auctioncentral.AuctionCentral'
    }
 }
 

@@ -1,3 +1,5 @@
+package auctioncentral.model;
+
 public class LoginManager implements ILoginManager {
 
     private User currentUser;

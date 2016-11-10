@@ -1,3 +1,5 @@
+package auctioncentral.model;
+
 public class Staff extends User {
 
     public Staff(String username, String name) {

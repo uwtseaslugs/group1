@@ -1,3 +1,10 @@
+package auctioncentral.view.login;
+
+import auctioncentral.*;
+import auctioncentral.model.*;
+import auctioncentral.view.*;
+import auctioncentral.view.staff.*;
+
 public class LoginUserTypeMenu extends AbstractMenu {
 
     private String username;

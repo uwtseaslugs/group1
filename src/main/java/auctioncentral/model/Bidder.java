@@ -1,3 +1,5 @@
+package auctioncentral.model;
+
 public class Bidder extends User {
 
     public Bidder(String username, String name) {

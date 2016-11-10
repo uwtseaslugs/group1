@@ -1,3 +1,8 @@
+package auctioncentral.view;
+
+import auctioncentral.*;
+import auctioncentral.model.*;
+
 import java.util.*;
 
 public abstract class AbstractMenu {

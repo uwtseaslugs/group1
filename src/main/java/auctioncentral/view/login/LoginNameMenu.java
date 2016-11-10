@@ -1,3 +1,7 @@
+package auctioncentral.view.login;
+
+import auctioncentral.view.*;
+
 public class LoginNameMenu extends AbstractMenu {
 
     private String username;

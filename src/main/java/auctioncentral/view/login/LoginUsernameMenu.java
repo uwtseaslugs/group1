@@ -1,3 +1,7 @@
+package auctioncentral.view.login;
+
+import auctioncentral.view.*;
+
 public class LoginUsernameMenu extends AbstractMenu {
 
     @Override

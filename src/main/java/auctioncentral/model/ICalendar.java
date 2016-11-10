@@ -1,3 +1,5 @@
+package auctioncentral.model;
+
 import java.util.Date;
 import java.util.List;
 

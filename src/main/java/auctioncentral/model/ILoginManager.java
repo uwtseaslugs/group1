@@ -1,3 +1,5 @@
+package auctioncentral.model;
+
 public interface ILoginManager {
 
     User getCurrentUser();

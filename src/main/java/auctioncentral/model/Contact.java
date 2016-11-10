@@ -1,3 +1,5 @@
+package auctioncentral.model;
+
 public class Contact extends User {
 
     public Contact(String username, String name) {

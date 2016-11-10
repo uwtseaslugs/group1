@@ -1,3 +1,5 @@
+package auctioncentral.model;
+
 import java.math.*;
 import java.util.*;
 

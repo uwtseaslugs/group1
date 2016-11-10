@@ -1,3 +1,5 @@
+package auctioncentral.model;
+
 /**
  * The condition of an Inventory Item
  */

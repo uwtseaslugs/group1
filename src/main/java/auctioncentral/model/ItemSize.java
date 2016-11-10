@@ -1,3 +1,5 @@
+package auctioncentral.model;
+
 /**
  * The size of an Inventory Item
  */
