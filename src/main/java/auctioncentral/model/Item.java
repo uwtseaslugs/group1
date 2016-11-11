@@ -108,11 +108,13 @@ public class Item implements IItem {
      *
      * @param bidder bidder who is placing the bid
      * @param price the price of the bid
-     * @throws IllegalArgumentException if bidder is null, price is null, or price is less than the minimum bid
+     * @throws IllegalArgumentException if bidder is null, price is null, price is less than the minimum bid,
+     *         or bidder has already placed a bid before
      */
     @Override
     public void placeBid(Bidder bidder, BigDecimal price) {
-        if (bidder == null || price == null || price.compareTo(BigDecimal.valueOf(minimumBid)) <= 0) {
+        if (bidder == null || price == null || price.compareTo(BigDecimal.valueOf(minimumBid)) < 0 ||
+                bids.containsKey(bidder)) {
             throw new IllegalArgumentException();
         }
         bids.put(bidder, price);
