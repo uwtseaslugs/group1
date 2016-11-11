@@ -17,6 +17,7 @@ repositories {
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
+    compile 'junit:junit:4.12'
 }
 
 sourceSets {
@@ -25,7 +26,7 @@ sourceSets {
          srcDir 'src'
       }
    }
-	
+
    test {
       java {
          srcDir 'test'
