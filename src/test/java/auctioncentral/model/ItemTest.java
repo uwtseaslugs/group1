@@ -64,4 +64,17 @@ public class ItemTest {
         item50MinBid.placeBid(testBidder, new BigDecimal("60"));
         item50MinBid.placeBid(testBidder, new BigDecimal("65"));
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNewItemMissingRequired() {
+        new Item("name", null, ItemSize.SMALL, 50, null, null, null);
+    }
+
+    @Test
+    public void testNewItemAllRequired() {
+        assertNotNull(item50MinBid.getName());
+        assertNotNull(item50MinBid.getMinimumBid());
+        assertNotNull(item50MinBid.getCondition());
+        assertNotNull(item50MinBid.getSize());
+    }
 }
