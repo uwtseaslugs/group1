@@ -26,8 +26,13 @@ public class StaffHomeMenu extends AbstractMenu {
     public void onResponse(String response) {
         int responseNum = Integer.parseInt(response);
         switch (responseNum) {
-
-
+            case 1:
+                return;
+            case 2:
+                new StaffAdminMenu().show();
+                return;
+            case 3:
+                return;
         }
     }
 }
