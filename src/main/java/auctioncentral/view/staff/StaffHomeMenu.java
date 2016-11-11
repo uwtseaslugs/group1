@@ -11,7 +11,7 @@ public class StaffHomeMenu extends AbstractMenu {
 
     @Override
     public String getHeading() {
-        return dateTimeFormatter.format(LocalDateTime.now()) + ".";
+        return dateTimeFormatter.format(LocalDateTime.now()) + ".  Total number of upcoming auctions: ";
     }
 
     @Override
@@ -26,6 +26,7 @@ public class StaffHomeMenu extends AbstractMenu {
     public void onResponse(String response) {
         int responseNum = Integer.parseInt(response);
         switch (responseNum) {
+
 
         }
     }
