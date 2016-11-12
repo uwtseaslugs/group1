@@ -2,6 +2,8 @@ package auctioncentral.model;
 
 import org.junit.*;
 
+import java.util.*;
+
 import static org.junit.Assert.*;
 
 /**
@@ -58,18 +60,17 @@ public class CalendarTest {
     public void setup() {
         emptyCalendar = new Calendar();
         fullCalendar = new Calendar();
-//        Contact contact = new Contact("contactUsername", "contactName");
-//        auctionToday = new Auction(contact, "Test auction", new Date(), "10:30", "Co comment");
-//        auctionTomorrow = new Auction("Test auction",
-//                                      Calendar.addDaysToDate(new Date(), 1),
-//                                      "10:30", "Co comment");
+        auctionToday = new Auction(new Contact("1u", "1n"), new Date(), "Co comment", null);
+        auctionTomorrow = new Auction(new Contact("2u", "2n"),
+                                      Calendar.addDaysToDate(new Date(), 1),
+                                      "Co comment", null);
 
-//        for (int i = 1; i < emptyCalendar.getNumberOfDaysForCurrentMonth(); i++) {
-//            Auction tmpAuction = new Auction("Test auction " + i,
-//                                             Calendar.addDaysToDate(new Date(), i),
-//                                             "10:30", "No comment");
-//            fullCalendar.addAuction(tmpAuction);
-//        }
+        for (int i = 1; i < emptyCalendar.getNumberOfDaysForCurrentMonth(); i++) {
+            Auction tmpAuction = new Auction(new Contact("" + i, "" + i),
+                                             Calendar.addDaysToDate(new Date(), i),
+                                             "No comment", null);
+            fullCalendar.addAuction(tmpAuction);
+        }
     }
 
     @Test
@@ -86,11 +87,11 @@ public class CalendarTest {
 
     @Test
     public void testCannotAddAuctionBeforeToday() {
-//        Auction auctionTmp = new Auction("Test auction",
-//                                      Calendar.addDaysToDate(new Date(), -1),
-//                                      "10:30", "Co comment");
-//        assertEquals(false, fullCalendar.canAddAuction(auctionTmp));
-//        assertEquals(false, fullCalendar.addAuction(auctionTmp));
+        Auction auctionTmp = new Auction(new Contact("", ""),
+                                      Calendar.addDaysToDate(new Date(), -1),
+                                      "Co comment", null);
+        assertEquals(false, fullCalendar.canAddAuction(auctionTmp));
+        assertEquals(false, fullCalendar.addAuction(auctionTmp));
     }
 
     @Test

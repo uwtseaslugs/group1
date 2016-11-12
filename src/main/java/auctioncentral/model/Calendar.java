@@ -1,9 +1,9 @@
 package auctioncentral.model;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Calendar implements ICalendar {
+
     @Override
     public boolean canAddAuction(Auction a) {
         return false;
