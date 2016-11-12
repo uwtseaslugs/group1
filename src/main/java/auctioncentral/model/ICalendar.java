@@ -7,9 +7,12 @@ import java.io.Serializable;
 
 public interface ICalendar extends Serializable {
     boolean canAddAuction(Auction a);
-    void addAuction(Auction a);
-    void removeAuction(Auction a);
+    boolean addAuction(Auction a);
+    boolean removeAuction(Auction a);
 
     List<Auction> getAuctionsPastDate(Date d);
     List<Auction> getAuctionsBetweenDates(Date start, Date end);
+
+
+    int getNumberOfDaysForCurrentMonth();
 }

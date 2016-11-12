@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="auctioncentral.model.ItemTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2016-11-12T21:37:29" hostname="viveret-Alienware-X51" time="0.019">
+  <properties/>
+  <testcase name="testPlaceBidTwice" classname="auctioncentral.model.ItemTest" time="0.005"/>
+  <testcase name="testPlaceBidZero" classname="auctioncentral.model.ItemTest" time="0.0"/>
+  <testcase name="testPlaceBidPositiveLessThanMin" classname="auctioncentral.model.ItemTest" time="0.0"/>
+  <testcase name="testPlaceBidEqualTonMin" classname="auctioncentral.model.ItemTest" time="0.0"/>
+  <testcase name="testNewItemNegativeMinimumBid" classname="auctioncentral.model.ItemTest" time="0.001"/>
+  <testcase name="testNewItemMissingRequired" classname="auctioncentral.model.ItemTest" time="0.0"/>
+  <testcase name="testPlaceBidNegative" classname="auctioncentral.model.ItemTest" time="0.0"/>
+  <testcase name="testNewItemPositiveMinimumBid" classname="auctioncentral.model.ItemTest" time="0.003"/>
+  <testcase name="testNewItemZeroMinimumBid" classname="auctioncentral.model.ItemTest" time="0.001"/>
+  <testcase name="testPlaceBidGreaterThanMin" classname="auctioncentral.model.ItemTest" time="0.0"/>
+  <testcase name="testNewItemAllRequired" classname="auctioncentral.model.ItemTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
