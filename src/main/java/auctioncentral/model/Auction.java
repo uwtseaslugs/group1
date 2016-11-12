@@ -9,12 +9,13 @@ public class Auction {
 
 
 
-    public Auction(String nameOfAuction,Date date, String Time, String Comments){
+    public Auction(String nameOfAuction, Date date, String Time, String Comments){
         this.nameOfAuction = nameOfAuction;
         this.date = date;
         this.Comments = Comments;
 
     }
+    
     public String getNameOfAuction(){return nameOfAuction;}
 
     public Date getDate(){return date;}
