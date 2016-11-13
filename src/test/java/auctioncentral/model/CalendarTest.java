@@ -46,8 +46,6 @@ import static org.junit.Assert.*;
 
 public class CalendarTest {
     private ICalendar emptyCalendar;
-    private ICalendar fullCalendar;
-    private ICalendar avgCalendar;
     private Contact contact1;
     
     private Auction auction2Weeks1;
@@ -55,31 +53,41 @@ public class CalendarTest {
     private Auction auctionToday;
     private Auction auction2Weeks2;
     private Auction auction2Weeks3;
+    private Auction auction25Days;
+    private Date date2Weeks;
+
+    private ICalendar calendarFullMinusOne;
+    private ICalendar calendarFull;
     
     @Before
     public void setup() {
         contact1 = new Contact("username1", "name1");
         emptyCalendar = new Calendar();
-        fullCalendar = new Calendar();
+        calendarFull = new Calendar();
+        calendarFullMinusOne = new Calendar();
 
         java.util.Calendar calendar2Weeks = Calendar.getJavaCalendar();
         calendar2Weeks.add(java.util.Calendar.DATE, 14);
-        Date date2Weeks = calendar2Weeks.getTime();
+        date2Weeks = calendar2Weeks.getTime();
 
         auctionToday = new Auction(contact1, new Date(), null, null);
         auction2Weeks1 = new Auction(new Contact("1u", "1n"), date2Weeks, "Co comment", null);
         auction2Weeks2 = new Auction(new Contact("2u", "2n"), date2Weeks, "Co comment", null);
         auction2Weeks3 = new Auction(new Contact("3u", "3n"), date2Weeks, "Co comment", null);
-        auctionTomorrow = new Auction(new Contact("2u", "2n"),
-                                      Calendar.addDaysToDate(new Date(), 1),
-                                      "Co comment", null);
+        auctionTomorrow = new Auction(new Contact("2u", "2n"), Calendar.addDaysToDate(new Date(), 1), null, null);
+        auction25Days = new Auction(new Contact("2u", "2n"), Calendar.addDaysToDate(new Date(), 25), null, null);
 
-        for (int i = 1; i < emptyCalendar.getNumberOfDaysForCurrentMonth(); i++) {
-            Auction tmpAuction = new Auction(new Contact("" + i, "" + i),
-                                             Calendar.addDaysToDate(new Date(), i),
-                                             "No comment", null);
-            fullCalendar.addAuction(tmpAuction);
+        java.util.Calendar c = java.util.Calendar.getInstance();
+        c.add(java.util.Calendar.DATE, 8);
+        for (int i = 0; i < 12; i++) {
+            calendarFullMinusOne.addAuction(new Auction(new Contact("" + i, "" + i), c.getTime(), null, null));
+            calendarFull.addAuction(new Auction(new Contact("" + i, "" + i), c.getTime(), null, null));
+            calendarFullMinusOne.addAuction(new Auction(new Contact("" + i, "" + i), c.getTime(), null, null));
+            calendarFull.addAuction(new Auction(new Contact("" + i, "" + i), c.getTime(), null, null));
+            c.add(java.util.Calendar.DATE, 1);
         }
+        c.add(java.util.Calendar.DATE, 1);
+        calendarFull.addAuction(new Auction(new Contact("last", "last"), c.getTime(), null, null));
     }
 
 
@@ -91,8 +99,13 @@ public class CalendarTest {
 
     @Test
     public void testCannotAddAuctionToFullCalendar() {
-        assertEquals(false, fullCalendar.canAddAuction(auctionTomorrow));
-        assertEquals(false, fullCalendar.addAuction(auctionTomorrow));
+        assertEquals(false, calendarFull.canAddAuction(auction25Days));
+        assertEquals(false, calendarFull.addAuction(auction25Days));
+    }
+    @Test
+    public void testAdd25thAuction() {
+        assertEquals(true, calendarFullMinusOne.canAddAuction(auction25Days));
+        assertEquals(true, calendarFullMinusOne.addAuction(auction25Days));
     }
 
     @Test
@@ -112,7 +125,8 @@ public class CalendarTest {
 
     @Test
     public void testCanRemoveAuctionWhenExists() {
-        assertEquals(true, fullCalendar.removeAuction(auctionTomorrow));
+        emptyCalendar.addAuction(auction2Weeks1);
+        assertEquals(true, emptyCalendar.removeAuction(auction2Weeks1));
     }
 
     @Test
@@ -129,14 +143,14 @@ public class CalendarTest {
     public void testGetAuctionsPastDateReturnsNonEmptyWhenCalIsNonEmpty() {
         java.util.Calendar c = Calendar.getJavaCalendar();
         c.set(java.util.Calendar.DAY_OF_MONTH, 1);
-        assertNotEquals(0, fullCalendar.getAuctionsPastDate(c.getTime()));
+        assertNotEquals(Collections.emptyList(), calendarFull.getAuctionsPastDate(c.getTime()));
     }
 
-    @Test
-    public void testGetNumberOfDaysForCurrentMonthIsCorrect() {
-        assertEquals(Calendar.getJavaCalendar().getActualMaximum(java.util.Calendar.DAY_OF_MONTH),
-                     emptyCalendar.getNumberOfDaysForCurrentMonth());
-    }
+//    @Test
+//    public void testGetNumberOfDaysForCurrentMonthIsCorrect() {
+//        assertEquals(Calendar.getJavaCalendar().getActualMaximum(java.util.Calendar.DAY_OF_MONTH),
+//                     emptyCalendar.getNumberOfDaysForCurrentMonth());
+//    }
     @Test
     public void testCanAddOneAuctionInOneDay(){
         assertEquals(true, emptyCalendar.canAddAuction(auction2Weeks1));
@@ -212,5 +226,16 @@ public class CalendarTest {
         java.util.Calendar c = Calendar.getJavaCalendar();
         c.add(java.util.Calendar.MONTH, 2);
         assertFalse(emptyCalendar.canAddAuction(new Auction(contact1, c.getTime(), null, null)));
+    }
+
+    @Test
+    public void testAddAuctionNoFutureAuctions() {
+        assertTrue(emptyCalendar.canAddAuction(new Auction(contact1, date2Weeks, null, null)));
+    }
+
+    @Test
+    public void testAddAuctionOneFutureAuction() {
+        emptyCalendar.addAuction(new Auction(contact1, date2Weeks, null, null));
+        assertFalse(emptyCalendar.canAddAuction(new Auction(contact1, Calendar.addDaysToDate(date2Weeks, 1), null, null)));
     }
 }
