@@ -43,9 +43,11 @@ public class LoginUserTypeMenu extends AbstractMenu {
                 return;
             case 2:
                 AuctionCentral.loginManager.setCurrentUser(new Contact(username, name));
+                new ContactHomeMenu().show();
                 return;
             case 3:
                 AuctionCentral.loginManager.setCurrentUser(new Bidder(username, name));
+                new BidderHomeMenu().show();
                 return;
             default:
         }
