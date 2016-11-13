@@ -21,6 +21,11 @@ public class AuctionTest {
     }
     
     @Test(expected = IllegalArgumentException.class)
+    public void testNewAuctionNegativeNumberOfItems() {
+        new Auction(contact,new Date(), "Negative Items",-3); 
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
     public void testNewAuctionNullContact(){
         new Auction(null,new Date(), "Null contact",1);
     }
