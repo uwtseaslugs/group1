@@ -146,11 +146,12 @@ public class CalendarTest {
         assertNotEquals(Collections.emptyList(), calendarFull.getAuctionsPastDate(c.getTime()));
     }
 
-//    @Test
-//    public void testGetNumberOfDaysForCurrentMonthIsCorrect() {
-//        assertEquals(Calendar.getJavaCalendar().getActualMaximum(java.util.Calendar.DAY_OF_MONTH),
-//                     emptyCalendar.getNumberOfDaysForCurrentMonth());
-//    }
+    @Test
+    public void testGetNumberOfDaysForCurrentMonthIsCorrect() {
+        assertEquals(Calendar.getJavaCalendar().getActualMaximum(java.util.Calendar.DAY_OF_MONTH),
+                     emptyCalendar.getNumberOfDaysForCurrentMonth());
+    }
+
     @Test
     public void testCanAddOneAuctionInOneDay(){
         assertEquals(true, emptyCalendar.canAddAuction(auction2Weeks1));
