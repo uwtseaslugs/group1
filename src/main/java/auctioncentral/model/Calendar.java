@@ -137,6 +137,18 @@ public class Calendar implements ICalendar {
     }
 
     public int getNumberOfAuctionsOnDate(Date d) {
-        return -1;
+        java.util.Calendar target = java.util.Calendar.getInstance();
+        target.setTime(d);
+        int numAuctionsOnDate = 0;
+        for (Auction a : auctions) {
+            java.util.Calendar c = java.util.Calendar.getInstance();
+            c.setTime(a.getDate());
+            if (c.get(java.util.Calendar.YEAR) == target.get(java.util.Calendar.YEAR) &&
+                    c.get(java.util.Calendar.MONTH) == target.get(java.util.Calendar.MONTH) &&
+                    c.get(java.util.Calendar.DATE) == target.get(java.util.Calendar.DATE)) {
+                numAuctionsOnDate++;
+            }
+        }
+        return numAuctionsOnDate;
     }
 }
