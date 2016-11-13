@@ -22,11 +22,7 @@ import static org.junit.Assert.*;
  * Prior to submitting the auction, the non-profit has no auctions in the past year in the system but one auction that is greater than one year in the past -- Allowed.
  * Prior to submitting the auction, the non-profit has no auctions in the past year in the system but one auction that is exactly one year in the past -- Allowed.
  * Prior to submitting the auction, the non-profit has no auctions in the past in the system -- Allowed.
- * Business rule: Maximum of two auctions per day
- * Prior to submitting the auction, there are no auctions in the system scheduled for this day -- Allowed
- * Prior to submitting the auction, there is exactly one auction in the system scheduled for this day -- Allowed
- * Prior to submitting the auction, there are exactly two auctions in the system scheduled for this day -- Not Allowed
- * Prior to submitting the auction, there are more than two auctions in the system scheduled for this day -- Not Allowed
+ * <p>
  * Business rule: Maximum of twenty-five upcoming auctions in the system
  * Prior to submitting the auction, there are less than 24 auctions in the system -- Allowed
  * Prior to submitting the auction, there are exactly 24 auctions in the system -- Allowed
@@ -129,4 +125,23 @@ public class CalendarTest {
         assertEquals(Calendar.getJavaCalendar().getActualMaximum(java.util.Calendar.DAY_OF_MONTH),
                      emptyCalendar.getNumberOfDaysForCurrentMonth());
     }
+    @Test
+    public void testCanAddOneAuctionInOneDay(){
+        assertEquals(true, emptyCalendar.canAddAuction(auctionToday));
+        assertEquals(true, emptyCalendar.addAuction(auctionToday));
+    }
+    @Test
+    public void testCanAddTwoAuctionsInOneDay(){
+        emptyCalendar.addAuction(auctionToday);
+        assertEquals(true, emptyCalendar.canAddAuction(auctionToday));
+        assertEquals(true, emptyCalendar.addAuction(auctionToday));
+    }
+    @Test
+    public void testCannotAddMoreThanTwoAuctionsInOneDay(){
+        emptyCalendar.addAuction(auctionToday);
+        emptyCalendar.addAuction(auctionToday);
+        assertEquals(false, emptyCalendar.canAddAuction(auctionToday));
+        assertEquals(false, emptyCalendar.addAuction(auctionToday));
+    }
+
 }
