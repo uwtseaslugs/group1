@@ -51,12 +51,16 @@ public class CalendarTest {
     
     private Auction auctionToday;
     private Auction auctionTomorrow;
-
+    private Auction auctionTwoToday;
+    private Auction auctionThreeToday;
+    
     @Before
     public void setup() {
         emptyCalendar = new Calendar();
         fullCalendar = new Calendar();
         auctionToday = new Auction(new Contact("1u", "1n"), new Date(), "Co comment", null);
+        auctionTwoToday = new Auction(new Contact("3u", "3n"), new Date(), "Co comment", null);
+        auctionThreeToday = new Auction(new Contact("4u", "4n"), new Date(), "Co comment", null);
         auctionTomorrow = new Auction(new Contact("2u", "2n"),
                                       Calendar.addDaysToDate(new Date(), 1),
                                       "Co comment", null);
@@ -133,15 +137,14 @@ public class CalendarTest {
     @Test
     public void testCanAddTwoAuctionsInOneDay(){
         emptyCalendar.addAuction(auctionToday);
-        assertEquals(true, emptyCalendar.canAddAuction(auctionToday));
-        assertEquals(true, emptyCalendar.addAuction(auctionToday));
+        assertEquals(true, emptyCalendar.canAddAuction(auctionTwoToday));
+        assertEquals(true, emptyCalendar.addAuction(auctionTwoToday));
     }
     @Test
     public void testCannotAddMoreThanTwoAuctionsInOneDay(){
         emptyCalendar.addAuction(auctionToday);
-        emptyCalendar.addAuction(auctionToday);
-        assertEquals(false, emptyCalendar.canAddAuction(auctionToday));
-        assertEquals(false, emptyCalendar.addAuction(auctionToday));
+        emptyCalendar.addAuction(auctionTwoToday);
+        assertEquals(false, emptyCalendar.canAddAuction(auctionThreeToday));
+        assertEquals(false, emptyCalendar.addAuction(auctionThreeToday));
     }
-
 }
