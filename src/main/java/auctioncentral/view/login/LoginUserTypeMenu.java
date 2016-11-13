@@ -5,6 +5,8 @@ import auctioncentral.model.*;
 import auctioncentral.view.*;
 import auctioncentral.view.staff.*;
 
+import java.util.Scanner;
+
 public class LoginUserTypeMenu extends AbstractMenu {
 
     private String username;
@@ -29,8 +31,11 @@ public class LoginUserTypeMenu extends AbstractMenu {
     }
 
     @Override
-    public void onResponse(String response) {
-        int responseInt = Integer.parseInt(response);
+    public void onResponse(Scanner scan) {
+        while (!scan.hasNextInt()) {
+            System.out.printf("Please input a number 1 - 3.\n>");
+        }
+        int responseInt = scan.nextInt();
         switch (responseInt) {
             case 1:
                 AuctionCentral.loginManager.setCurrentUser(new Staff(username, name));

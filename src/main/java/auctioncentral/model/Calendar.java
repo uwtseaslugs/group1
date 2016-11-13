@@ -122,7 +122,7 @@ public class Calendar implements ICalendar {
     
     @Override
     public int getNumberOfDaysForCurrentMonth() {
-        return 0;
+        return getJavaCalendar().getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
     }
 
     public static java.util.Calendar getJavaCalendar() {
@@ -134,5 +134,9 @@ public class Calendar implements ICalendar {
         c.setTime(theDate);
         c.add(java.util.Calendar.DAY_OF_MONTH, numDays);
         return c.getTime();
+    }
+
+    public int getNumberOfAuctionsOnDate(Date d) {
+        return -1;
     }
 }

@@ -38,9 +38,7 @@ public abstract class AbstractMenu {
     public abstract String getBody();
 
     public void show() {
-        for (int i = 0; i < 6; i++) {
-            System.out.println("");
-        }
+        clearPreviousScreen();
         System.out.println(getTitle());
         System.out.println(getStatus());
         System.out.println("");
@@ -49,14 +47,28 @@ public abstract class AbstractMenu {
         String body = getBody();
         System.out.println(body);
         int bodyLines = (int) body.chars().filter(c -> c == '\n').count();
-        for (int i = 0; i < 22 - bodyLines; i++) {
-            System.out.println("");
-        }
         System.out.println("");
         System.out.print("> ");
         Scanner scanner = new Scanner(System.in);
-        onResponse(scanner.nextLine());
+        onResponse(scanner);
     }
 
-    public abstract void onResponse(String response);
+    public final void clearPreviousScreen() {
+        try {
+            final String os = System.getProperty("os.name");
+
+            if (os.contains("Windows")){
+                Runtime.getRuntime().exec("cls");
+            } else {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (final Exception e) {
+            for (int i = 0; i < 6; i++) {
+                System.out.println("");
+            }
+        }
+    }
+
+    public abstract void onResponse(Scanner response);
 }

@@ -15,4 +15,6 @@ public interface ICalendar extends Serializable {
 
 
     int getNumberOfDaysForCurrentMonth();
+
+    int getNumberOfAuctionsOnDate(Date d);
 }
