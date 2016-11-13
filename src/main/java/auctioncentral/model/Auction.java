@@ -36,8 +36,12 @@ public class Auction {
      *
      * @return date and time of this auction
      */
-    public Date getDate(){
+    public Date getDate() {
         return date;
+    }
+
+    public Contact getContact() {
+        return contact;
     }
 
     /**
