@@ -40,8 +40,7 @@ public class LoginUserTypeMenu extends AbstractMenu {
                 new StaffHomeMenu().show();
                 return;
             case "2":
-                AuctionCentral.loginManager.setCurrentUser(new Contact(username, name));
-                new ContactHomeMenu().show();
+                new ContactNonprofitNameMenu(username, name).show();
                 return;
             case "3":
                 AuctionCentral.loginManager.setCurrentUser(new Bidder(username, name));
