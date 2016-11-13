@@ -48,6 +48,7 @@ public class CalendarTest {
     private ICalendar emptyCalendar;
     private ICalendar fullCalendar;
     private ICalendar avgCalendar;
+    private Contact contact1;
     
     private Auction auctionToday;
     private Auction auctionTomorrow;
@@ -56,6 +57,7 @@ public class CalendarTest {
     
     @Before
     public void setup() {
+        contact1 = new Contact("username1", "name1");
         emptyCalendar = new Calendar();
         fullCalendar = new Calendar();
         auctionToday = new Auction(new Contact("1u", "1n"), new Date(), "Co comment", null);
@@ -72,6 +74,7 @@ public class CalendarTest {
             fullCalendar.addAuction(tmpAuction);
         }
     }
+
 
     @Test
     public void testCanAddAuctionToEmptyCalendar() {
@@ -146,5 +149,63 @@ public class CalendarTest {
         emptyCalendar.addAuction(auctionTwoToday);
         assertEquals(false, emptyCalendar.canAddAuction(auctionThreeToday));
         assertEquals(false, emptyCalendar.addAuction(auctionThreeToday));
+    }
+
+    @Test
+    public void testAddAuctionInEightDays() {
+        java.util.Calendar c = Calendar.getJavaCalendar();
+        c.add(java.util.Calendar.DATE, 8);
+        assertTrue(emptyCalendar.canAddAuction(new Auction(contact1, c.getTime(), null, null)));
+    }
+
+    @Test
+    public void testAddAuctionInSevenDays() {
+        java.util.Calendar c = Calendar.getJavaCalendar();
+        c.add(java.util.Calendar.DATE, 7);
+        c.add(java.util.Calendar.HOUR, 1);
+        assertTrue(emptyCalendar.canAddAuction(new Auction(contact1, c.getTime(), null, null)));
+    }
+
+    @Test
+    public void testAddAuctionInSixDays() {
+        java.util.Calendar c = Calendar.getJavaCalendar();
+        c.add(java.util.Calendar.DATE, 6);
+        assertFalse(emptyCalendar.canAddAuction(new Auction(contact1, c.getTime(), null, null)));
+    }
+
+    @Test
+    public void testAddAuctionTomorrow() {
+        java.util.Calendar c = Calendar.getJavaCalendar();
+        c.add(java.util.Calendar.DATE, 1);
+        assertFalse(emptyCalendar.canAddAuction(new Auction(contact1, c.getTime(), null, null)));
+    }
+
+    @Test
+    public void testAddAuctionInOneMonth() {
+        java.util.Calendar c = Calendar.getJavaCalendar();
+        c.add(java.util.Calendar.MONTH, 1);
+        assertTrue(emptyCalendar.canAddAuction(new Auction(contact1, c.getTime(), null, null)));
+    }
+
+    @Test
+    public void testAddAuctionIn25Days() {
+        java.util.Calendar c = Calendar.getJavaCalendar();
+        c.add(java.util.Calendar.DATE, 25);
+        assertTrue(emptyCalendar.canAddAuction(new Auction(contact1, c.getTime(), null, null)));
+    }
+
+    @Test
+    public void testAddAuctionInOneMonthAndOneDay() {
+        java.util.Calendar c = Calendar.getJavaCalendar();
+        c.add(java.util.Calendar.DATE, 1);
+        c.add(java.util.Calendar.MONTH, 1);
+        assertFalse(emptyCalendar.canAddAuction(new Auction(contact1, c.getTime(), null, null)));
+    }
+
+    @Test
+    public void testAddAuctionInTwoMonths() {
+        java.util.Calendar c = Calendar.getJavaCalendar();
+        c.add(java.util.Calendar.MONTH, 2);
+        assertFalse(emptyCalendar.canAddAuction(new Auction(contact1, c.getTime(), null, null)));
     }
 }
