@@ -9,11 +9,11 @@ public class AuctionTest {
         newAuction = new Auction(contact,new Date(),"Test Auction",2);
         Item testItem  = new Item("name", ItemCondition.NEW, ItemSize.SMALL, 50, null, null, null);
     }
-
     @Test(expected = IllegalArgumentException.class)
-    public void testNewItemNegativeMinimumBid() {
-        new Item("name", ItemCondition.GOOD, ItemSize.SMALL, -50, null, null, null);
+    public void testNewAuctionNullItemNUmber(){
+        new Auction(contact,new Date(), "Null Item",null);
     }
+    
     @Test(expected = IllegalArgumentException.class)
     public void testNewAuctionNullContact(){
         new Auction(null,new Date(), "Null contact",1);
