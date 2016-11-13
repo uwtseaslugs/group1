@@ -8,17 +8,7 @@ public class Calendar implements ICalendar {
     private TreeSet<Auction> auctions;
 
     public Calendar() {
-        auctions = new TreeSet<>((new Comparator<Auction>() {
-            @Override
-            public int compare(Auction o1, Auction o2) {
-                int compareDates = o1.getDate().compareTo(o2.getDate());
-                if (compareDates == 0) {
-                    return Integer.compare(o1.hashCode(), o2.hashCode());
-                } else {
-                    return compareDates;
-                }
-            }
-        }));
+        auctions = new TreeSet<>();
     }
 
     @Override
