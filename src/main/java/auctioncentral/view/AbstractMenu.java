@@ -50,7 +50,7 @@ public abstract class AbstractMenu {
         System.out.println("");
         System.out.print("> ");
         Scanner scanner = new Scanner(System.in);
-        onResponse(scanner.nextLine());
+        onResponse(scanner);
     }
 
     public final void clearPreviousScreen() {
@@ -70,5 +70,5 @@ public abstract class AbstractMenu {
         }
     }
 
-    public abstract void onResponse(String response);
+    public abstract void onResponse(Scanner response);
 }

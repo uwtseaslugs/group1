@@ -2,6 +2,8 @@ package auctioncentral.view.login;
 
 import auctioncentral.view.*;
 
+import java.util.Scanner;
+
 public class LoginUsernameMenu extends AbstractMenu {
 
     @Override
@@ -15,7 +17,7 @@ public class LoginUsernameMenu extends AbstractMenu {
     }
 
     @Override
-    public void onResponse(String response) {
-        new LoginNameMenu(response).show();
+    public void onResponse(Scanner scan) {
+        new LoginNameMenu(scan.nextLine()).show();
     }
 }

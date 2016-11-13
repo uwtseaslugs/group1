@@ -4,6 +4,7 @@ import auctioncentral.view.*;
 
 import java.time.*;
 import java.time.format.*;
+import java.util.Scanner;
 
 public class StaffHomeMenu extends AbstractMenu {
 
@@ -23,8 +24,11 @@ public class StaffHomeMenu extends AbstractMenu {
     }
 
     @Override
-    public void onResponse(String response) {
-        int responseNum = Integer.parseInt(response);
+    public void onResponse(Scanner scan) {
+        while (!scan.hasNextInt()) {
+            System.out.printf("Please enter a number 1 - 3.\n> ");
+        }
+        int responseNum = scan.nextInt();
         switch (responseNum) {
             case 1:
                 return;

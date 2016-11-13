@@ -3,6 +3,7 @@ package auctioncentral.view.bidder;
 import auctioncentral.view.*;
 import java.time.*;
 import java.time.format.*;
+import java.util.Scanner;
 
 public class BidderBidMenu extends AbstractMenu {
 
@@ -19,7 +20,7 @@ public class BidderBidMenu extends AbstractMenu {
     }
 
     @Override
-    public void onResponse(String response) {
+    public void onResponse(Scanner scan) {
 //        int responseNum = Integer.parseInt(response);
 //        switch (responseNum) {
 //
