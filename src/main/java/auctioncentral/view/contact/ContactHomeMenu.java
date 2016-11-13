@@ -25,20 +25,18 @@ public class ContactHomeMenu extends AbstractMenu {
 
     @Override
     public void onResponse(Scanner scan) {
-        while (!scan.hasNextInt()) {
-            System.out.printf("Please enter a number 1 - 4.\n> ");
+        switch (scan.nextLine()) {
+            case "1":
+                return;
+            case "2":
+                return;
+            case "3":
+                return;
+            case "4":
+                return;
+            default:
+                System.out.printf("Please enter a number 1 - 4.\n> ");
+                onResponse(scan);
         }
-        int responseNum = scan.nextInt();
-        switch (responseNum) {
-            case 1:
-                return;
-            case 2:
-                return;
-            case 3:
-                return;
-            case 4:
-                return;
-        }
-
     }
 }

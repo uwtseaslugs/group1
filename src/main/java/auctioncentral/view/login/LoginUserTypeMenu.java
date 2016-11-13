@@ -34,24 +34,22 @@ public class LoginUserTypeMenu extends AbstractMenu {
 
     @Override
     public void onResponse(Scanner scan) {
-        while (!scan.hasNextInt()) {
-            System.out.printf("Please input a number 1 - 3.\n>");
-        }
-        int responseInt = scan.nextInt();
-        switch (responseInt) {
-            case 1:
+        switch (scan.nextLine()) {
+            case "1":
                 AuctionCentral.loginManager.setCurrentUser(new Staff(username, name));
                 new StaffHomeMenu().show();
                 return;
-            case 2:
+            case "2":
                 AuctionCentral.loginManager.setCurrentUser(new Contact(username, name));
                 new ContactHomeMenu().show();
                 return;
-            case 3:
+            case "3":
                 AuctionCentral.loginManager.setCurrentUser(new Bidder(username, name));
                 new BidderHomeMenu().show();
                 return;
             default:
+                System.out.print("Please enter a number 1 - 3.\n> ");
+                onResponse(scan);
         }
     }
 }
