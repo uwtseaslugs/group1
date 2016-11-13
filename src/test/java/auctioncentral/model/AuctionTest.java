@@ -1,17 +1,23 @@
 package auctioncentral.model;
 import org.junit.*;
 import java.util.*;
-public class AuctionTest {
-    private Auction newAuction;
+import static org.junit.Assert.*;
 
+public class AuctionTest {
+
+    private Auction newAuction;
+    private Contact contact;
+    private Item testItem;
+
+    @Before
     public void setup(){
-        Contact contact = new Contact("contactUsername", "contactName");
+        contact = new Contact("contactUsername", "contactName");
         newAuction = new Auction(contact,new Date(),"Test Auction",2);
-        Item testItem  = new Item("name", ItemCondition.NEW, ItemSize.SMALL, 50, null, null, null);
+        testItem  = new Item("name", ItemCondition.NEW, ItemSize.SMALL, 50, null, null, null);
     }
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testNewAuctionNullItemNUmber(){
-        new Auction(contact,new Date(), "Null Item",null);
+        assertNotNull(new Auction(contact,new Date(), "Null Item",null));
     }
     
     @Test(expected = IllegalArgumentException.class)
@@ -25,10 +31,8 @@ public class AuctionTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testNewAuctionNullDate(){
+    public void testAddItemTwice(){
         newAuction.addItem(testItem);
         newAuction.addItem(testItem);
     }
-
-
 }

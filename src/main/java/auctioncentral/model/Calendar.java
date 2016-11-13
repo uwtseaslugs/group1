@@ -52,7 +52,13 @@ public class Calendar implements ICalendar {
         // todo
 
         // more than one week in the future
-        // todo
+        java.util.Calendar jCalendar = getJavaCalendar();
+        jCalendar.setTime(now);
+        jCalendar.add(java.util.Calendar.DATE, 7);
+        Date oneWeekFromNow = jCalendar.getTime();
+        if (auction.getDate().after(oneWeekFromNow)) {
+            return false;
+        }
 
         return true;
     }
