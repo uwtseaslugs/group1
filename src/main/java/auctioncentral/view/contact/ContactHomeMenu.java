@@ -1,9 +1,10 @@
 package auctioncentral.view.contact;
 
-import auctioncentral.view.AbstractMenu;
+import auctioncentral.view.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.*;
+import java.time.format.*;
+import java.util.*;
 
 public class ContactHomeMenu extends AbstractMenu {
     private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMMM d, uuuu");
@@ -23,8 +24,11 @@ public class ContactHomeMenu extends AbstractMenu {
     }
 
     @Override
-    public void onResponse(String response) {
-        int responseNum = Integer.parseInt(response);
+    public void onResponse(Scanner scan) {
+        while (!scan.hasNextInt()) {
+            System.out.printf("Please enter a number 1 - 4.\n> ");
+        }
+        int responseNum = scan.nextInt();
         switch (responseNum) {
             case 1:
                 return;
@@ -35,5 +39,6 @@ public class ContactHomeMenu extends AbstractMenu {
             case 4:
                 return;
         }
+
     }
 }

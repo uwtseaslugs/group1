@@ -3,9 +3,11 @@ package auctioncentral.view.login;
 import auctioncentral.*;
 import auctioncentral.model.*;
 import auctioncentral.view.*;
+import auctioncentral.view.bidder.*;
+import auctioncentral.view.contact.*;
 import auctioncentral.view.staff.*;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class LoginUserTypeMenu extends AbstractMenu {
 
