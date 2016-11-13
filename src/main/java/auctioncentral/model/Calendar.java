@@ -46,17 +46,37 @@ public class Calendar implements ICalendar {
         }
 
         // max of 1 other auction on the new auctions date
-        // todo
+        int countOnNewAuctionDate = 0;
+        java.util.Calendar newAuctionCalendar = getJavaCalendar();
+        newAuctionCalendar.setTime(auction.getDate());
+        for (Auction a : upcomingAuctions) {
+            java.util.Calendar jCalendar = getJavaCalendar();
+            jCalendar.setTime(a.getDate());
+            if (jCalendar.get(java.util.Calendar.YEAR) == newAuctionCalendar.get(java.util.Calendar.YEAR) &&
+                    jCalendar.get(java.util.Calendar.MONTH) == newAuctionCalendar.get(java.util.Calendar.MONTH) &&
+                    jCalendar.get(java.util.Calendar.DATE) == newAuctionCalendar.get(java.util.Calendar.DATE)) {
+                countOnNewAuctionDate++;
+            }
+        }
+        if (countOnNewAuctionDate >= 2) {
+            return false;
+        }
 
         // less than one month in the future
-        // todo
+        java.util.Calendar jCalendar = getJavaCalendar();
+        jCalendar.setTime(now);
+        jCalendar.add(java.util.Calendar.MONTH, 1);
+        Date oneMonthFromNow = jCalendar.getTime();
+        if (auction.getDate().after(oneMonthFromNow)) {
+            return false;
+        }
 
         // more than one week in the future
-        java.util.Calendar jCalendar = getJavaCalendar();
+        jCalendar = getJavaCalendar();
         jCalendar.setTime(now);
         jCalendar.add(java.util.Calendar.DATE, 7);
         Date oneWeekFromNow = jCalendar.getTime();
-        if (auction.getDate().after(oneWeekFromNow)) {
+        if (auction.getDate().before(oneWeekFromNow)) {
             return false;
         }
 
