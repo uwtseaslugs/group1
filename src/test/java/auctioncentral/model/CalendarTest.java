@@ -50,19 +50,26 @@ public class CalendarTest {
     private ICalendar avgCalendar;
     private Contact contact1;
     
-    private Auction auctionToday;
+    private Auction auction2Weeks1;
     private Auction auctionTomorrow;
-    private Auction auctionTwoToday;
-    private Auction auctionThreeToday;
+    private Auction auctionToday;
+    private Auction auction2Weeks2;
+    private Auction auction2Weeks3;
     
     @Before
     public void setup() {
         contact1 = new Contact("username1", "name1");
         emptyCalendar = new Calendar();
         fullCalendar = new Calendar();
-        auctionToday = new Auction(new Contact("1u", "1n"), new Date(), "Co comment", null);
-        auctionTwoToday = new Auction(new Contact("3u", "3n"), new Date(), "Co comment", null);
-        auctionThreeToday = new Auction(new Contact("4u", "4n"), new Date(), "Co comment", null);
+
+        java.util.Calendar calendar2Weeks = Calendar.getJavaCalendar();
+        calendar2Weeks.add(java.util.Calendar.DATE, 14);
+        Date date2Weeks = calendar2Weeks.getTime();
+
+        auctionToday = new Auction(contact1, new Date(), null, null);
+        auction2Weeks1 = new Auction(new Contact("1u", "1n"), date2Weeks, "Co comment", null);
+        auction2Weeks2 = new Auction(new Contact("2u", "2n"), date2Weeks, "Co comment", null);
+        auction2Weeks3 = new Auction(new Contact("3u", "3n"), date2Weeks, "Co comment", null);
         auctionTomorrow = new Auction(new Contact("2u", "2n"),
                                       Calendar.addDaysToDate(new Date(), 1),
                                       "Co comment", null);
@@ -78,8 +85,8 @@ public class CalendarTest {
 
     @Test
     public void testCanAddAuctionToEmptyCalendar() {
-        assertEquals(true, emptyCalendar.canAddAuction(auctionTomorrow));
-        assertEquals(true, emptyCalendar.addAuction(auctionTomorrow));
+        assertEquals(true, emptyCalendar.canAddAuction(auction2Weeks1));
+        assertEquals(true, emptyCalendar.addAuction(auction2Weeks1));
     }
 
     @Test
@@ -93,14 +100,14 @@ public class CalendarTest {
         Auction auctionTmp = new Auction(new Contact("", ""),
                                       Calendar.addDaysToDate(new Date(), -1),
                                       "Co comment", null);
-        assertEquals(false, fullCalendar.canAddAuction(auctionTmp));
-        assertEquals(false, fullCalendar.addAuction(auctionTmp));
+        assertEquals(false, emptyCalendar.canAddAuction(auctionTmp));
+        assertEquals(false, emptyCalendar.addAuction(auctionTmp));
     }
 
     @Test
     public void testCannotAddAuctionToday() {
-        assertEquals(false, fullCalendar.canAddAuction(auctionToday));
-        assertEquals(false, fullCalendar.addAuction(auctionToday));
+        assertEquals(false, emptyCalendar.canAddAuction(auctionToday));
+        assertEquals(false, emptyCalendar.addAuction(auctionToday));
     }
 
     @Test
@@ -115,9 +122,7 @@ public class CalendarTest {
 
     @Test
     public void testGetAuctionsPastDateReturnsEmptyWhenCalIsEmpty() {
-        java.util.Calendar c = Calendar.getJavaCalendar();
-        c.set(java.util.Calendar.DAY_OF_MONTH, 1);
-        assertEquals(0, emptyCalendar.getAuctionsPastDate(c.getTime()));
+        assertEquals(Collections.emptyList(), emptyCalendar.getAuctionsPastDate(new Date()));
     }
 
     @Test
@@ -134,21 +139,21 @@ public class CalendarTest {
     }
     @Test
     public void testCanAddOneAuctionInOneDay(){
-        assertEquals(true, emptyCalendar.canAddAuction(auctionToday));
-        assertEquals(true, emptyCalendar.addAuction(auctionToday));
+        assertEquals(true, emptyCalendar.canAddAuction(auction2Weeks1));
+        assertEquals(true, emptyCalendar.addAuction(auction2Weeks1));
     }
     @Test
     public void testCanAddTwoAuctionsInOneDay(){
-        emptyCalendar.addAuction(auctionToday);
-        assertEquals(true, emptyCalendar.canAddAuction(auctionTwoToday));
-        assertEquals(true, emptyCalendar.addAuction(auctionTwoToday));
+        emptyCalendar.addAuction(auction2Weeks1);
+        assertEquals(true, emptyCalendar.canAddAuction(auction2Weeks2));
+        assertEquals(true, emptyCalendar.addAuction(auction2Weeks2));
     }
     @Test
     public void testCannotAddMoreThanTwoAuctionsInOneDay(){
-        emptyCalendar.addAuction(auctionToday);
-        emptyCalendar.addAuction(auctionTwoToday);
-        assertEquals(false, emptyCalendar.canAddAuction(auctionThreeToday));
-        assertEquals(false, emptyCalendar.addAuction(auctionThreeToday));
+        emptyCalendar.addAuction(auction2Weeks1);
+        emptyCalendar.addAuction(auction2Weeks2);
+        assertEquals(false, emptyCalendar.canAddAuction(auction2Weeks3));
+        assertEquals(false, emptyCalendar.addAuction(auction2Weeks3));
     }
 
     @Test
