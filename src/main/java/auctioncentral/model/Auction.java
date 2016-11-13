@@ -9,7 +9,7 @@ public class Auction {
 
     private Date date;
     private String comments;
-    private int approxNumOfItems;
+    private Integer approxNumOfItems;
     private Contact contact;
     private List<Item> items;
 
@@ -19,10 +19,10 @@ public class Auction {
      * @param date (required) date and time of the auction
      * @param comments (optional)
      * @param approxNumOfItems (optional)
-     * @throws IllegalArgumentException if date is null or contact is null
+     * @throws IllegalArgumentException if date is null, contact is null, or approxNumOfItems is <= 0
      */
     public Auction(Contact contact, Date date, String comments, Integer approxNumOfItems){
-        if (date == null || contact == null) {
+        if (date == null || contact == null || (approxNumOfItems != null && approxNumOfItems <= 0)) {
             throw new IllegalArgumentException();
         }
         this.date = date;
