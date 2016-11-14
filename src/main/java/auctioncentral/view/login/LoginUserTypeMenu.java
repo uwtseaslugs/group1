@@ -44,7 +44,7 @@ public class LoginUserTypeMenu extends AbstractMenu {
                 return;
             case "3":
                 AuctionCentral.loginManager.setCurrentUser(new Bidder(username, name));
-                new BidderHomeMenu().show();
+                new BidderHomeMenu(this).show();
                 return;
             default:
                 System.out.print("Please enter a number 1 - 3.\n> ");
