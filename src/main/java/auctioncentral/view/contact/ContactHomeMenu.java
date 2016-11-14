@@ -1,5 +1,6 @@
 package auctioncentral.view.contact;
 
+import auctioncentral.*;
 import auctioncentral.view.*;
 
 import java.time.*;
@@ -9,9 +10,9 @@ import java.util.*;
 public class ContactHomeMenu extends AbstractMenu {
     private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMMM d, uuuu");
 
-    @Override
     public String getHeading() {
-        return dateTimeFormatter.format(LocalDateTime.now()) + ".  Total number of upcoming auctions: ";
+        return dateTimeFormatter.format(LocalDateTime.now()) + ".  Total number of upcoming auctions: " +
+                AuctionCentral.calendar.getAuctionsPastDate(new Date()).size();
     }
 
     @Override
@@ -29,6 +30,7 @@ public class ContactHomeMenu extends AbstractMenu {
             case "1":
                 return;
             case "2":
+                new ContactAddMenu(this).show();
                 return;
             case "3":
                 return;
