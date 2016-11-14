@@ -1,11 +1,12 @@
 package auctioncentral.model;
 
+import java.io.*;
 import java.util.*;
 
 /**
  * An Auction held by a non-profit. Contains Items to be sold.
  */
-public class Auction {
+public class Auction implements Serializable, Comparable<Auction> {
 
     private Date date;
     private String comments;
@@ -62,6 +63,16 @@ public class Auction {
             throw new IllegalArgumentException();
         }
         items.add(newItem);
+    }
+
+    @Override
+    public int compareTo(Auction o) {
+        int compareDates = getDate().compareTo(o.getDate());
+        if (compareDates == 0) {
+            return Integer.compare(hashCode(), o.hashCode());
+        } else {
+            return compareDates;
+        }
     }
 }
 

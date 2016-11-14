@@ -241,12 +241,20 @@ public class CalendarTest {
     }
 
     @Test
-    public void testGetNumberOfAuctionsOnDateIsZeroWhenEmpty() {
-        assertEquals(0, emptyCalendar.getNumberOfAuctionsOnDate(date2Weeks()));
+    public void testGetNumberOfAuctionsOnDateZero() {
+        assertEquals(0, emptyCalendar.getNumberOfAuctionsOnDate(new Date()));
     }
 
     @Test
-    public void testGetNumberOfAuctionsOnDateIsNotZeroWhenNotEmpty() {
-        assertNotEquals(0, calendarFull.getNumberOfAuctionsOnDate(date2Weeks()));
+    public void testGetNumberOfAuctionsOnDateOne() {
+        emptyCalendar.addAuction(auction2Weeks1);
+        assertEquals(1, emptyCalendar.getNumberOfAuctionsOnDate(date2Weeks));
+    }
+
+    @Test
+    public void testGetNumberOfAuctionsOnDateTwo() {
+        emptyCalendar.addAuction(auction2Weeks1);
+        emptyCalendar.addAuction(auction2Weeks2);
+        assertEquals(2, emptyCalendar.getNumberOfAuctionsOnDate(date2Weeks));
     }
 }

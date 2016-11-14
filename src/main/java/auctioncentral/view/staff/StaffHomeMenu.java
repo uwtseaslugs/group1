@@ -1,10 +1,11 @@
 package auctioncentral.view.staff;
 
+import auctioncentral.*;
 import auctioncentral.view.*;
 
 import java.time.*;
 import java.time.format.*;
-import java.util.Scanner;
+import java.util.*;
 
 public class StaffHomeMenu extends AbstractMenu {
 
@@ -12,7 +13,8 @@ public class StaffHomeMenu extends AbstractMenu {
 
     @Override
     public String getHeading() {
-        return dateTimeFormatter.format(LocalDateTime.now()) + ".  Total number of upcoming auctions: ";
+        return dateTimeFormatter.format(LocalDateTime.now()) + ".  Total number of upcoming auctions: " +
+                AuctionCentral.calendar.getAuctionsPastDate(new Date()).size();
     }
 
     @Override
@@ -25,18 +27,18 @@ public class StaffHomeMenu extends AbstractMenu {
 
     @Override
     public void onResponse(Scanner scan) {
-        while (!scan.hasNextInt()) {
-            System.out.printf("Please enter a number 1 - 3.\n> ");
-        }
-        int responseNum = scan.nextInt();
-        switch (responseNum) {
-            case 1:
+        switch (scan.nextLine()) {
+            case "1":
+                new CalendarView(AuctionCentral.calendar).show();
                 return;
-            case 2:
+            case "2":
                 //new StaffAdminMenu().show();
                 return;
-            case 3:
+            case "3":
                 return;
+            default:
+                System.out.printf("Please enter a number 1 - 3.\n> ");
+                onResponse(scan);
         }
     }
 }
