@@ -15,6 +15,7 @@ public class ContactAddMenu extends AbstractMenu {
     private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMMM d, uuuu");
     private Auction newAuction;
     private  Date dateParsed;
+    private String date;
     private String comments;
 
     public ContactAddMenu(AbstractMenu parent) {
