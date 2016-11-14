@@ -8,12 +8,13 @@ import java.time.*;
 import java.time.format.*;
 import java.util.Calendar;
 import java.util.*;
+import java.text.*;
 
 public class ContactAddMenu extends AbstractMenu {
 
     private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMMM d, uuuu");
     private Auction newAuction;
-    private int year,month,day;
+    private  Date dateParsed;
     private String comments;
 
     public ContactAddMenu(AbstractMenu parent) {
@@ -32,24 +33,17 @@ public class ContactAddMenu extends AbstractMenu {
 
     @Override
     public void onResponse(Scanner response) {
-        System.out.println("What year would you like this Auction?");
-        year = response.nextInt();
-        response.nextLine();
-        System.out.println("What month would you like this Auction?");
-        month = response.nextInt() - 1;
-        response.nextLine();
-        System.out.println("What day would you like this Auction?");
-        day = response.nextInt();
-        response.nextLine();
-        System.out.println("Add Comments :");
-        comments = response.nextLine();
-
-
-        Calendar c = Calendar.getInstance();
-        c.set(year, month, day);
-//        System.out.println(c.getTime().toString());
+       System.out.println("What date would you like this auction?\n");
+        date = response.next();
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        try{
+             dateParsed = format.parse(date);
+        }catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
         try {
-            newAuction = new Auction((Contact) AuctionCentral.loginManager.getCurrentUser(), c.getTime(), comments, null);
+            newAuction = new Auction((Contact) AuctionCentral.loginManager.getCurrentUser(), dateParsed, comments, null);
             AuctionCentral.calendar.addAuction(newAuction);
         } finally {
             getParent().show();
