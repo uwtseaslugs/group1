@@ -26,9 +26,9 @@ public class ContactHomeMenu extends AbstractMenu {
     @Override
     public void onResponse(Scanner scan) {
         switch (scan.nextLine()) {
-            case "1":
+            case "1": CalendarView(AuctionCentral.calendar).show();
                 return;
-            case "2":
+            case "2": new ContactAddMenu().show();
                 return;
             case "3":
                 return;
