@@ -1,12 +1,11 @@
 package auctioncentral.view.bidder;
 
 import auctioncentral.*;
-import auctioncentral.model.Bidder;
 import auctioncentral.view.*;
+
 import java.time.*;
 import java.time.format.*;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 
 public class BidderHomeMenu extends AbstractMenu {
     private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMMM d, uuuu");

@@ -46,6 +46,7 @@ public class ContactAddMenu extends AbstractMenu {
         comments = response.nextLine();
         System.out.println("Enter in the Approx # of Items:");
         amountOfItems = response.nextInt();
+        response.nextLine();
         try {
             newAuction = new Auction((Contact) AuctionCentral.loginManager.getCurrentUser(), dateParsed, comments, amountOfItems);
             AuctionCentral.calendar.addAuction(newAuction);
