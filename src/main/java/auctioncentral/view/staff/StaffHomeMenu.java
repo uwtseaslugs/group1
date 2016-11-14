@@ -29,7 +29,7 @@ public class StaffHomeMenu extends AbstractMenu {
     public void onResponse(Scanner scan) {
         switch (scan.nextLine()) {
             case "1":
-                new CalendarView(AuctionCentral.calendar).show();
+                new StaffCalendarMenu(this).show();
                 return;
             case "2":
                 //new StaffAdminMenu().show();
