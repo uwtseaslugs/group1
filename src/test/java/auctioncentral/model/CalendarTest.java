@@ -239,4 +239,14 @@ public class CalendarTest {
         emptyCalendar.addAuction(new Auction(contact1, date2Weeks, null, null));
         assertFalse(emptyCalendar.canAddAuction(new Auction(contact1, Calendar.addDaysToDate(date2Weeks, 1), null, null)));
     }
+
+    @Test
+    public void testGetNumberOfAuctionsOnDateIsZeroWhenEmpty() {
+        assertEquals(0, emptyCalendar.getNumberOfAuctionsOnDate(date2Weeks()));
+    }
+
+    @Test
+    public void testGetNumberOfAuctionsOnDateIsNotZeroWhenNotEmpty() {
+        assertNotEquals(0, calendarFull.getNumberOfAuctionsOnDate(date2Weeks()));
+    }
 }
