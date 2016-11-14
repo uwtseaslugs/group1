@@ -44,27 +44,27 @@ public class ContactAddItemMenu extends AbstractMenu {
         System.out.print("\nEnter minimum bid (positive integer):\n> ");
         int minimumBid = response.nextInt();
         response.nextLine();
-        System.out.print("\nEnter donor name or -1 to leave out:\n> ");
+        System.out.print("\nEnter donor name or leave blank to skip:\n> ");
         String donorName = response.nextLine();
-        if (donorName.equals("-1")) {
+        if (donorName.trim().isEmpty()) {
             donorName = null;
         }
-        System.out.print("\nEnter description for bidders or -1 to leave out:\n> ");
+        System.out.print("\nEnter description for bidders or leave blank to skip:\n> ");
         String description = response.nextLine();
-        if (description.equals("-1")) {
+        if (description.trim().isEmpty()) {
             description = null;
         }
-        System.out.print("\nEnter comment for Auction Central staff or -1 to leave out:\n> ");
+        System.out.print("\nEnter comment for Auction Central staff or leave blank to skip:\n> ");
         String comment = response.nextLine();
-        if (comment.equals("-1")) {
+        if (comment.trim().isEmpty()) {
             comment = null;
         }
         try {
             Item item = new Item(name, condition, size, minimumBid, donorName, description, comment);
             auction.addItem(item);
-            System.out.print("\nItem successfully added. Enter anything to continue\n> ");
+            System.out.print("\nItem successfully added. Press enter to continue\n> ");
         } catch (IllegalArgumentException e) {
-            System.out.print("\nError inputting information. Enter anything to return to previous menu\n> ");
+            System.out.print("\nError inputting information. Press enter to return to previous menu\n> ");
         }
         response.nextLine();
         getParent().show();
