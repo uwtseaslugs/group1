@@ -21,10 +21,12 @@ public class ContactEditAuctionMenu extends AbstractMenu {
 
     @Override
     public String getBody() {
-        return "What would you like to do?\n" +
+        String body = "Number of items: " + auction.getItems().size();
+        body += "\n\nWhat would you like to do?\n" +
                 "1. Add new Item\n" +
                 "2. Go back\n" +
                 "3. Exit AuctionCentral";
+        return body;
     }
 
     @Override

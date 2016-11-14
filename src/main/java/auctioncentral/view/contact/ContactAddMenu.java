@@ -4,11 +4,10 @@ import auctioncentral.*;
 import auctioncentral.model.*;
 import auctioncentral.view.*;
 
+import java.text.*;
 import java.time.*;
 import java.time.format.*;
-import java.util.Calendar;
 import java.util.*;
-import java.text.*;
 
 public class ContactAddMenu extends AbstractMenu {
 
