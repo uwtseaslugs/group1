@@ -41,12 +41,13 @@ public class CalendarView {
 
         // Print out upcoming events
         int dayOn = c.get(java.util.Calendar.DAY_OF_MONTH);
-        for (; dayOn < myCal.getNumberOfDaysForCurrentMonth(); dayOn++, dayOfWeek++) {
+        int startDayOfMonth = dayOn;
+        for (; dayOn <= myCal.getNumberOfDaysForCurrentMonth(); dayOn++, dayOfWeek++) {
             if (dayOfWeek == 8) {
                 System.out.printf("|\n");
                 dayOfWeek = 1;
             }
-            int numAuctionsOnDate = myCal.getNumberOfAuctionsOnDate(Calendar.addDaysToDate(startDate, dayOn));
+            int numAuctionsOnDate = myCal.getNumberOfAuctionsOnDate(Calendar.addDaysToDate(startDate, dayOn - startDayOfMonth));
             if (numAuctionsOnDate < 0)
                 numAuctionsOnDate = 0;
             
@@ -89,7 +90,7 @@ public class CalendarView {
                 System.out.printf("|\n");
                 dayOfWeek = 1;
             }
-            int numAuctionsOnDate = myCal.getNumberOfAuctionsOnDate(Calendar.addDaysToDate(c.getTime(), dayOn));
+            int numAuctionsOnDate = myCal.getNumberOfAuctionsOnDate(Calendar.addDaysToDate(c.getTime(), dayOn - 1));
             if (numAuctionsOnDate < 0)
                 numAuctionsOnDate = 0;
             
