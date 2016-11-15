@@ -13,11 +13,13 @@ public class AuctionCentral {
     public static ICalendar calendar = new Calendar();
 
     public static void main(String[] args) {
-//        calendar = (ICalendar) deserializeFrom("cal.ser");
-//        addAuctions();
-        add25Auctions();
+        if (args.length > 0) {
+            calendar = (ICalendar) deserializeFrom(args[0]);
+        } else {
+            addAuctions();
+        }
         new LoginUsernameMenu().show();
-        serializeTo(calendar, "cal.ser");
+        serializeTo(calendar, "last.ser");
     }
 
     private static void serializeTo(Object o, String fileName) {
