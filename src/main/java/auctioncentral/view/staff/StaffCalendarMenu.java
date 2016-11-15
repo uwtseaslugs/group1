@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+   StaffCalendarMenu shows the staff the calendar.
+ */
 package auctioncentral.view.staff;
 
 import auctioncentral.*;
