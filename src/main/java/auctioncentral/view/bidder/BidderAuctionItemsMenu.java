@@ -8,14 +8,14 @@ import java.math.*;
 import java.text.*;
 import java.util.*;
 
-public class BidderBidMenu extends AbstractMenu {
+public class BidderAuctionItemsMenu extends AbstractMenu {
     private Bidder bidder;
     private Auction auction;
     private List<Item> items;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MMMMMM d, yyyy, ha");
     private String heading = "Select an item to bid on::\n";
 
-    public BidderBidMenu(Auction auction, AbstractMenu parent){
+    public BidderAuctionItemsMenu(Auction auction, AbstractMenu parent){
         super(parent);
         items = auction.getItems();
         this.auction = auction;
@@ -29,6 +29,7 @@ public class BidderBidMenu extends AbstractMenu {
     @Override
     public String getBody() {
         StringBuilder itemStr = new StringBuilder();
+        itemStr.append("Items offered for sale:\n");
         itemStr.append("ID\tItem name\tCondition\tMin bid\t\tMy bid\n");
         for (int i = 0; i < auction.getItems().size() ; i++) {
             Item item = items.get(i);
@@ -39,12 +40,27 @@ public class BidderBidMenu extends AbstractMenu {
             }
             itemStr.append("\n");
         }
-        return itemStr.toString() + "\n" +
-                "Type item ID to get more information and bid on the item\n" ;
+        return heading + itemStr.toString() + "\n" +
+               "What would you like to do?\n" +
+                "1. Bid on an Item.\n" +
+                "2. Go back \n" +
+                "3. Exit AuctionCentral\n" ;
     }
 
     @Override
     public void onResponse(Scanner scan) {
-        new BidderPlaceBidMenu(this,items.get(Integer.parseInt(scan.nextLine()))).show();
+        switch (scan.nextLine()) {
+            case "1":
+                new BidderBidMenu(auction, this).show();
+                return;
+            case "2":
+                getParent().getParent().show();
+                return;
+            case "3":
+                return;
+            default:
+                System.out.print("Please enter a number 1 - 3.\n> ");
+                onResponse(scan);
+        }
     }
 }

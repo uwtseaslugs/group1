@@ -1,12 +1,10 @@
 package auctioncentral.view.bidder;
-import auctioncentral.model.Auction;
-import auctioncentral.model.Item;
+import auctioncentral.model.*;
 import auctioncentral.view.*;
 
-import java.math.BigDecimal;
 import java.time.*;
 import java.time.format.*;
-import java.util.Scanner;
+import java.util.*;
 
 public class BidderPlaceBidMenu  extends AbstractMenu {
     private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMMM d, uuuu");
@@ -27,14 +25,12 @@ public class BidderPlaceBidMenu  extends AbstractMenu {
 
     @Override
     public String getBody() {
-        return item.getName() + "\n"
-                + startBid + item.getMinimumBid()
-                + currentBid + ""
-                + prompt;
+        return "" + item.getName() + "\n" + item.getCondition() + "\n$" + item.getMinimumBid() + "\n" + item.getComment() + "\n\n" +
+                prompt;
     }
 
     @Override
     public void onResponse(Scanner scan) {
-        new BidderConfirmBidMenu(this, item, scan.nextDouble());
+        new BidderConfirmBidMenu(this, item, scan.nextDouble()).show();
     }
 }

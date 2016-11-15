@@ -40,8 +40,9 @@ public class BidderConfirmBidMenu extends AbstractMenu {
         switch (scan.nextLine()){
             case "1":
                 item.placeBid((Bidder) AuctionCentral.loginManager.getCurrentUser(), new BigDecimal(bid));
+                getParent().getParent().getParent().show();
             case "2":
-                return;
+                getParent().getParent().getParent().show();
         }
     }
 }

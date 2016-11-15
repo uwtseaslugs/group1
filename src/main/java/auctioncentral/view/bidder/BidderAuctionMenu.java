@@ -1,14 +1,11 @@
 package auctioncentral.view.bidder;
 
-import auctioncentral.AuctionCentral;
 import auctioncentral.model.Auction;
-import auctioncentral.model.Contact;
 import auctioncentral.view.*;
 
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.*;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -41,6 +38,6 @@ public class BidderAuctionMenu extends AbstractMenu {
 
     @Override
     public void onResponse(Scanner scan) {
-        new BidderBidMenu(auctionList.get(Integer.parseInt(scan.nextLine())),this).show();
+        new BidderAuctionItemsMenu(auctionList.get(Integer.parseInt(scan.nextLine())),this).show();
     }
 }

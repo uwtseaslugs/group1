@@ -1,9 +1,11 @@
 package auctioncentral;
 
 import auctioncentral.model.*;
+import auctioncentral.model.Calendar;
 import auctioncentral.view.login.*;
 
 import java.io.*;
+import java.util.*;
 
 public class AuctionCentral {
 
@@ -45,12 +47,34 @@ public class AuctionCentral {
 
     // test
     private static void addAuctions() {
+        Random r = new Random();
         java.util.Calendar c = java.util.Calendar.getInstance();
-        c.add(java.util.Calendar.DATE, 13);
-        for (int i = 0; i < 12; i++) {
+        c.add(java.util.Calendar.DATE, 8);
+        int auctionCount = 0;
+        while (auctionCount <= 6) {
             c.add(java.util.Calendar.DATE, 1);
-            calendar.addAuction(new Auction(new Contact("" + i, "" + i), c.getTime(), null, null));
-
+            switch (r.nextInt(3)) {
+                case 0:
+                    c.add(java.util.Calendar.DATE, 1);
+                    break;
+                case 1:
+                    c.add(java.util.Calendar.DATE, 2);
+                    break;
+                default:
+                    break;
+            }
+            Auction a = new Auction(new Contact("user" + auctionCount, "name" + auctionCount, "Nonprofit" + auctionCount),
+                    c.getTime(), null, null);
+            if (calendar.canAddAuction(a)) {
+                auctionCount++;
+                calendar.addAuction(a);
+                int itemsCount = r.nextInt(9) + 2;
+                for (int i = 0; i < itemsCount; i++) {
+                    a.addItem(new Item("item" + i, ItemCondition.values()[r.nextInt(ItemCondition.values().length - 1)],
+                            ItemSize.SMALL, r.nextInt(201) + 1,
+                            "donor" + i, "description" + i, "comment" + i));
+                }
+            }
         }
     }
 }
