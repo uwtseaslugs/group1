@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    BidderPlaceBidMenu shows the bid info.
+ */
 package auctioncentral.view.bidder;
 import auctioncentral.model.*;
 import auctioncentral.view.*;
