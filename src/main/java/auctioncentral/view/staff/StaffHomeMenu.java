@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    StaffHomeMenu is the home screen for the staff.
+ */
 package auctioncentral.view.staff;
 
 import auctioncentral.*;
