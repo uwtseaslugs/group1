@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+Interface for Item.
+ */
 package auctioncentral.model;
 
 import java.io.*;
