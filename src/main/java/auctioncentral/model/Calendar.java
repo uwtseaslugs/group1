@@ -1,3 +1,12 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    Calendar class that we use to manage the auctions. Has canAddAuction()to check the 
+    business rules and addAuction() to add the auction.
+
+ */
 package auctioncentral.model;
 
 import java.util.*;
@@ -54,6 +63,21 @@ public class Calendar implements ICalendar {
                 .count();
         if (futureAuctionsByThisNonprofit >= 1) {
             return false;
+        }
+        Auction lastAuctionByThisNonprofit = auctions.descendingSet().stream()
+                .filter(a -> a.getContact().equals(auction.getContact()))
+                .filter(a -> a.getDate().before(auction.getDate()))
+                .findFirst().orElse(null);
+        if (lastAuctionByThisNonprofit != null) {
+            java.util.Calendar jCalendar = getJavaCalendar();
+            jCalendar.setTime(lastAuctionByThisNonprofit.getDate());
+            jCalendar.add(java.util.Calendar.YEAR, 1);
+            Date yearAfterLastAuction = jCalendar.getTime();
+            if (yearAfterLastAuction.after(auction.getDate())) {
+                return false;
+                }
+            }
+        return true;
         }
 
         // max of 1 other auction on the new auctions date
