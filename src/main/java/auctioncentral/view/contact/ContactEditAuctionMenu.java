@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    ContactEditAuctionMenu is when the contact selects the option to edit auctions.
+ */
 package auctioncentral.view.contact;
 
 import auctioncentral.model.*;
