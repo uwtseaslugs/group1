@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    BidderAuctionItemMenu shows the items on a menu when the bidder wants to view the items in an auction.
+ */
 package auctioncentral.view.bidder;
 
 import auctioncentral.*;
