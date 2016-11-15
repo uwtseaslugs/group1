@@ -14,7 +14,8 @@ public class AuctionCentral {
 
     public static void main(String[] args) {
 //        calendar = (ICalendar) deserializeFrom("cal.ser");
-        addAuctions();
+//        addAuctions();
+        add25Auctions();
         new LoginUsernameMenu().show();
         serializeTo(calendar, "cal.ser");
     }
@@ -45,6 +46,26 @@ public class AuctionCentral {
         }
     }
 
+    private static void add25Auctions() {
+        Random r = new Random();
+        java.util.Calendar c = java.util.Calendar.getInstance();
+        c.add(java.util.Calendar.DATE, 8);
+        for (int i = 0; i < 25; i++) {
+            Auction a = new Auction(new Contact("user" + i, "name" + i, "Nonprofit" + i),
+                    c.getTime(), null, null);
+            int itemsCount = r.nextInt(9) + 2;
+            calendar.addAuction(a);
+            for (int j = 0; j < itemsCount; j++) {
+                a.addItem(new Item("item" + j, ItemCondition.values()[r.nextInt(ItemCondition.values().length - 1)],
+                        ItemSize.SMALL, r.nextInt(201) + 1,
+                        "donor" + j, "description" + j, "comment" + j));
+            }
+            if (i % 2 == 0) {
+                c.add(java.util.Calendar.DATE, 1);
+            }
+        }
+    }
+
     // test
     private static void addAuctions() {
         Random r = new Random();
@@ -53,16 +74,7 @@ public class AuctionCentral {
         int auctionCount = 0;
         while (auctionCount <= 6) {
             c.add(java.util.Calendar.DATE, 1);
-            switch (r.nextInt(3)) {
-                case 0:
-                    c.add(java.util.Calendar.DATE, 1);
-                    break;
-                case 1:
-                    c.add(java.util.Calendar.DATE, 2);
-                    break;
-                default:
-                    break;
-            }
+            c.add(java.util.Calendar.DATE, r.nextInt(3));
             Auction a = new Auction(new Contact("user" + auctionCount, "name" + auctionCount, "Nonprofit" + auctionCount),
                     c.getTime(), null, null);
             if (calendar.canAddAuction(a)) {
