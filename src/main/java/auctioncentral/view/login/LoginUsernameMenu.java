@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    LoginUsernameMenu prompts user for their username.
+ */
 package auctioncentral.view.login;
 
 import auctioncentral.view.*;
