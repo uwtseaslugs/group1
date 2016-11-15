@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    BidderItemMenu is the menu you see when a item is selected for viewing.
+ */
 package auctioncentral.view.bidder;
 
 import auctioncentral.model.*;
