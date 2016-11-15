@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    AbstractMenu is the menu template that we used for all of our other menus.
+ */
 package auctioncentral.view;
 
 import auctioncentral.*;
