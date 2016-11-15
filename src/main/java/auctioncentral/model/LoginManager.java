@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    LoginManager class sets the current user.
+ */
 package auctioncentral.model;
 
 public class LoginManager implements ILoginManager {
