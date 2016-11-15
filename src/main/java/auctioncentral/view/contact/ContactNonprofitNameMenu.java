@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    ContactNonprofitNameMenu gets the name of the non-profit.
+ */
 package auctioncentral.view.contact;
 
 import auctioncentral.*;
