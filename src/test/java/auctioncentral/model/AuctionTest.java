@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    Test all the logic in the auction class.
+ */
 package auctioncentral.model;
 import org.junit.*;
 import java.util.*;
