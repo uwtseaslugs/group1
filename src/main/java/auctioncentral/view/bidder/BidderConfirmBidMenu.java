@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    Cofirmation page that tells the user the bid has been placed.
+ */
 package auctioncentral.view.bidder;
 import auctioncentral.AuctionCentral;
 import auctioncentral.model.Bidder;
