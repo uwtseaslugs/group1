@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    Contact class takes in username and name of contact.
+ */
 package auctioncentral.model;
 
 public class Contact extends User {
