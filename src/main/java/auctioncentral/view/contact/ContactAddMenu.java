@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    ContactAddMenu is the screen that lets the contact sumbit and auction request.
+ */
 package auctioncentral.view.contact;
 
 import auctioncentral.*;
