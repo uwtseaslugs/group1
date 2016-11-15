@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    CalendarView is the view of the calendar with #ofday:#ofAuctions under the day.
+ */
 package auctioncentral.view;
 
 import auctioncentral.model.ICalendar;
