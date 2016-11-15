@@ -1,3 +1,11 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+   Auction class that takes in the contact, date, comments and # of items from the user. Also has a
+   method to add items.
+ */
 package auctioncentral.model;
 
 import java.io.*;
