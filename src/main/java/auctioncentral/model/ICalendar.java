@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    Interface for Calendar.
+ */
 package auctioncentral.model;
 
 import java.util.Date;
