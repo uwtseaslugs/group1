@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    BidderPlaceBidMenu shows the bid info.
+ */
 package auctioncentral.model;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -10,16 +17,3 @@ import org.junit.runners.Suite;
 })
 public class testSuite {
 }
-
-//@RunWith(Suite.class)
-//@Suite.SuiteClasses({
-//        TestFeatureLogin.class,
-//        TestFeatureLogout.class,
-//        TestFeatureNavigate.class,
-//        TestFeatureUpdate.class
-//})
-//
-//public class FeatureTestSuite {
-//    // the class remains empty,
-//    // used only as a holder for the above annotations
-//}
