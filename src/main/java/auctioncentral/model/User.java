@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    User class takes in the Username and name of user.
+ */
 package auctioncentral.model;
 
 import java.io.*;
