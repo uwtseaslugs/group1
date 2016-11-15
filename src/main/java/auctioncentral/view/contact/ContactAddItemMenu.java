@@ -1,3 +1,11 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    ContactAddItemMenu is the scrren that the contact sees when the contact wants to add an auction Item. 
+    Prompts for item infomation.
+ */
 package auctioncentral.view.contact;
 
 import auctioncentral.model.*;
