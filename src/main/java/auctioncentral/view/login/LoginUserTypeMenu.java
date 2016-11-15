@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    LoginUserTypeMenu asks the user what type of user they are.
+ */
 package auctioncentral.view.login;
 
 import auctioncentral.*;
