@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    Enum for the different item conditions.
+ */
 package auctioncentral.model;
 
 /**
