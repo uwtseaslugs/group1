@@ -10,6 +10,11 @@ public class Calendar implements ICalendar {
     public Calendar() {
         auctions = new TreeSet<>();
     }
+      /**
+     *
+     * @param auction
+     * @return true of false depending on contact past auctions
+     */
     public boolean canAddAuctionYear(Auction auction){
         // if any previous auctions by this nonprofit, last one was 1 year+ before new auctions date
         Auction lastAuctionByThisNonprofit = auctions.descendingSet().stream()
@@ -27,7 +32,11 @@ public class Calendar implements ICalendar {
             }
         return true;
         }
-
+     /**
+     *
+     * @param auction
+     * @return true of false depending on business rules for future Auctions
+     */
     @Override
     public boolean canAddAuction(Auction auction) {
         Date now = new Date();
@@ -84,11 +93,20 @@ public class Calendar implements ICalendar {
 
         return true;
     }
+    /**
+     *
+     * @param a
+     * @return adds the auction without business rules
+     */
     @Override
     public boolean faddAuction(Auction a) {
         return auctions.add(a);
     }
-    
+    /**
+     *
+     * @param a
+     * @return checks the buiness rules and then adds them.
+     */
     @Override
     public boolean addAuction(Auction a) {
         if (!canAddAuction(a)) {
@@ -96,26 +114,34 @@ public class Calendar implements ICalendar {
         }
         return auctions.add(a);
     }
-    
+    /**
+     *
+     * @param a
+     * @return removes the auction
+     */
     @Override
     public boolean removeAuction(Auction a) {
         return auctions.remove(a);
     }
-
     @Override
     public List<Auction> getAuctionsPastDate(Date d) {
         return auctions.stream()
                 .filter(a -> a.getDate().after(d))
                 .collect(Collectors.toList());
     }
-    
+    /**
+     *
+     * @param start
+     * @param end
+     * @return returns the auctions between these 2 dates
+     */
     @Override
     public List<Auction> getAuctionsBetweenDates(Date start, Date end) {
         return auctions.stream()
                 .filter(a -> a.getDate().after(start) && a.getDate().before(end))
                 .collect(Collectors.toList());
     }
-    
+ 
     @Override
     public int getNumberOfDaysForCurrentMonth() {
         return getJavaCalendar().getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
@@ -124,14 +150,24 @@ public class Calendar implements ICalendar {
     public static java.util.Calendar getJavaCalendar() {
         return java.util.Calendar.getInstance();
     }
-
+    
+    /**
+     * 
+     * @param theDate
+     * @param numDays
+     * @return adds days to the current date.
+     */
     public static Date addDaysToDate(Date theDate, int numDays) {
         java.util.Calendar c = getJavaCalendar();
         c.setTime(theDate);
         c.add(java.util.Calendar.DAY_OF_MONTH, numDays);
         return c.getTime();
-    }
-
+    } 
+    /**
+     * 
+     * @param d
+     * @return returns the number of auctions on that day.
+     */
     public int getNumberOfAuctionsOnDate(Date d) {
         java.util.Calendar target = java.util.Calendar.getInstance();
         target.setTime(d);
