@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    ContactHomeMenu is the home screen of the contact. The contact and select to sumbit and request or edit auction.
+ */
 package auctioncentral.view.contact;
 
 import auctioncentral.*;
