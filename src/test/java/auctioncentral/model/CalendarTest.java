@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    Test all the logic/business rules in the calendar class.
+ */
 package auctioncentral.model;
 
 import org.junit.*;
