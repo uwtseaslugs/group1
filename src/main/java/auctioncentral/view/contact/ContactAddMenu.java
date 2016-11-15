@@ -41,13 +41,15 @@ public class ContactAddMenu extends AbstractMenu {
 
     @Override
     public void onResponse(Scanner response) {
-        System.out.println("What date and Time would you like this auction?\n");
+        System.out.println("What date and Time would you like this auction? (MM/DD/YYYY HH [AM/PM])\n");
         dateAndTime = response.nextLine();
         SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy hh a");
         try{
             dateParsed = format.parse(dateAndTime);
         }catch (ParseException e) {
-            e.printStackTrace();
+            System.out.print("\nError inputting information. Press enter to return to previous menu\n> ");
+            response.nextLine();
+            getParent().show();
         }
         System.out.println("Enter in the Comments:");
         comments = response.nextLine();
@@ -56,14 +58,18 @@ public class ContactAddMenu extends AbstractMenu {
         response.nextLine();
         try {
             newAuction = new Auction((Contact) AuctionCentral.loginManager.getCurrentUser(), dateParsed, comments, amountOfItems);
-            AuctionCentral.calendar.addAuction(newAuction);
-        } finally {
+        } catch (IllegalArgumentException e) {
+            System.out.print("\nError inputting information. Press enter to return to previous menu\n> ");
+            response.nextLine();
             getParent().show();
         }
-    }
-
-    private void confirmation(){
-        new CalendarView(AuctionCentral.calendar).show();
-        System.out.println("Comfirmed Your Auction is added on :" + newAuction.getDate().toString());
+        if (AuctionCentral.calendar.canAddAuction(newAuction)) {
+            AuctionCentral.calendar.addAuction(newAuction);
+            System.out.print("\nAuction Successfully added. Press enter to continue\n> ");
+        } else {
+            System.out.print("\nError scheduling auction. Press enter to return to previous menu\n> ");
+        }
+        response.nextLine();
+        getParent().show();
     }
 }
