@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    Item class creates an itema and takes in the name, condition, min bid, donor name, description, comments, and bids.
+ */
 package auctioncentral.model;
 
 import java.math.*;
