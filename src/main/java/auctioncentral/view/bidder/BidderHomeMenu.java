@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    BidderHomeMenu is the home screen that the bidder sees.
+ */
 package auctioncentral.view.bidder;
 
 import auctioncentral.*;
