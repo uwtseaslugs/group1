@@ -12,19 +12,31 @@ public abstract class AbstractMenu {
     protected AbstractMenu() {
         this(null);
     }
-
+    /**
+     * 
+     * @param parent
+     */
     protected AbstractMenu(AbstractMenu parent) {
         this.parent = parent;
     }
-
+    /**
+     * 
+     * @return gets the parent
+     */
     public final AbstractMenu getParent() {
         return parent;
     }
-
+    /**
+     * 
+     * @return gets the name of nonprofit
+     */
     public final String getTitle() {
         return "AuctionCentral: the auctioneer for non-profit organizations.";
     }
-
+    /**
+     * 
+     * @return returns the status of the user
+     */
     public final String getStatus() {
         User user = AuctionCentral.loginManager.getCurrentUser();
         if (user == null) {
@@ -36,7 +48,9 @@ public abstract class AbstractMenu {
     public abstract String getHeading();
 
     public abstract String getBody();
-
+    /**
+     *  Show() is the template for the menus
+     */
     public void show() {
         clearPreviousScreen();
         System.out.println(getTitle());
@@ -52,7 +66,9 @@ public abstract class AbstractMenu {
         Scanner scanner = new Scanner(System.in);
         onResponse(scanner);
     }
-
+    /**
+     * clears the screen.
+     */
     public final void clearPreviousScreen() {
         try {
             final String os = System.getProperty("os.name");
