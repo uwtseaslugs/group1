@@ -77,8 +77,6 @@ public class Calendar implements ICalendar {
                 return false;
                 }
             }
-        return true;
-        }
 
         // max of 1 other auction on the new auctions date
         int countOnNewAuctionDate = 0;
