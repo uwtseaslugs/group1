@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    BidderBidMenu shows the infotion about the item for the user.
+ */
 package auctioncentral.view.bidder;
 
 import auctioncentral.*;
