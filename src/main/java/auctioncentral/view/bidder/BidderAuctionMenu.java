@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    BidderAuctionMenu shows the different auctions and then asks the user which auction the user wants to see.
+ */
 package auctioncentral.view.bidder;
 
 import auctioncentral.model.Auction;
