@@ -16,6 +16,7 @@ public class AuctionCentral {
         if (args.length > 0) {
             calendar = (ICalendar) deserializeFrom(args[0]);
         }
+//        add25Auctions();
         new LoginUsernameMenu().show();
         serializeTo(calendar, "last.ser");
     }

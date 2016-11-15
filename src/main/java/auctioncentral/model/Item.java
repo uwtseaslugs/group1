@@ -111,6 +111,13 @@ public class Item implements IItem {
         return bids.get(bidder);
     }
 
+    public boolean isValidBid(BigDecimal price) {
+        if (price == null) {
+            throw new IllegalArgumentException();
+        }
+        return price.compareTo(BigDecimal.valueOf(minimumBid)) >= 0;
+    }
+
     /**
      *
      * @param bidder bidder who is placing the bid
@@ -120,7 +127,7 @@ public class Item implements IItem {
      */
     @Override
     public void placeBid(Bidder bidder, BigDecimal price) {
-        if (bidder == null || price == null || price.compareTo(BigDecimal.valueOf(minimumBid)) < 0 ||
+        if (bidder == null || price == null || !isValidBid(price) ||
                 bids.containsKey(bidder)) {
             throw new IllegalArgumentException();
         }

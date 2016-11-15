@@ -6,9 +6,11 @@
     BidderPlaceBidMenu shows the bid info.
  */
 package auctioncentral.view.bidder;
+import auctioncentral.*;
 import auctioncentral.model.*;
 import auctioncentral.view.*;
 
+import java.math.*;
 import java.time.*;
 import java.time.format.*;
 import java.util.*;
@@ -38,6 +40,15 @@ public class BidderPlaceBidMenu  extends AbstractMenu {
 
     @Override
     public void onResponse(Scanner scan) {
-        new BidderConfirmBidMenu(this, item, scan.nextDouble()).show();
+        BigDecimal bd = new BigDecimal(scan.nextLine());
+        if (!item.isValidBid(bd)) {
+            System.out.print("Error: invalid price\n> ");
+            onResponse(scan);
+        } else if (item.getBid((Bidder) AuctionCentral.loginManager.getCurrentUser()) != null) {
+            System.out.print("Error: you have already bid on this item\n> ");
+            onResponse(scan);
+        } else {
+            new BidderConfirmBidMenu(this, item, bd.doubleValue()).show();
+        }
     }
 }
