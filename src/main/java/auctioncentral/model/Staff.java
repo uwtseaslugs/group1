@@ -1,3 +1,10 @@
+/*
+    Deliverable 2 
+    TCSS 360
+    Created by: Sea Slugs
+    
+    Staff class takes in the username and name.
+ */
 package auctioncentral.model;
 
 public class Staff extends User {
