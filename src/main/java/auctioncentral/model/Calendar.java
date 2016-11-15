@@ -10,6 +10,23 @@ public class Calendar implements ICalendar {
     public Calendar() {
         auctions = new TreeSet<>();
     }
+    public boolean canAddAuctionYear(Auction auction){
+        // if any previous auctions by this nonprofit, last one was 1 year+ before new auctions date
+        Auction lastAuctionByThisNonprofit = auctions.descendingSet().stream()
+                .filter(a -> a.getContact().equals(auction.getContact()))
+                .filter(a -> a.getDate().before(auction.getDate()))
+                .findFirst().orElse(null);
+        if (lastAuctionByThisNonprofit != null) {
+            java.util.Calendar jCalendar = getJavaCalendar();
+            jCalendar.setTime(lastAuctionByThisNonprofit.getDate());
+            jCalendar.add(java.util.Calendar.YEAR, 1);
+            Date yearAfterLastAuction = jCalendar.getTime();
+            if (yearAfterLastAuction.after(auction.getDate())) {
+                return false;
+                }
+            }
+        return true;
+        }
 
     @Override
     public boolean canAddAuction(Auction auction) {
@@ -28,21 +45,6 @@ public class Calendar implements ICalendar {
                 .count();
         if (futureAuctionsByThisNonprofit >= 1) {
             return false;
-        }
-
-        // if any previous auctions by this nonprofit, last one was 1 year+ before new auctions date
-        Auction lastAuctionByThisNonprofit = auctions.descendingSet().stream()
-                .filter(a -> a.getContact().equals(auction.getContact()))
-                .filter(a -> a.getDate().before(auction.getDate()))
-                .findFirst().orElse(null);
-        if (lastAuctionByThisNonprofit != null) {
-            java.util.Calendar jCalendar = getJavaCalendar();
-            jCalendar.setTime(lastAuctionByThisNonprofit.getDate());
-            jCalendar.add(java.util.Calendar.YEAR, 1);
-            Date yearAfterLastAuction = jCalendar.getTime();
-            if (yearAfterLastAuction.after(auction.getDate())) {
-                return false;
-            }
         }
 
         // max of 1 other auction on the new auctions date
@@ -81,6 +83,10 @@ public class Calendar implements ICalendar {
         }
 
         return true;
+    }
+    @Override
+    public boolean faddAuction(Auction a) {
+        return auctions.add(a);
     }
     
     @Override
