@@ -15,9 +15,11 @@ import java.util.stream.*;
 public class Calendar implements ICalendar {
 
     private TreeSet<Auction> auctions;
+    private int maxAuctions;
 
     public Calendar() {
         auctions = new TreeSet<>();
+        maxAuctions = 25;
     }
       /**
      *
@@ -50,10 +52,10 @@ public class Calendar implements ICalendar {
     public boolean canAddAuction(Auction auction) {
         Date now = new Date();
 
-        // less than 25 future auctions
+        // less than "maxAuctions" future auctions
         List<Auction> upcomingAuctions = getAuctionsPastDate(now);
         int numOfUpcomingAuctions = upcomingAuctions.size();
-        if (numOfUpcomingAuctions >= 25) {
+        if (numOfUpcomingAuctions >= maxAuctions) {
             return false;
         }
 
@@ -204,5 +206,17 @@ public class Calendar implements ICalendar {
             }
         }
         return numAuctionsOnDate;
+    }
+
+    /**
+     *
+     * @param addAuctions
+     */
+    public void addMaxAuctions(int addAuctions) {
+        maxAuctions += addAuctions;
+    }
+
+    public int getMaxAuctions(){
+        return maxAuctions;
     }
 }

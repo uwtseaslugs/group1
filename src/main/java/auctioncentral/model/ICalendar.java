@@ -18,6 +18,8 @@ public interface ICalendar extends Serializable {
     boolean removeAuction(Auction a);
     boolean faddAuction(Auction a);
     boolean canAddAuctionYear(Auction a);
+    void addMaxAuctions(int a);
+    int getMaxAuctions();
     
     List<Auction> getAuctionsPastDate(Date d);
     List<Auction> getAuctionsBetweenDates(Date start, Date end);

@@ -39,7 +39,7 @@ public class StaffHomeMenu extends AbstractMenu {
                 new StaffCalendarMenu(this).show();
                 return;
             case "2":
-                //new StaffAdminMenu().show();
+                new StaffAdminMenu().show();
                 return;
             case "3":
                 return;
