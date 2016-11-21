@@ -23,7 +23,11 @@ public class CalendarTest {
     private Auction auction2Weeks2;
     private Auction auction2Weeks3;
     private Auction auction25Days;
+    private Auction auction3Days;
+    private Auction auction2Days;
     private Date date2Weeks;
+    private Date threeDays;
+    private Date twoDays;
 
     private ICalendar calendarFullMinusOne;
     private ICalendar calendarFull;
@@ -35,6 +39,14 @@ public class CalendarTest {
         calendarFull = new Calendar();
         calendarFullMinusOne = new Calendar();
 
+        java.util.Calendar cthreeDays = Calendar.getJavaCalendar();
+        cthreeDays.add(java.util.Calendar.DATE, 3);
+        threeDays = cthreeDays.getTime();
+
+        java.util.Calendar ctwoDays = Calendar.getJavaCalendar();
+        ctwoDays.add(java.util.Calendar.DATE, 2);
+        twoDays = ctwoDays.getTime();
+
         java.util.Calendar calendar2Weeks = Calendar.getJavaCalendar();
         calendar2Weeks.add(java.util.Calendar.DATE, 14);
         date2Weeks = calendar2Weeks.getTime();
@@ -45,6 +57,8 @@ public class CalendarTest {
         auction2Weeks3 = new Auction(new Contact("3u", "3n"), date2Weeks, "Co comment", null);
         auctionTomorrow = new Auction(new Contact("2u", "2n"), Calendar.addDaysToDate(new Date(), 1), null, null);
         auction25Days = new Auction(new Contact("2u", "2n"), Calendar.addDaysToDate(new Date(), 25), null, null);
+        auction3Days = new Auction(new Contact("4u", "4u"), threeDays, "Co comment", null);
+        auction2Days= new Auction(new Contact("5u", "5u"), twoDays, "Co comment", null);
 
         java.util.Calendar c = java.util.Calendar.getInstance();
         c.add(java.util.Calendar.DATE, 8);
@@ -266,5 +280,26 @@ public class CalendarTest {
         c.set(2015,11,8);
         assertEquals(true,emptyCalendar.canAddAuctionYear(new Auction(contact1,c.getTime(),"Test",1)));
 
+    }
+    @Test
+    public void testRemoveAuctionTwentyFiveDaysAway(){
+        emptyCalendar.addAuction(auction25Days);
+        assertTrue(emptyCalendar.removeAuction(auction25Days));
+
+    }
+    @Test
+    public void testRemoveAuctionThreeDaysAway() {
+        emptyCalendar.faddAuction(auction3Days);
+        assertTrue(emptyCalendar.removeAuction(auction3Days));
+    }
+    @Test
+    public void testRemoveAuctionTwoDaysAway() {
+        emptyCalendar.faddAuction(auction2Days);
+        assertFalse(emptyCalendar.removeAuction(auction2Days));
+    }
+    @Test
+    public void testRemoveAuctionToday(){
+        emptyCalendar.faddAuction(auctionToday);
+        assertFalse(emptyCalendar.removeAuction(auctionToday));
     }
 }

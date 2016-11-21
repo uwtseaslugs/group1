@@ -142,10 +142,20 @@ public class Calendar implements ICalendar {
      *
      * @param a
      * @return removes the auction
+     * created by Jon
      */
     @Override
     public boolean removeAuction(Auction a) {
-        return auctions.remove(a);
+        Date now = new Date();
+        java.util.Calendar jCalendar = getJavaCalendar();
+        jCalendar.setTime(now);
+        jCalendar.add(java.util.Calendar.DATE, 2);
+        Date twoDaysFromNow = jCalendar.getTime();
+        if (a.getDate().before(twoDaysFromNow)) {
+            return false;
+        } else{
+            return auctions.remove(a);
+        }
     }
     @Override
     public List<Auction> getAuctionsPastDate(Date d) {
