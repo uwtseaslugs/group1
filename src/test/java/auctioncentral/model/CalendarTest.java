@@ -302,4 +302,14 @@ public class CalendarTest {
         emptyCalendar.faddAuction(auctionToday);
         assertFalse(emptyCalendar.removeAuction(auctionToday));
     }
+
+    @Test
+    public void testAddMaxAuctions() {
+        calendarFull.addMaxAuctions(1);
+        assertEquals(26, calendarFull.getMaxAuctions());
+        assertEquals(true, calendarFull.canAddAuction(auction25Days));
+        assertEquals(true, calendarFull.addAuction(auction25Days));
+        calendarFull.addMaxAuctions(5000);
+        assertEquals(5026, calendarFull.getMaxAuctions());
+    }
 }
