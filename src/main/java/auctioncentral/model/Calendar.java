@@ -39,26 +39,35 @@ public class Calendar implements ICalendar {
             Date yearAfterLastAuction = jCalendar.getTime();
             if (yearAfterLastAuction.after(auction.getDate())) {
                 return false;
-                }
             }
-        return true;
         }
-     /**
+        return true;
+    }
+
+    /**
      *
      * @param auction
-     * @return true of false depending on business rules for future Auctions
+     * @return true if the number of upcoming auctions is less than the max limit
      */
-    @Override
-    public boolean canAddAuction(Auction auction) {
+    public boolean canAddAuctionMaxLimit(Auction auction) {
         Date now = new Date();
-
         // less than "maxAuctions" future auctions
         List<Auction> upcomingAuctions = getAuctionsPastDate(now);
         int numOfUpcomingAuctions = upcomingAuctions.size();
         if (numOfUpcomingAuctions >= maxAuctions) {
             return false;
         }
+        return true;
+    }
 
+    /**
+     *
+     * @param auction
+     * @return true if the non profit of auction has another auction already scheduled in the future
+     */
+    public boolean canAddAuctionNonprofitLimit(Auction auction) {
+        Date now = new Date();
+        List<Auction> upcomingAuctions = getAuctionsPastDate(now);
         // no future auctions by this nonprofit
         int futureAuctionsByThisNonprofit = (int) upcomingAuctions.stream()
                 .filter(a -> a.getContact().equals(auction.getContact()))
@@ -66,21 +75,17 @@ public class Calendar implements ICalendar {
         if (futureAuctionsByThisNonprofit >= 1) {
             return false;
         }
-        Auction lastAuctionByThisNonprofit = auctions.descendingSet().stream()
-                .filter(a -> a.getContact().equals(auction.getContact()))
-                .filter(a -> a.getDate().before(auction.getDate()))
-                .findFirst().orElse(null);
-        if (lastAuctionByThisNonprofit != null) {
-            java.util.Calendar jCalendar = getJavaCalendar();
-            jCalendar.setTime(lastAuctionByThisNonprofit.getDate());
-            jCalendar.add(java.util.Calendar.YEAR, 1);
-            Date yearAfterLastAuction = jCalendar.getTime();
-            if (yearAfterLastAuction.after(auction.getDate())) {
-                return false;
-                }
-            }
+        return true;
+    }
 
-        // max of 1 other auction on the new auctions date
+    /**
+     *
+     * @param auction
+     * @return true if there is already 2 auctions on the same date as auction
+     */
+    public boolean canAddAuctionDailyLimit(Auction auction) {
+        Date now = new Date();
+        List<Auction> upcomingAuctions = getAuctionsPastDate(now);
         int countOnNewAuctionDate = 0;
         java.util.Calendar newAuctionCalendar = getJavaCalendar();
         newAuctionCalendar.setTime(auction.getDate());
@@ -96,7 +101,16 @@ public class Calendar implements ICalendar {
         if (countOnNewAuctionDate >= 2) {
             return false;
         }
+        return true;
+    }
 
+    /**
+     *
+     * @param auction
+     * @return true if auction is less than one month in the future
+     */
+    public boolean canAddAuctionMaxInFuture(Auction auction) {
+        Date now = new Date();
         // less than one month in the future
         java.util.Calendar jCalendar = getJavaCalendar();
         jCalendar.setTime(now);
@@ -105,7 +119,17 @@ public class Calendar implements ICalendar {
         if (auction.getDate().after(oneMonthFromNow)) {
             return false;
         }
+        return true;
+    }
 
+    /**
+     *
+     * @param auction
+     * @return true if auction is more than one week in the future
+     */
+    public boolean canAddAuctionMinInFuture(Auction auction) {
+        Date now = new Date();
+        java.util.Calendar jCalendar = getJavaCalendar();
         // more than one week in the future
         jCalendar = getJavaCalendar();
         jCalendar.setTime(now);
@@ -114,8 +138,17 @@ public class Calendar implements ICalendar {
         if (auction.getDate().before(oneWeekFromNow)) {
             return false;
         }
-
         return true;
+    }
+     /**
+     *
+     * @param auction
+     * @return true of false depending on business rules for future Auctions
+     */
+    @Override
+    public boolean canAddAuction(Auction auction) {
+        return canAddAuctionYear(auction) && canAddAuctionDailyLimit(auction) && canAddAuctionMaxInFuture(auction) &&
+                canAddAuctionMinInFuture(auction) && canAddAuctionNonprofitLimit(auction) && canAddAuctionMaxLimit(auction);
     }
     /**
      *
