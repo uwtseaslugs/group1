@@ -7,19 +7,28 @@ import auctioncentral.gui.*;
 import java.io.*;
 import java.util.*;
 
-public class AuctionCentral {
-
-    public static ILoginManager loginManager = new LoginManager();
-    public static ICalendar calendar = new Calendar();
+public class AuctionCentral implements Serializable {
 
     public static void main(String[] args) {
-        if (args.length > 0) {
-            calendar = (ICalendar) deserializeFrom(args[0]);
-        }
-//        add25Auctions();
-        //new LoginUsernameMenu().show();
+        AuctionCentral auctionCentral = new AuctionCentral();
         new Window(new LoginView()).start();
-        serializeTo(calendar, "last.ser");
+        serializeTo(auctionCentral, "last.ser");
+    }
+
+    public ILoginManager myLoginManager;
+    public ICalendar myCalendar;
+
+    public AuctionCentral() {
+        myLoginManager = new LoginManager();
+        myCalendar = new Calendar();
+    }
+
+    public ILoginManager getLoginManager() {
+        return myLoginManager;
+    }
+
+    public ICalendar getCalendar() {
+        return myCalendar;
     }
 
     private static void serializeTo(Object o, String fileName) {
@@ -47,6 +56,9 @@ public class AuctionCentral {
             return null;
         }
     }
+
+    public static ILoginManager loginManager = new LoginManager();
+    public static ICalendar calendar = new Calendar();
 
     private static void add25Auctions() {
         Random r = new Random();

@@ -15,6 +15,7 @@ public class Window
         super("Auction Central");
         myScreenHistory = new LinkedList<AbstractScreen>();
         initView(initialScreen);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     private void initView(AbstractScreen initialScreen) {
