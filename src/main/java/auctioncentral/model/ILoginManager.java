@@ -10,5 +10,7 @@ package auctioncentral.model;
 public interface ILoginManager {
 
     User getCurrentUser();
+    void register(User user);
+    User getUser(String username);
     void setCurrentUser(User currentUser);
 }
