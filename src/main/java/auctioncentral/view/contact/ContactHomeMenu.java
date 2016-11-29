@@ -13,7 +13,8 @@ import auctioncentral.view.*;
 
 import java.time.*;
 import java.time.format.*;
-import java.util.*;
+import java.util.Scanner;
+import java.util.Date;
 
 public class ContactHomeMenu extends AbstractMenu {
 
@@ -23,7 +24,7 @@ public class ContactHomeMenu extends AbstractMenu {
 
     @Override
     public void show() {
-        upcomingAuction = AuctionCentral.calendar.getAuctionsPastDate(new Date()).stream()
+        upcomingAuction = Calendar.inst().getAuctionsPastDate(new Date()).stream()
                 .filter(a -> a.getContact().equals(AuctionCentral.loginManager.getCurrentUser()))
                 .findFirst().orElse(null);
         super.show();

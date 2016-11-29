@@ -9,6 +9,7 @@ package auctioncentral.view.bidder;
 
 import auctioncentral.*;
 import auctioncentral.view.*;
+import auctioncentral.model.Calendar;
 
 import java.time.*;
 import java.time.format.*;
@@ -37,7 +38,7 @@ public class BidderHomeMenu extends AbstractMenu {
     public void onResponse(Scanner scan) {
         switch (scan.nextLine()) {
             case "1":
-                new BidderAuctionMenu(this, AuctionCentral.calendar.getAuctionsPastDate(new Date())).show();
+                new BidderAuctionMenu(this, Calendar.inst().getAuctionsPastDate(new Date())).show();
                 return;
             case "2":
                 getParent().show();

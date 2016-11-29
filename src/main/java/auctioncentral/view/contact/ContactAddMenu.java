@@ -14,7 +14,8 @@ import auctioncentral.view.*;
 import java.text.*;
 import java.time.*;
 import java.time.format.*;
-import java.util.*;
+import java.util.Date;
+import java.util.Scanner;
 
 public class ContactAddMenu extends AbstractMenu {
 
@@ -63,8 +64,8 @@ public class ContactAddMenu extends AbstractMenu {
             response.nextLine();
             getParent().show();
         }
-        if (AuctionCentral.calendar.canAddAuction(newAuction)) {
-            AuctionCentral.calendar.addAuction(newAuction);
+        if (Calendar.inst().canAddAuction(newAuction)) {
+            Calendar.inst().addAuction(newAuction);
             System.out.print("\nAuction Successfully added. Press enter to continue\n> ");
         } else {
             System.out.print("\nError scheduling auction. Press enter to return to previous menu\n> ");

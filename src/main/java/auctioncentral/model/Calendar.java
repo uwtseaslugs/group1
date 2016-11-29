@@ -17,7 +17,7 @@ public class Calendar implements ICalendar {
     private TreeSet<Auction> auctions;
     private int maxAuctions;
 
-    private Calendar() {
+    public Calendar() {
         auctions = new TreeSet<>();
         maxAuctions = 25;
     }

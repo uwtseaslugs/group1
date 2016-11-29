@@ -20,7 +20,7 @@ public class AuctionCentral implements Serializable {
 
     public AuctionCentral() {
         myLoginManager = new LoginManager();
-        myCalendar = new Calendar();
+        myCalendar = Calendar.inst();
     }
 
     public ILoginManager getLoginManager() {
@@ -58,7 +58,6 @@ public class AuctionCentral implements Serializable {
     }
 
     public static ILoginManager loginManager = new LoginManager();
-    public static ICalendar calendar = new Calendar();
 
     private static void add25Auctions() {
         Random r = new Random();
@@ -68,7 +67,7 @@ public class AuctionCentral implements Serializable {
             Auction a = new Auction(new Contact("user" + i, "name" + i, "Nonprofit" + i),
                     c.getTime(), null, null);
             int itemsCount = r.nextInt(9) + 2;
-            calendar.addAuction(a);
+            Calendar.inst().addAuction(a);
             for (int j = 0; j < itemsCount; j++) {
                 a.addItem(new Item("item" + j, ItemCondition.values()[r.nextInt(ItemCondition.values().length - 1)],
                         ItemSize.SMALL, r.nextInt(201) + 1,
@@ -91,9 +90,9 @@ public class AuctionCentral implements Serializable {
             c.add(java.util.Calendar.DATE, r.nextInt(3));
             Auction a = new Auction(new Contact("user" + auctionCount, "name" + auctionCount, "Nonprofit" + auctionCount),
                     c.getTime(), null, null);
-            if (calendar.canAddAuction(a)) {
+            if (Calendar.inst().canAddAuction(a)) {
                 auctionCount++;
-                calendar.addAuction(a);
+                Calendar.inst().addAuction(a);
                 int itemsCount = r.nextInt(9) + 2;
                 for (int i = 0; i < itemsCount; i++) {
                     a.addItem(new Item("item" + i, ItemCondition.values()[r.nextInt(ItemCondition.values().length - 1)],

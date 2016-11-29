@@ -7,6 +7,7 @@
  */
 package auctioncentral.view.staff;
 
+import auctioncentral.model.Calendar;
 import auctioncentral.AuctionCentral;
 import auctioncentral.view.AbstractMenu;
 
@@ -22,7 +23,7 @@ public class StaffAddAuctionsMenu extends AbstractMenu {
     @Override
     public String getHeading() {
         return dateTimeFormatter.format(LocalDateTime.now()) + ".  Total number of upcoming auctions: " +
-                AuctionCentral.calendar.getAuctionsPastDate(new Date()).size();
+                Calendar.inst().getAuctionsPastDate(new Date()).size();
     }
 
     @Override
@@ -33,7 +34,7 @@ public class StaffAddAuctionsMenu extends AbstractMenu {
     @Override
     public void onResponse(Scanner scan) {
         int add = scan.nextInt();
-        AuctionCentral.calendar.addMaxAuctions(add);
-        System.out.print(AuctionCentral.calendar.getMaxAuctions());
+        Calendar.inst().addMaxAuctions(add);
+        System.out.print(Calendar.inst().getMaxAuctions());
     }
 }
