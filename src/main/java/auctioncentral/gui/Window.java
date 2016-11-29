@@ -7,13 +7,14 @@ import java.awt.CardLayout;
 public class Window extends JFrame {
     private Deque<AbstractScreen> myScreenHistory;
     
-    public Window() {
+    public Window(AbstractScreen initialScreen) {
         super("Auction Central");
         myScreenHistory = new LinkedList<AbstractScreen>();
-        initView();
+        initView(initialScreen);
     }
 
-    private void initView() {
+    private void initView(AbstractScreen initialScreen) {
+        addScreen(initialScreen);
     }
 
     public void popScreen() {
@@ -28,5 +29,23 @@ public class Window extends JFrame {
 
     private void switchScreen(AbstractScreen screen) {
         setContentPane(screen);
+    }
+
+    private void guiEntryPoint() {
+        setVisible(true);
+    }
+
+    public void start() {
+        Thread th = new Thread(new Runnable() {
+                @Override public void run() {
+                    guiEntryPoint();
+                }
+            });
+        th.start();
+        try {
+            th.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -2,7 +2,7 @@ package auctioncentral;
 
 import auctioncentral.model.*;
 import auctioncentral.model.Calendar;
-import auctioncentral.view.login.*;
+import auctioncentral.gui.*;
 
 import java.io.*;
 import java.util.*;
@@ -17,7 +17,8 @@ public class AuctionCentral {
             calendar = (ICalendar) deserializeFrom(args[0]);
         }
 //        add25Auctions();
-        new LoginUsernameMenu().show();
+        //new LoginUsernameMenu().show();
+        new Window(new LoginView()).start();
         serializeTo(calendar, "last.ser");
     }
 
