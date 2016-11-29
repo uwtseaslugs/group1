@@ -3,8 +3,12 @@ package auctioncentral.gui;
 import java.util.*;
 import javax.swing.*;
 import java.awt.CardLayout;
+import java.awt.Dimension;
 
-public class Window extends JFrame {
+public class Window
+    extends JFrame
+    implements Observer/*, ActionListener*/ {
+    
     private Deque<AbstractScreen> myScreenHistory;
     
     public Window(AbstractScreen initialScreen) {
@@ -14,6 +18,8 @@ public class Window extends JFrame {
     }
 
     private void initView(AbstractScreen initialScreen) {
+        pack();
+        setPreferredSize(new Dimension(640, 480));
         addScreen(initialScreen);
     }
 
@@ -29,6 +35,11 @@ public class Window extends JFrame {
 
     private void switchScreen(AbstractScreen screen) {
         setContentPane(screen);
+    }
+
+    @Override
+    public void update(Observable o, Object p) {
+        
     }
 
     private void guiEntryPoint() {

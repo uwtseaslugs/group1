@@ -17,10 +17,30 @@ public class Calendar implements ICalendar {
     private TreeSet<Auction> auctions;
     private int maxAuctions;
 
-    public Calendar() {
+    private Calendar() {
         auctions = new TreeSet<>();
         maxAuctions = 25;
     }
+
+    private static Calendar myInst = null;
+    public static Calendar inst() {
+        if (myInst == null) {
+            myInst = new Calendar();
+        }
+
+        return myInst;
+    }
+
+    public static void setInst(Calendar theInst) {
+        if (myInst != null)
+            throw new IllegalStateException("Must call setInst before inst");
+        myInst = theInst;
+    }
+
+    public static void clearInst() {
+        myInst = null;
+    }
+    
       /**
      *
      * @param auction
