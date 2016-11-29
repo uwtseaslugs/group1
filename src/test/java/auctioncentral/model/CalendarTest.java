@@ -45,6 +45,7 @@ public class CalendarTest {
 
         java.util.Calendar ctwoDays = Calendar.getJavaCalendar();
         ctwoDays.add(java.util.Calendar.DATE, 2);
+        ctwoDays.add(java.util.Calendar.HOUR, -1);
         twoDays = ctwoDays.getTime();
 
         java.util.Calendar calendar2Weeks = Calendar.getJavaCalendar();
