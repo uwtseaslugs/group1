@@ -19,8 +19,8 @@ public class Window
     }
 
     private void initView(AbstractScreen initialScreen) {
-        pack();
         setPreferredSize(new Dimension(640, 480));
+        pack();
         addScreen(initialScreen);
     }
 

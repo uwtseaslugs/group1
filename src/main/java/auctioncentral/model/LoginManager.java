@@ -1,9 +1,6 @@
 /*
-    Deliverable 2 
     TCSS 360
-    Created by: Sea Slugs
-    
-    LoginManager class sets the current user.
+    Sea Slugs
  */
 package auctioncentral.model;
 
@@ -16,6 +13,21 @@ import java.util.Map;
  * @author Hunter
  */
 public class LoginManager implements ILoginManager, Serializable {
+
+    private static LoginManager myInst = null;
+
+    public static LoginManager inst() {
+        if (myInst == null) {
+            myInst = new LoginManager();
+        }
+        return myInst;
+    }
+
+    public static void setInst(LoginManager theInst) {
+        if (myInst != null)
+            throw new IllegalStateException("Must call setInst before inst");
+        myInst = theInst;
+    }
 
     private transient User currentUser;
 
@@ -32,7 +44,7 @@ public class LoginManager implements ILoginManager, Serializable {
 
     @Override
     public void register(User user) {
-        users.put(user.getName(), user);
+        users.put(user.getUsername(), user);
     }
 
     @Override
