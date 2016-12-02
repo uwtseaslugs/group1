@@ -1,7 +1,9 @@
 package auctioncentral.gui;
 
 import auctioncentral.gui.bidder.BidderHomeView;
+import auctioncentral.gui.contact.ContactHomeView;
 import auctioncentral.gui.staff.StaffAdminMenu;
+import auctioncentral.gui.staff.StaffHomeView;
 import auctioncentral.model.*;
 
 import java.awt.*;
@@ -34,9 +36,11 @@ public class LoginView extends AbstractScreen {
             if (user != null) {
                 LoginManager.getInstance().setCurrentUser(user);
                 if (user instanceof Staff) {
-
+                    Window frame = (Window) SwingUtilities.getRoot(this);
+                    frame.addScreen(new StaffHomeView());
                 } else if (user instanceof Contact) {
-
+                    Window frame = (Window) SwingUtilities.getRoot(this);
+                    frame.addScreen(new ContactHomeView());
                 } else if (user instanceof Bidder) {
                     Window frame = (Window) SwingUtilities.getRoot(this);
                     frame.addScreen(new BidderHomeView());
