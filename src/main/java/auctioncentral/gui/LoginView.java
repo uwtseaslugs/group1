@@ -36,14 +36,11 @@ public class LoginView extends AbstractScreen {
             if (user != null) {
                 LoginManager.getInstance().setCurrentUser(user);
                 if (user instanceof Staff) {
-                    Window frame = (Window) SwingUtilities.getRoot(this);
-                    frame.addScreen(new StaffHomeView());
+                    getRoot().addScreen(new StaffHomeView());
                 } else if (user instanceof Contact) {
-                    Window frame = (Window) SwingUtilities.getRoot(this);
-                    frame.addScreen(new ContactHomeView());
+                    getRoot().addScreen(new ContactHomeView());
                 } else if (user instanceof Bidder) {
-                    Window frame = (Window) SwingUtilities.getRoot(this);
-                    frame.addScreen(new BidderHomeView());
+                    getRoot().addScreen(new BidderHomeView());
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid username");
