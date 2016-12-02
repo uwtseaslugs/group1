@@ -3,35 +3,33 @@ package auctioncentral.gui;
 import auctioncentral.model.*;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.*;
 import javax.swing.*;
 
 public class LoginView extends AbstractScreen {
 
-    private JLabel label;
-    private JTextField textField;
-    private JButton button;
+    private JLabel enterUsernamelabel;
+    private JTextField usernameField;
+    private JButton loginButton;
 
     public LoginView() {
-        label = new JLabel("Enter username:");
-        textField = new JTextField(20);
-        button = new JButton("Login");
+        enterUsernamelabel = new JLabel("Enter username:");
+        usernameField = new JTextField(20);
+        loginButton = new JButton("Login");
 
         GridBagLayout gbl = new GridBagLayout();
         setLayout(gbl);
         GridBagConstraints c = new GridBagConstraints();
         c.gridwidth = GridBagConstraints.REMAINDER;
-        gbl.setConstraints(label, c);
-        gbl.setConstraints(textField, c);
-        gbl.setConstraints(button, c);
-        add(label);
-        add(textField);
-        add(button);
+        gbl.setConstraints(enterUsernamelabel, c);
+        gbl.setConstraints(usernameField, c);
+        gbl.setConstraints(loginButton, c);
+        add(enterUsernamelabel);
+        add(usernameField);
+        add(loginButton);
 
-        button.addActionListener(a -> {
-            User user = LoginManager.getInstance().getUser(textField.getText());
+        loginButton.addActionListener(a -> {
+            User user = LoginManager.getInstance().getUser(usernameField.getText());
             if (user != null) {
                 LoginManager.getInstance().setCurrentUser(user);
                 if (user instanceof Staff) {
