@@ -1,9 +1,6 @@
 /*
-    Deliverable 2 
     TCSS 360
     Created by: Sea Slugs
-    
-    Item class creates an itema and takes in the name, condition, min bid, donor name, description, comments, and bids.
  */
 package auctioncentral.model;
 
@@ -12,6 +9,7 @@ import java.util.*;
 
 /**
  * An inventory item in an auction
+ * @author Hunter
  */
 public class Item implements IItem {
 
@@ -111,6 +109,12 @@ public class Item implements IItem {
         return bids.get(bidder);
     }
 
+    /**
+     *
+     * @param price the price of the potential bid
+     * @return true if the price is greater than or equal to the minimum bid, false otherwise
+     * @throws IllegalArgumentException if price is null
+     */
     public boolean isValidBid(BigDecimal price) {
         if (price == null) {
             throw new IllegalArgumentException();

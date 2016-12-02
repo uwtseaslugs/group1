@@ -1,6 +1,10 @@
 package auctioncentral.gui;
 
+import auctioncentral.model.*;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 import javax.swing.*;
 
@@ -26,7 +30,21 @@ public class LoginView extends AbstractScreen {
         add(textField);
         add(button);
 
-        button.addActionListener(a -> System.out.println(textField.getText()));
+        button.addActionListener(a -> {
+            User user = LoginManager.getInstance().getUser(textField.getText());
+            if (user != null) {
+                LoginManager.getInstance().setCurrentUser(user);
+                if (user instanceof Staff) {
+
+                } else if (user instanceof Contact) {
+
+                } else if (user instanceof Bidder) {
+
+                }
+            } else {
+
+            }
+        });
     }
 
     @Override

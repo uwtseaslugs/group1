@@ -1,14 +1,12 @@
 /*
-    Deliverable 2 
     TCSS 360
     Created by: Sea Slugs
-    
-  Enum for the different sizes.
  */
 package auctioncentral.model;
 
 /**
  * The size of an Inventory Item
+ * @author Hunter
  */
 public enum ItemSize {
 

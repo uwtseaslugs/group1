@@ -10,7 +10,7 @@ import java.util.*;
 public class AuctionCentral implements Serializable {
 
     public static void main(String[] args) {
-        LoginManager.inst().register(new Bidder("bidder1", "Bidder1 Name"));
+        LoginManager.getInstance().register(new Bidder("bidder1", "Bidder1 Name"));
 
         new Window(new LoginView()).start();
         serializeTo(new AuctionCentral(), "last.ser");
@@ -20,7 +20,7 @@ public class AuctionCentral implements Serializable {
     private ICalendar myCalendar;
 
     public AuctionCentral() {
-        myLoginManager = LoginManager.inst();
+        myLoginManager = LoginManager.getInstance();
         myCalendar = Calendar.inst();
     }
 

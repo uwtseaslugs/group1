@@ -1,6 +1,6 @@
 /*
     TCSS 360
-    Sea Slugs
+    Created by: Sea Slugs
  */
 package auctioncentral.model;
 
@@ -9,23 +9,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * Handles the authentication and storage of Users
  * @author Hunter
  */
 public class LoginManager implements ILoginManager, Serializable {
 
     private static LoginManager myInst = null;
 
-    public static LoginManager inst() {
+    public static LoginManager getInstance() {
         if (myInst == null) {
             myInst = new LoginManager();
         }
         return myInst;
     }
 
-    public static void setInst(LoginManager theInst) {
+    public static void setInstance(LoginManager theInst) {
         if (myInst != null)
-            throw new IllegalStateException("Must call setInst before inst");
+            throw new IllegalStateException("Must call setInstance before getInstance");
         myInst = theInst;
     }
 
@@ -42,11 +42,20 @@ public class LoginManager implements ILoginManager, Serializable {
         return currentUser;
     }
 
+    /**
+     *
+     * @param user a new User for registration
+     */
     @Override
     public void register(User user) {
         users.put(user.getUsername(), user);
     }
 
+    /**
+     *
+     * @param username of a previously registered User
+     * @return the User with the given username or null if no such User exists
+     */
     @Override
     public User getUser(String username) {
         return users.get(username);
