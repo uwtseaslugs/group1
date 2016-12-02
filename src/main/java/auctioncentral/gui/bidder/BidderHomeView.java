@@ -1,4 +1,6 @@
-package auctioncentral.gui;
+package auctioncentral.gui.bidder;
+
+import auctioncentral.gui.AbstractScreen;
 
 import javax.swing.*;
 import java.util.Observable;
