@@ -9,6 +9,8 @@ public class BidderHomeView extends AbstractScreen {
 
     private JButton viewAuctionsButton;
 
+
+
     public BidderHomeView() {
         viewAuctionsButton = new JButton("View upcoming auctions");
 
