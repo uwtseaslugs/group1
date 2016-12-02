@@ -277,14 +277,14 @@ public class Calendar implements ICalendar {
     /**
      *
      * @param auction
-     * @return if auction is at least 2 days in the future
+     * @return if auction has been previously scheduled with this Calendar and is at least 2 days in the future
      */
     public boolean canCancelAuction(Auction auction) {
         Date now = new Date();
         java.util.Calendar target = java.util.Calendar.getInstance();
         target.setTime(now);
         target.add(java.util.Calendar.DATE, CANCEL_MAX_DAYS_AWAY);
-        return target.getTime().before(auction.getDate());
+        return target.getTime().before(auction.getDate()) && auctions.contains(auction);
     }
 
     /**
