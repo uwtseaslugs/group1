@@ -13,6 +13,9 @@ import java.util.Observable;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * @author Hunter
+ */
 public class ContactAddItemView extends AbstractScreen {
 
     private Auction auction;
@@ -111,7 +114,7 @@ public class ContactAddItemView extends AbstractScreen {
                 String description = itemDescriptionField.getText().trim().equals("") ? null : itemDescriptionField.getText();
                 String comment = itemCommentField.getText().trim().equals("") ? null : itemCommentField.getText();
                 auction.addItem(new Item(
-                        itemDonorNameField.getText(),
+                        itemNameField.getText(),
                         (ItemCondition) itemConditionCombo.getSelectedItem(),
                         (ItemSize) itemSizeCombo.getSelectedItem(),
                         (int) itemMinBidSpinner.getValue(),

@@ -21,12 +21,11 @@ public class LoginView extends AbstractScreen {
         setLayout(gbl);
         GridBagConstraints c = new GridBagConstraints();
         c.gridwidth = GridBagConstraints.REMAINDER;
-        gbl.setConstraints(enterUsernamelabel, c);
-        gbl.setConstraints(usernameField, c);
-        gbl.setConstraints(loginButton, c);
-        add(enterUsernamelabel);
-        add(usernameField);
-        add(loginButton);
+        add(enterUsernamelabel, c);
+        add(Box.createRigidArea(new Dimension(0, 5)), c);
+        add(usernameField, c);
+        add(Box.createRigidArea(new Dimension(0, 5)), c);
+        add(loginButton, c);
 
         loginButton.addActionListener(a -> {
             User user = LoginManager.getInstance().getUser(usernameField.getText());
