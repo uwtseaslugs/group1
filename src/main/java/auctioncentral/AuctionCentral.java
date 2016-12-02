@@ -5,6 +5,8 @@ import auctioncentral.gui.contact.ContactEditAuctionView;
 import auctioncentral.model.*;
 import auctioncentral.model.Calendar;
 import auctioncentral.gui.*;
+import auctioncentral.view.CalendarView;
+import sun.rmi.runtime.Log;
 
 import java.io.*;
 import java.util.*;
@@ -12,25 +14,27 @@ import java.util.*;
 public class AuctionCentral implements Serializable {
 
     public static void main(String[] args) {
-        addUsers();
-        addAuctions();
+        AuctionCentral ac = make24Auctions();
+        LoginManager.setInstance(ac.getLoginManager());
+        Calendar.setInst(ac.getCalendar());
+
         new Window(new LoginView()).start();
-        serializeTo(new AuctionCentral(), "last.ser");
+        serializeTo(new AuctionCentral(LoginManager.getInstance(), Calendar.inst()), "last.ser");
     }
 
-    private ILoginManager myLoginManager;
-    private ICalendar myCalendar;
+    private LoginManager myLoginManager;
+    private Calendar myCalendar;
 
-    public AuctionCentral() {
-        myLoginManager = LoginManager.getInstance();
-        myCalendar = Calendar.inst();
+    public AuctionCentral(LoginManager loginManager, Calendar calendar) {
+        myLoginManager = loginManager;
+        myCalendar = calendar;
     }
 
-    public ILoginManager getLoginManager() {
+    public LoginManager getLoginManager() {
         return myLoginManager;
     }
 
-    public ICalendar getCalendar() {
+    public Calendar getCalendar() {
         return myCalendar;
     }
 
@@ -62,55 +66,30 @@ public class AuctionCentral implements Serializable {
 
     public static ILoginManager loginManager = new LoginManager();
 
-    private static void add25Auctions() {
+    private static AuctionCentral make24Auctions() {
+        LoginManager lm = new LoginManager();
+        for (int i = 0; i < 50; i++) {
+            lm.register(new Bidder("bidder" + i, "bidder" + i + "name"));
+            lm.register(new Staff("staff" + i, "staff" + i + "name"));
+            lm.register(new Contact("contact" + i, "contact" + i + "name", "nonprofit" + i));
+        }
         Random r = new Random();
+        Calendar cal = new Calendar();
         java.util.Calendar c = java.util.Calendar.getInstance();
         c.add(java.util.Calendar.DATE, 8);
-        for (int i = 0; i < 25; i++) {
-            Auction a = new Auction(new Contact("user" + i, "name" + i, "Nonprofit" + i),
+        for (int i = 1; i <= 24; i++) {
+            Auction a = new Auction((Contact) lm.getUser("contact" + i),
                     c.getTime(), null, null);
-            int itemsCount = r.nextInt(9) + 2;
-            Calendar.inst().addAuction(a);
-            for (int j = 0; j < itemsCount; j++) {
+            cal.addAuction(a);
+            for (int j = 0; j < i; j++) {
                 a.addItem(new Item("item" + j, ItemCondition.values()[r.nextInt(ItemCondition.values().length - 1)],
-                        ItemSize.SMALL, r.nextInt(201) + 1,
+                        ItemSize.values()[r.nextInt(ItemSize.values().length)], r.nextInt(201) + 1,
                         "donor" + j, "description" + j, "comment" + j));
             }
             if (i % 2 == 0) {
                 c.add(java.util.Calendar.DATE, 1);
             }
         }
-    }
-
-    // test
-    private static void addAuctions() {
-        Random r = new Random();
-        java.util.Calendar c = java.util.Calendar.getInstance();
-        c.add(java.util.Calendar.DATE, 8);
-        int auctionCount = 0;
-        while (auctionCount <= 6) {
-            c.add(java.util.Calendar.DATE, 1);
-            c.add(java.util.Calendar.DATE, r.nextInt(3));
-            Auction a = new Auction(new Contact("user" + auctionCount, "name" + auctionCount, "Nonprofit" + auctionCount),
-                    c.getTime(), null, null);
-            if (Calendar.inst().canAddAuction(a)) {
-                auctionCount++;
-                Calendar.inst().addAuction(a);
-                int itemsCount = r.nextInt(9) + 2;
-                for (int i = 0; i < itemsCount; i++) {
-                    a.addItem(new Item("item" + i, ItemCondition.values()[r.nextInt(ItemCondition.values().length - 1)],
-                            ItemSize.SMALL, r.nextInt(201) + 1,
-                            "donor" + i, "description" + i, "comment" + i));
-                }
-            }
-        }
-    }
-
-    private static void addUsers() {
-        for (int i = 0; i < 50; i++) {
-            LoginManager.getInstance().register(new Bidder("bidder" + i, "bidder" + i + "name"));
-            LoginManager.getInstance().register(new Staff("staff" + i, "staff" + i + "name"));
-            LoginManager.getInstance().register(new Contact("contact" + i, "contact" + i + "name", "nonprofit" + i));
-        }
+        return new AuctionCentral(lm, cal);
     }
 }
