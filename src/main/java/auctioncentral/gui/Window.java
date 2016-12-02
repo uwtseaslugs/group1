@@ -37,6 +37,7 @@ public class Window
 
     private void switchScreen(AbstractScreen screen) {
         setContentPane(screen);
+        setVisible(true);
     }
 
     @Override

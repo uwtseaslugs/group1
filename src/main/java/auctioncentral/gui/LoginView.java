@@ -1,5 +1,6 @@
 package auctioncentral.gui;
 
+import auctioncentral.gui.bidder.BidderHomeView;
 import auctioncentral.gui.staff.StaffAdminMenu;
 import auctioncentral.model.*;
 
@@ -37,7 +38,8 @@ public class LoginView extends AbstractScreen {
                 } else if (user instanceof Contact) {
 
                 } else if (user instanceof Bidder) {
-
+                    Window frame = (Window) SwingUtilities.getRoot(this);
+                    frame.addScreen(new BidderHomeView());
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid username");
