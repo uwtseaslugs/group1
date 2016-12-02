@@ -16,6 +16,7 @@ public class Window
         myScreenHistory = new LinkedList<AbstractScreen>();
         initView(initialScreen);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
     }
 
     private void initView(AbstractScreen initialScreen) {

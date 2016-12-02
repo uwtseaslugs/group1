@@ -9,14 +9,24 @@ import auctioncentral.view.CalendarView;
 import sun.rmi.runtime.Log;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class AuctionCentral implements Serializable {
 
-    public static void main(String[] args) {
+    private static String CONFIG_FILE = "config.txt";
+
+    public static void main(String[] args) throws IOException {
         AuctionCentral ac = make24Auctions();
+
+//        String serFileName = new String(Files.readAllBytes(Paths.get(CONFIG_FILE)), StandardCharsets.UTF_8);
+//        AuctionCentral ac = (AuctionCentral) deserializeFrom(serFileName);
+
         LoginManager.setInstance(ac.getLoginManager());
         Calendar.setInst(ac.getCalendar());
+
         new Window(new LoginView()).start();
         serializeTo(new AuctionCentral(LoginManager.getInstance(), Calendar.inst()), "last.ser");
     }
