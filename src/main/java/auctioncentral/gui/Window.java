@@ -12,7 +12,7 @@ public class Window
     private Deque<AbstractScreen> myScreenHistory;
     
     public Window(AbstractScreen initialScreen) {
-        super("Auction Central");
+        super("Auction Central: the auctioneer for non-profit organizations");
         myScreenHistory = new LinkedList<AbstractScreen>();
         initView(initialScreen);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -36,6 +36,7 @@ public class Window
 
     private void switchScreen(AbstractScreen screen) {
         setContentPane(screen);
+        setVisible(true);
     }
 
     @Override
