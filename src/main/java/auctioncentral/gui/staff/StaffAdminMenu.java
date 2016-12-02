@@ -1,6 +1,7 @@
 package auctioncentral.gui.staff;
 
 import auctioncentral.gui.AbstractScreen;
+import auctioncentral.model.Calendar;
 
 import javax.swing.*;
 import java.util.Observable;
