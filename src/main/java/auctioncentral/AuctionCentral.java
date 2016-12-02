@@ -14,7 +14,7 @@ public class AuctionCentral implements Serializable {
     public static void main(String[] args) {
         LoginManager.getInstance().register(new Bidder("bidder1", "Bidder1 Name"));
         addAuctions();
-        new Window(new LoginView()).start();
+        new Window(new ContactAddItemView(null)).start();
         serializeTo(new AuctionCentral(), "last.ser");
     }
 

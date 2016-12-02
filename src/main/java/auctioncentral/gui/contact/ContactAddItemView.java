@@ -8,7 +8,10 @@ import auctioncentral.model.ItemSize;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 import java.util.Observable;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ContactAddItemView extends AbstractScreen {
 
@@ -50,6 +53,7 @@ public class ContactAddItemView extends AbstractScreen {
         itemCommentField = new JTextField(40);
         addItemButton = new JButton("Add Item");
         cancelButton = new JButton("Cancel");
+        itemSizeCombo.setToolTipText(Stream.of(ItemSize.values()).map(s -> s.name() + ": " + s.getDescription() + ". ").collect(Collectors.joining()));
 
         Box vertBox = Box.createVerticalBox();
         Box row1 = Box.createHorizontalBox();
@@ -96,8 +100,6 @@ public class ContactAddItemView extends AbstractScreen {
 
         GridBagLayout gbl = new GridBagLayout();
         setLayout(gbl);
-        GridBagConstraints c = new GridBagConstraints();
-        gbl.setConstraints(vertBox, c);
 
         add(vertBox);
 
