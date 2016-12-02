@@ -12,7 +12,7 @@ import java.util.*;
 public class AuctionCentral implements Serializable {
 
     public static void main(String[] args) {
-        LoginManager.getInstance().register(new Bidder("bidder1", "Bidder1 Name"));
+        addUsers();
         addAuctions();
         new Window(new LoginView()).start();
         serializeTo(new AuctionCentral(), "last.ser");
@@ -103,6 +103,14 @@ public class AuctionCentral implements Serializable {
                             "donor" + i, "description" + i, "comment" + i));
                 }
             }
+        }
+    }
+
+    private static void addUsers() {
+        for (int i = 0; i < 50; i++) {
+            LoginManager.getInstance().register(new Bidder("bidder" + i, "bidder" + i + "name"));
+            LoginManager.getInstance().register(new Staff("staff" + i, "staff" + i + "name"));
+            LoginManager.getInstance().register(new Contact("contact" + i, "contact" + i + "name", "nonprofit" + i));
         }
     }
 }
