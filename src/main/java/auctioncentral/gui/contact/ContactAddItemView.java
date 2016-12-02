@@ -2,6 +2,7 @@ package auctioncentral.gui.contact;
 
 import auctioncentral.gui.AbstractScreen;
 import auctioncentral.model.Auction;
+import auctioncentral.model.Item;
 import auctioncentral.model.ItemCondition;
 import auctioncentral.model.ItemSize;
 
@@ -99,6 +100,25 @@ public class ContactAddItemView extends AbstractScreen {
         gbl.setConstraints(vertBox, c);
 
         add(vertBox);
+
+        addItemButton.addActionListener(e -> {
+            if (itemNameField.getText().trim().equals("")) {
+                JOptionPane.showMessageDialog(this, "Item name required");
+            } else {
+                String donorName = itemDonorNameField.getText().trim().equals("") ? null : itemDonorNameField.getText();
+                String description = itemDescriptionField.getText().trim().equals("") ? null : itemDescriptionField.getText();
+                String comment = itemCommentField.getText().trim().equals("") ? null : itemCommentField.getText();
+                auction.addItem(new Item(
+                        itemDonorNameField.getText(),
+                        (ItemCondition) itemConditionCombo.getSelectedItem(),
+                        (ItemSize) itemSizeCombo.getSelectedItem(),
+                        (int) itemMinBidSpinner.getValue(),
+                        donorName,
+                        description,
+                        comment)
+                );
+            }
+        });
     }
 
     @Override

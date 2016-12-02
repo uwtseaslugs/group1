@@ -40,7 +40,7 @@ public class LoginView extends AbstractScreen {
 
                 }
             } else {
-
+                JOptionPane.showMessageDialog(this, "Invalid username");
             }
         });
     }
