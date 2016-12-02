@@ -271,6 +271,32 @@ public class Calendar implements ICalendar {
         return numAuctionsOnDate;
     }
 
+
+    private static final int CANCEL_MAX_DAYS_AWAY = 2;
+
+    /**
+     *
+     * @param auction
+     * @return if auction is at least 2 days in the future
+     */
+    public boolean canCancelAuction(Auction auction) {
+        Date now = new Date();
+        java.util.Calendar target = java.util.Calendar.getInstance();
+        target.setTime(now);
+        target.add(java.util.Calendar.DATE, CANCEL_MAX_DAYS_AWAY);
+        return target.getTime().before(auction.getDate());
+    }
+
+    /**
+     * Cancels the auction if possible
+     * @param auction
+     */
+    public void cancelAuction(Auction auction) {
+        if (canCancelAuction(auction)) {
+            auctions.remove(auction);
+        }
+    }
+
     /**
      *
      * @param addAuctions

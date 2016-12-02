@@ -1,6 +1,7 @@
 package auctioncentral;
 
 import auctioncentral.gui.contact.ContactAddItemView;
+import auctioncentral.gui.contact.ContactEditAuctionView;
 import auctioncentral.model.*;
 import auctioncentral.model.Calendar;
 import auctioncentral.gui.*;
