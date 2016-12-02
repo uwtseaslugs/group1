@@ -8,6 +8,8 @@ import auctioncentral.gui.*;
 import auctioncentral.view.CalendarView;
 import sun.rmi.runtime.Log;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -17,6 +19,7 @@ import java.util.*;
 public class AuctionCentral implements Serializable {
 
     private static String CONFIG_FILE = "config.txt";
+    private static String SER_SAVE_FILE = "last.ser";
 
     public static void main(String[] args) throws IOException {
         AuctionCentral ac = make24Auctions();
@@ -27,8 +30,14 @@ public class AuctionCentral implements Serializable {
         LoginManager.setInstance(ac.getLoginManager());
         Calendar.setInst(ac.getCalendar());
 
-        new Window(new LoginView()).start();
-        serializeTo(new AuctionCentral(LoginManager.getInstance(), Calendar.inst()), "last.ser");
+        Window window = new Window(new LoginView());
+        window.start();
+        window.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                serializeTo(new AuctionCentral(LoginManager.getInstance(), Calendar.inst()), SER_SAVE_FILE);
+            }
+        });
     }
 
     private LoginManager myLoginManager;
