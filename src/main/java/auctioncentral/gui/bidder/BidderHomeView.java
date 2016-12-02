@@ -19,9 +19,9 @@ public class BidderHomeView extends AbstractScreen {
         viewPreviousBids = new JButton("View Previous Bids");
         exitButton = new JButton("Exit Auction Central");
         user = new JLabel(((Bidder) LoginManager.getInstance().getCurrentUser()).getName());
-        userLabel = new JLabel(" currently logged in as a Bidder");
+        userLabel = new JLabel("Currently logged in as a Bidder");
         dateLabel = new JLabel(dateTimeFormatter.format(LocalDateTime.now()));
-        auctionLabel = new JLabel("Total Number of Upcoming Auctions: ");
+        auctionNumberLabel = new JLabel("Total Number of Upcoming Auctions: ");
 
         GridBagLayout gbl = new GridBagLayout();
         setLayout(gbl);
@@ -33,10 +33,15 @@ public class BidderHomeView extends AbstractScreen {
         c.gridx = 0;
         c.gridy = 0;
         gbl.setConstraints(user, c);
-        c.weightx = 1.0;
-        c.weighty = 1.0;
         c.gridx = 1;
         gbl.setConstraints(userLabel, c);
+        c.gridx = 0;
+        c.gridy = 1;
+        gbl.setConstraints(dateLabel, c);
+        c.gridx = 1;
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        gbl.setConstraints(auctionNumberLabel, c);
 
         c.gridx = 2;
         c.weighty = 0.0;
@@ -52,6 +57,8 @@ public class BidderHomeView extends AbstractScreen {
 
         add(user);
         add(userLabel);
+        add(dateLabel);
+        add(auctionNumberLabel);
         add(viewAuctionsButton);
         add(viewPreviousBids);
         add(exitButton);
