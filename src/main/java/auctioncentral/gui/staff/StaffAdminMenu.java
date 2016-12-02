@@ -23,8 +23,10 @@ public class StaffAdminMenu extends AbstractScreen {
         returnToHome = new JButton("Return Home");
         add(returnToHome);
 
-        maxAuctions.addActionListener(e -> {
-
+        addMaxAuctions.addActionListener(e -> {
+            String num = maxAuctions.getText();
+            numOfMaxAuctions = Integer.parseInt(num);
+            Calendar.inst().addMaxAuctions(numOfMaxAuctions);
         });
 
 
