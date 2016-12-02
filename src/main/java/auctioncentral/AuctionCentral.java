@@ -17,7 +17,6 @@ public class AuctionCentral implements Serializable {
         AuctionCentral ac = make24Auctions();
         LoginManager.setInstance(ac.getLoginManager());
         Calendar.setInst(ac.getCalendar());
-
         new Window(new LoginView()).start();
         serializeTo(new AuctionCentral(LoginManager.getInstance(), Calendar.inst()), "last.ser");
     }

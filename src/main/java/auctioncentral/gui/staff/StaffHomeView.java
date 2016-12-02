@@ -9,11 +9,14 @@ import java.util.Observable;
 public class StaffHomeView extends AbstractScreen {
 
     private JButton viewCalendarButton;
+    private JButton AdminButton;
 
     public StaffHomeView() {
         viewCalendarButton = new JButton("View Calendar");
+        AdminButton = new JButton("Administrative functions");
 
         add(viewCalendarButton);
+        add(AdminButton);
     }
 
     @Override
