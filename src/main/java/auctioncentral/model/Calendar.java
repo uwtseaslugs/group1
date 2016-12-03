@@ -299,6 +299,17 @@ public class Calendar implements ICalendar {
 
     /**
      *
+     * @param contact for the Auction
+     * @return the next upcoming Auction by the contact or null if none
+     */
+    public Auction getNextAuctionBy(Contact contact) {
+        List<Auction> upcoming = getAuctionsPastDate(new Date());
+        return upcoming.stream().filter(a -> a.getContact().equals(contact))
+                .findFirst().orElse(null);
+    }
+
+    /**
+     *
      * @param addAuctions
      */
     public void addMaxAuctions(int addAuctions) {
