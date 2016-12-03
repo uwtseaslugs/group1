@@ -2,7 +2,6 @@ package auctioncentral.gui;
 
 import auctioncentral.gui.bidder.BidderHomeView;
 import auctioncentral.gui.contact.ContactHomeView;
-import auctioncentral.gui.staff.StaffAdminMenu;
 import auctioncentral.gui.staff.StaffHomeView;
 import auctioncentral.model.*;
 

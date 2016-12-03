@@ -1,6 +1,7 @@
 package auctioncentral.gui.staff;
 
 import auctioncentral.gui.AbstractScreen;
+import auctioncentral.gui.Window;
 import auctioncentral.model.Calendar;
 
 import javax.swing.*;
@@ -30,6 +31,10 @@ public class StaffAdminMenu extends AbstractScreen {
             Calendar.inst().addMaxAuctions(numOfMaxAuctions);
         });
 
+        returnToHome.addActionListener(e -> {
+            Window frame = (Window) SwingUtilities.getRoot(this);
+            frame.addScreen(new StaffHomeView());
+        });
 
 
     }
