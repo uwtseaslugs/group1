@@ -3,7 +3,12 @@ package auctioncentral.gui.staff;
 import auctioncentral.gui.AbstractScreen;
 import auctioncentral.gui.Window;
 import auctioncentral.model.Calendar;
+import auctioncentral.model.LoginManager;
+import auctioncentral.model.Staff;
 
+import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
@@ -13,32 +18,79 @@ public class StaffAdminMenu extends AbstractScreen {
     private JTextField maxAuctions;
     private JLabel EnterMax;
     private JLabel currentMaxAuctions;
+    private JLabel StaffName;
+    private JLabel DateC;
+    private static DateTimeFormatter date = DateTimeFormatter.ofPattern("MMMM d, uuuu");
     private int numOfMaxAuctions;
+    private int currentNumMaxAuctions;
+    private int currentAuctions;
+
+
+
     public StaffAdminMenu() {
-
-        setLayout(new FlowLayout());
-
+        updateAuctions();
+        StaffName = new JLabel(((Staff) LoginManager.getInstance().getCurrentUser()).getName());
         currentMaxAuctions = new JLabel("Current Max Auctions allowed: " + Calendar.inst().getMaxAuctions());
-        add(currentMaxAuctions);
-
+        DateC = new JLabel(date.format(LocalDateTime.now()));
         EnterMax = new JLabel("Enter max auctions: ");
-        add(EnterMax);
-
         maxAuctions = new JTextField(3);
-        add(maxAuctions);
-
         addMaxAuctions = new JButton("Add Max Auctions");
-        add(addMaxAuctions);
-
         returnToHome = new JButton("Return Home");
+
+        GridBagLayout gbl = new GridBagLayout();
+        setLayout(gbl);
+        GridBagConstraints c = new GridBagConstraints();
+        c.insets = new Insets(5,5,5,5);
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        c.gridx = 0;
+        c.gridy = 0;
+        gbl.setConstraints(StaffName, c);
+        c.gridy = 1;
+        gbl.setConstraints(currentMaxAuctions,c);
+        c.gridy = 2;
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        gbl.setConstraints(DateC,c);
+
+        c.weighty = 0.0;
+        c.weightx = 0.0;
+        c.anchor = GridBagConstraints.CENTER;
+        c.gridx = 1;
+        c.gridy = 3;
+        gbl.setConstraints(EnterMax,c);
+        c.gridx = 2;
+        gbl.setConstraints(maxAuctions,c);
+        c.gridx = 3;
+        gbl.setConstraints(addMaxAuctions,c);
+
+        c.weighty = 0.0;
+        c.weightx = 0.0;
+        c.gridx = 3;
+        c.gridy = 5;
+        c.anchor = GridBagConstraints.LAST_LINE_END;
+        gbl.setConstraints(returnToHome,c);
+
+        add(currentMaxAuctions);
+        add(StaffName);
+        add(DateC);
+        add(EnterMax);
+        add(maxAuctions);
+        add(addMaxAuctions);
         add(returnToHome);
+
 
         addMaxAuctions.addActionListener(e -> {
             String num = maxAuctions.getText();
             numOfMaxAuctions = Integer.parseInt(num);
             Calendar.inst().addMaxAuctions(numOfMaxAuctions);
+            updateAuctions();
+            if (currentNumMaxAuctions < currentAuctions) {
+                JOptionPane.showMessageDialog(this, "<html>Maximum Auctions is less than current auctions. <br>Clients will be unable to add new auctions until current auctions are completed<html>");
+            }
             JOptionPane.showMessageDialog(this, "Successfully added " + numOfMaxAuctions +" to max amount of auctions.");
-
+            currentMaxAuctions.setText("<html>Current Auctions: " + currentAuctions + "<br>Current Max Auctions allowed:<html> " + currentNumMaxAuctions);
 
         });
 
@@ -47,6 +99,10 @@ public class StaffAdminMenu extends AbstractScreen {
         });
 
 
+    }
+    public void updateAuctions(){
+        currentNumMaxAuctions = Calendar.inst().getMaxAuctions();
+        currentAuctions = Calendar.inst().getAuctionsPastDate(new Date()).size();
     }
 
     @Override

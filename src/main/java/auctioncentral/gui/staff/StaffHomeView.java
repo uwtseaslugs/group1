@@ -17,21 +17,25 @@ public class StaffHomeView extends AbstractScreen {
     private JButton AdminButton;
     private JLabel StaffName;
     private JLabel currentMaxAuction;
+    private JPanel Home;
     public StaffHomeView() {
+        Home = new JPanel(new GridLayout(5,0));
+
         StaffName = new JLabel(((Staff) LoginManager.getInstance().getCurrentUser()).getName());
         currentMaxAuction = new JLabel("Current Max Auctions allowed: " + Calendar.inst().getMaxAuctions());
         viewCalendarButton = new JButton("View Calendar");
         AdminButton = new JButton("Administrative functions");
 
 
-        add(currentMaxAuction);
+        Home.add(currentMaxAuction);
 
-        add(StaffName);
+        Home.add(StaffName);
 
-        add(viewCalendarButton);
+        Home.add(viewCalendarButton);
 
-        add(AdminButton);
+        Home.add(AdminButton);
 
+        add(Home);
         AdminButton.addActionListener(e -> {
            getRoot().addScreen(new StaffAdminMenu());
         });
