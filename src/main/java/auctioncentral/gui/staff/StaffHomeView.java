@@ -29,8 +29,7 @@ public class StaffHomeView extends AbstractScreen {
         add(AdminButton);
 
         AdminButton.addActionListener(e -> {
-           Window frame = (Window) SwingUtilities.getRoot(this);
-            frame.addScreen(new StaffAdminMenu());
+           getRoot().addScreen(new StaffAdminMenu());
         });
     }
 

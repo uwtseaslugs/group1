@@ -32,8 +32,7 @@ public class StaffAdminMenu extends AbstractScreen {
         });
 
         returnToHome.addActionListener(e -> {
-            Window frame = (Window) SwingUtilities.getRoot(this);
-            frame.addScreen(new StaffHomeView());
+            getRoot().addScreen(new StaffHomeView());
         });
 
 
