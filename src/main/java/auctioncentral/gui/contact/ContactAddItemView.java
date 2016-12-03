@@ -122,6 +122,8 @@ public class ContactAddItemView extends AbstractScreen {
                         description,
                         comment)
                 );
+                JOptionPane.showMessageDialog(this, "Item added successfully");
+                getRoot().addScreen(new ContactEditAuctionView(auction));
             }
         });
     }

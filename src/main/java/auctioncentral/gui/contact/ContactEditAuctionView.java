@@ -14,6 +14,7 @@ public class ContactEditAuctionView extends AbstractScreen {
 
     private JScrollPane itemsPane;
     private JPanel itemsPanel;
+    private JButton addItemButton;
 
     public ContactEditAuctionView(Auction auction) {
         this.auction = auction;
@@ -30,7 +31,13 @@ public class ContactEditAuctionView extends AbstractScreen {
             itemsPanel.add(new JLabel("$" + item.getMinimumBid()));
         }
 
+        addItemButton = new JButton("Add new Item");
+        addItemButton.addActionListener(e -> {
+            getRoot().addScreen(new ContactAddItemView(auction));
+        });
+
         add(itemsPane);
+        add(addItemButton);
         itemsPane.setPreferredSize(new Dimension(400, 250));
     }
 
