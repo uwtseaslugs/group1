@@ -31,6 +31,7 @@ public class ContactEditAuctionView extends AbstractScreen {
         }
 
         add(itemsPane);
+        itemsPane.setPreferredSize(new Dimension(400, 250));
     }
 
     @Override

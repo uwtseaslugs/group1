@@ -7,13 +7,14 @@ import auctioncentral.model.Contact;
 import auctioncentral.model.LoginManager;
 
 import javax.swing.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 
 public class ContactHomeView extends AbstractScreen {
 
-    private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMMM d, uuuu");
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh a");
 
     private Auction auction;
     private JLabel auctionLabel;
@@ -28,7 +29,7 @@ public class ContactHomeView extends AbstractScreen {
         addAuctionButton = new JButton("Add new auction");
 
         if (auction != null) {
-            auctionLabel = new JLabel("You have an upcoming auction on " + dateTimeFormatter.format(LocalDateTime.now()));
+            auctionLabel = new JLabel("You have an upcoming auction on " + dateFormat.format(auction.getDate()));
         } else {
             auctionLabel = new JLabel("You do not have any upcoming auctions");
             editAuctionButton.setEnabled(false);
