@@ -15,12 +15,12 @@ public class Contact extends User {
      *
      * @param username
      * @param name
-     * Sets the username and name of Contact
      */
     public Contact(String username, String name) {
         this(username, name, "");
     }
-        /**
+
+    /**
      *
      * @param username
      * @param name
@@ -37,7 +37,8 @@ public class Contact extends User {
     public String getNonprofitName() {
         return nonprofitName;
     }
-        /**
+
+    /**
      *
      * @return gets the title
      */

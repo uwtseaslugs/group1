@@ -37,6 +37,10 @@ public class LoginManager implements ILoginManager, Serializable {
         users = new HashMap<>();
     }
 
+    /**
+     *
+     * @return the User currently logged in
+     */
     @Override
     public User getCurrentUser() {
         return currentUser;
@@ -61,6 +65,10 @@ public class LoginManager implements ILoginManager, Serializable {
         return users.get(username);
     }
 
+    /**
+     *
+     * @param currentUser
+     */
     @Override
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;

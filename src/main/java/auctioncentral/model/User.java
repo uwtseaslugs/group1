@@ -1,9 +1,6 @@
 /*
-    Deliverable 2 
     TCSS 360
     Created by: Sea Slugs
-    
-    User class takes in the Username and name of user.
  */
 package auctioncentral.model;
 
@@ -13,6 +10,7 @@ public abstract class User implements Serializable {
 
     protected String username;
     protected String name;
+
     /**
      *
      * @param username
@@ -31,11 +29,15 @@ public abstract class User implements Serializable {
     }
     /**
      * 
-     * @return gets the name of user
+     * @return the name of user
      */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @return a description of the type of user
+     */
     public abstract String getTitle();
 }

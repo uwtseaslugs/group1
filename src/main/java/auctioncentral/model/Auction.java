@@ -49,6 +49,10 @@ public class Auction implements Serializable, Comparable<Auction> {
         return date;
     }
 
+    /**
+     *
+     * @return the Contact who created and is handling this Auction
+     */
     public Contact getContact() {
         return contact;
     }
@@ -73,11 +77,16 @@ public class Auction implements Serializable, Comparable<Auction> {
         items.add(newItem);
     }
 
+    /**
+     *
+     * @param auction another Auction
+     * @return compares first by the dates and then randomly in case of ties
+     */
     @Override
-    public int compareTo(Auction o) {
-        int compareDates = getDate().compareTo(o.getDate());
+    public int compareTo(Auction auction) {
+        int compareDates = getDate().compareTo(auction.getDate());
         if (compareDates == 0) {
-            return Integer.compare(hashCode(), o.hashCode());
+            return Integer.compare(hashCode(), auction.hashCode());
         } else {
             return compareDates;
         }
