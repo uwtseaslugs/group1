@@ -15,6 +15,7 @@ public class ContactEditAuctionView extends AbstractScreen {
     private JScrollPane itemsPane;
     private JPanel itemsPanel;
     private JButton addItemButton;
+    private JButton homeButton;
 
     public ContactEditAuctionView(Auction auction) {
         this.auction = auction;
@@ -36,8 +37,22 @@ public class ContactEditAuctionView extends AbstractScreen {
             getRoot().addScreen(new ContactAddItemView(auction));
         });
 
-        add(itemsPane);
-        add(addItemButton);
+        homeButton = new JButton("Back");
+        homeButton.addActionListener(e -> {
+            getRoot().addScreen(new ContactHomeView());
+        });
+
+        setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridwidth = GridBagConstraints.REMAINDER;
+
+        add(itemsPane, c);
+        add(Box.createRigidArea(new Dimension(0, 10)), c);
+        c.gridwidth = 1;
+        add(homeButton, c);
+        c.anchor = GridBagConstraints.LINE_END;
+        add(addItemButton, c);
+
         itemsPane.setPreferredSize(new Dimension(400, 250));
     }
 
