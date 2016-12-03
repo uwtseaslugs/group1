@@ -6,6 +6,7 @@ import auctioncentral.model.Calendar;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Date;
 import java.util.Observable;
 public class StaffAdminMenu extends AbstractScreen {
     private JButton addMaxAuctions;
@@ -14,11 +15,16 @@ public class StaffAdminMenu extends AbstractScreen {
     private JLabel EnterMax;
     private JLabel currentMaxAuctions;
     private int numOfMaxAuctions;
+    private int currentNumMaxAuctions;
+    private int currentAuctions;
+
     public StaffAdminMenu() {
+
+        updateAuctions();
 
         setLayout(new FlowLayout());
 
-        currentMaxAuctions = new JLabel("Current Max Auctions allowed: " + Calendar.inst().getMaxAuctions());
+        currentMaxAuctions = new JLabel("<html>Current Auctions: " +  currentAuctions + "<br>Current Max Auctions allowed:<html> " + currentNumMaxAuctions);
         add(currentMaxAuctions);
 
         EnterMax = new JLabel("Enter max auctions: ");
@@ -37,7 +43,12 @@ public class StaffAdminMenu extends AbstractScreen {
             String num = maxAuctions.getText();
             numOfMaxAuctions = Integer.parseInt(num);
             Calendar.inst().addMaxAuctions(numOfMaxAuctions);
+            updateAuctions();
+            if (currentNumMaxAuctions < currentAuctions) {
+                JOptionPane.showMessageDialog(this, "<html>Maximum Auctions is less than current auctions. <br>Clients will be unable to add new auctions until current auctions are completed<html>");
+            }
             JOptionPane.showMessageDialog(this, "Successfully added " + numOfMaxAuctions +" to max amount of auctions.");
+            currentMaxAuctions.setText("<html>Current Auctions: " + currentAuctions + "<br>Current Max Auctions allowed:<html> " + currentNumMaxAuctions);
 
 
         });
@@ -47,6 +58,11 @@ public class StaffAdminMenu extends AbstractScreen {
         });
 
 
+    }
+
+    public void updateAuctions(){
+        currentNumMaxAuctions = Calendar.inst().getMaxAuctions();
+        currentAuctions = Calendar.inst().getAuctionsPastDate(new Date()).size();
     }
 
     @Override
