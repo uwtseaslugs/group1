@@ -5,14 +5,22 @@ import auctioncentral.gui.Window;
 import auctioncentral.model.Calendar;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Observable;
 public class StaffAdminMenu extends AbstractScreen {
     private JButton addMaxAuctions;
     private JButton returnToHome;
     private JTextField maxAuctions;
     private JLabel EnterMax;
+    private JLabel currentMaxAuctions;
     private int numOfMaxAuctions;
     public StaffAdminMenu() {
+
+        setLayout(new FlowLayout());
+
+        currentMaxAuctions = new JLabel("Current Max Auctions allowed: " + Calendar.inst().getMaxAuctions());
+        add(currentMaxAuctions);
+
         EnterMax = new JLabel("Enter max auctions: ");
         add(EnterMax);
 
@@ -29,6 +37,9 @@ public class StaffAdminMenu extends AbstractScreen {
             String num = maxAuctions.getText();
             numOfMaxAuctions = Integer.parseInt(num);
             Calendar.inst().addMaxAuctions(numOfMaxAuctions);
+            JOptionPane.showMessageDialog(this, "Successfully added " + numOfMaxAuctions +" to max amount of auctions.");
+
+
         });
 
         returnToHome.addActionListener(e -> {
