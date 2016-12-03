@@ -2,6 +2,7 @@ package auctioncentral.gui.contact;
 
 import auctioncentral.gui.AbstractScreen;
 import auctioncentral.model.Auction;
+import auctioncentral.model.Calendar;
 import auctioncentral.model.Item;
 
 import javax.swing.*;
@@ -16,6 +17,7 @@ public class ContactEditAuctionView extends AbstractScreen {
     private JPanel itemsPanel;
     private JButton addItemButton;
     private JButton homeButton;
+    private JButton cancelAuctionButton;
 
     public ContactEditAuctionView(Auction auction) {
         this.auction = auction;
@@ -42,6 +44,21 @@ public class ContactEditAuctionView extends AbstractScreen {
             getRoot().addScreen(new ContactHomeView());
         });
 
+        cancelAuctionButton = new JButton("Cancel Auction");
+        cancelAuctionButton.addActionListener(e -> {
+            if (JOptionPane.showConfirmDialog(this, "Warning! Are you sure you want to cancel this auction?") == JOptionPane.OK_OPTION) {
+                if (Calendar.inst().canCancelAuction(auction)) {
+                    Calendar.inst().cancelAuction(auction);
+                    JOptionPane.showMessageDialog(this, "Auction cancelled successfully");
+                    getRoot().addScreen(new ContactHomeView());
+                } else {
+                    JOptionPane.showMessageDialog(this, "Auctions can only be cancelled if they are " + Calendar.CANCEL_MAX_DAYS_AWAY +
+                            "+ days away");
+                }
+            }
+
+        });
+
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.gridwidth = GridBagConstraints.REMAINDER;
@@ -50,8 +67,14 @@ public class ContactEditAuctionView extends AbstractScreen {
         add(Box.createRigidArea(new Dimension(0, 10)), c);
         c.gridwidth = 1;
         add(homeButton, c);
+        c.gridwidth = GridBagConstraints.REMAINDER;
         c.anchor = GridBagConstraints.LINE_END;
         add(addItemButton, c);
+
+        c.anchor = GridBagConstraints.CENTER;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        add(Box.createRigidArea(new Dimension(0, 40)), c);
+        add(cancelAuctionButton, c);
 
         itemsPane.setPreferredSize(new Dimension(400, 250));
     }
