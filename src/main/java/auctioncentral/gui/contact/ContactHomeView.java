@@ -22,7 +22,7 @@ public class ContactHomeView extends AbstractScreen {
     private JButton addAuctionButton;
 
     public ContactHomeView() {
-        auction = Calendar.inst().getNextAuctionBy((Contact) LoginManager.getInstance().getCurrentUser());
+        auction = Calendar.inst().getNextAuctionBy((Contact) LoginManager.inst().getCurrentUser());
 
 
         editAuctionButton = new JButton("Edit auction");

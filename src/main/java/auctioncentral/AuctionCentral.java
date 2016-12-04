@@ -15,46 +15,31 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class AuctionCentral implements Serializable {
+public class AuctionCentral /*implements Serializable*/ {
 
     private static String CONFIG_FILE = "config.txt";
     private static String SER_SAVE_FILE = "last.ser";
 
     public static void main(String[] args) throws IOException {
-        AuctionCentral ac = make24Auctions();
+        //AuctionCentral ac = make24Auctions();
 
 //        String serFileName = new String(Files.readAllBytes(Paths.get(CONFIG_FILE)), StandardCharsets.UTF_8);
 //        AuctionCentral ac = (AuctionCentral) deserializeFrom(serFileName);
 
-        LoginManager.setInstance(ac.getLoginManager());
-        Calendar.setInst(ac.getCalendar());
+        //LoginManager.setInstance(ac.getLoginManager());
+        //Calendar.setInst(ac.getCalendar());
 
         Window window = new Window(new LoginView());
         window.start();
         window.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                serializeTo(new AuctionCentral(LoginManager.getInstance(), Calendar.inst()), SER_SAVE_FILE);
+                //serializeTo(this, SER_SAVE_FILE);
+                SerializeOnExit.execute("last");
             }
         });
     }
-
-    private LoginManager myLoginManager;
-    private Calendar myCalendar;
-
-    public AuctionCentral(LoginManager loginManager, Calendar calendar) {
-        myLoginManager = loginManager;
-        myCalendar = calendar;
-    }
-
-    public LoginManager getLoginManager() {
-        return myLoginManager;
-    }
-
-    public Calendar getCalendar() {
-        return myCalendar;
-    }
-
+    /*
     private static void serializeTo(Object o, String fileName) {
         try {
             FileOutputStream fos = new FileOutputStream(fileName);
@@ -80,10 +65,8 @@ public class AuctionCentral implements Serializable {
             return null;
         }
     }
-
-    public static ILoginManager loginManager = new LoginManager();
-
-    private static AuctionCentral make24Auctions() {
+    */
+    private static void make24AuctionsSER() {
         LoginManager lm = new LoginManager();
         for (int i = 0; i < 50; i++) {
             lm.register(new Bidder("bidder" + i, "bidder" + i + "name"));
@@ -107,6 +90,6 @@ public class AuctionCentral implements Serializable {
                 c.add(java.util.Calendar.DATE, 1);
             }
         }
-        return new AuctionCentral(lm, cal);
+        //return new AuctionCentral(lm, cal);
     }
 }

@@ -12,12 +12,13 @@ package auctioncentral.model;
 import java.util.*;
 import java.util.stream.*;
 
-public class Calendar implements ICalendar {
+public class Calendar extends SerializeOnExit implements ICalendar {
 
     private TreeSet<Auction> auctions;
     private int maxAuctions;
 
     public Calendar() {
+        super();
         auctions = new TreeSet<>();
         maxAuctions = 25;
     }
@@ -39,6 +40,11 @@ public class Calendar implements ICalendar {
 
     public static void clearInst() {
         myInst = null;
+    }
+
+    @Override
+    public String getSerializedName() {
+        return "calendar";
     }
     
       /**
@@ -256,11 +262,11 @@ public class Calendar implements ICalendar {
      * @return returns the number of auctions on that day.
      */
     public int getNumberOfAuctionsOnDate(Date d) {
-        java.util.Calendar target = java.util.Calendar.getInstance();
+        java.util.Calendar target = getJavaCalendar();
         target.setTime(d);
         int numAuctionsOnDate = 0;
         for (Auction a : auctions) {
-            java.util.Calendar c = java.util.Calendar.getInstance();
+            java.util.Calendar c = getJavaCalendar();
             c.setTime(a.getDate());
             if (c.get(java.util.Calendar.YEAR) == target.get(java.util.Calendar.YEAR) &&
                     c.get(java.util.Calendar.MONTH) == target.get(java.util.Calendar.MONTH) &&
@@ -281,7 +287,7 @@ public class Calendar implements ICalendar {
      */
     public boolean canCancelAuction(Auction auction) {
         Date now = new Date();
-        java.util.Calendar target = java.util.Calendar.getInstance();
+        java.util.Calendar target = getJavaCalendar();
         target.setTime(now);
         target.add(java.util.Calendar.DATE, CANCEL_MAX_DAYS_AWAY);
         return target.getTime().before(auction.getDate()) && auctions.contains(auction);

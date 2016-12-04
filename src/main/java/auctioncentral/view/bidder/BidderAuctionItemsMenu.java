@@ -41,7 +41,7 @@ public class BidderAuctionItemsMenu extends AbstractMenu {
         for (int i = 0; i < auction.getItems().size() ; i++) {
             Item item = items.get(i);
             itemStr.append("" + i + "\t" + item.getName() + "\t\t" + item.getCondition().name().toLowerCase() + "    \t$" + item.getMinimumBid() + "\t\t");
-            BigDecimal bid = item.getBid((Bidder) AuctionCentral.loginManager.getCurrentUser());
+            BigDecimal bid = item.getBid((Bidder) LoginManager.inst().getCurrentUser());
             if (bid != null) {
                 itemStr.append("$" + bid.toPlainString());
             }

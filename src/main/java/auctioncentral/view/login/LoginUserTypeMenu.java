@@ -43,14 +43,14 @@ public class LoginUserTypeMenu extends AbstractMenu {
     public void onResponse(Scanner scan) {
         switch (scan.nextLine()) {
             case "1":
-                AuctionCentral.loginManager.setCurrentUser(new Staff(username, name));
+                LoginManager.inst().setCurrentUser(new Staff(username, name));
                 new StaffHomeMenu().show();
                 return;
             case "2":
                 new ContactNonprofitNameMenu(username, name).show();
                 return;
             case "3":
-                AuctionCentral.loginManager.setCurrentUser(new Bidder(username, name));
+                LoginManager.inst().setCurrentUser(new Bidder(username, name));
                 new BidderHomeMenu(this).show();
                 return;
             default:

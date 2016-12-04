@@ -58,7 +58,7 @@ public class ContactAddMenu extends AbstractMenu {
         amountOfItems = response.nextInt();
         response.nextLine();
         try {
-            newAuction = new Auction((Contact) AuctionCentral.loginManager.getCurrentUser(), dateParsed, comments, amountOfItems);
+            newAuction = new Auction((Contact) LoginManager.inst().getCurrentUser(), dateParsed, comments, amountOfItems);
         } catch (IllegalArgumentException e) {
             System.out.print("\nError inputting information. Press enter to return to previous menu\n> ");
             response.nextLine();
