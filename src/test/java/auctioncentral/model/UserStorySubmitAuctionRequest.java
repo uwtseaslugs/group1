@@ -13,17 +13,14 @@ public class UserStorySubmitAuctionRequest {
     private Contact contact1;
 
     private Auction auction2Weeks1;
-    private Auction auctionTomorrow;
     private Auction auctionToday;
     private Auction auction2Weeks2;
     private Auction auction2Weeks3;
     private Auction auction25Days;
-    private Auction auction3Days;
-    private Auction auction2Days;
     private Date date2Weeks;
     private Date threeDays;
     private Date twoDays;
-    private Item testItem;
+
 
     private ICalendar calendarFullMinusOne;
     private ICalendar calendarFull;
@@ -35,7 +32,6 @@ public class UserStorySubmitAuctionRequest {
         calendarFull = new Calendar();
         calendarFullMinusOne = new Calendar();
 
-        testItem  = new Item("name", ItemCondition.NEW, ItemSize.SMALL, 50, null, null, null);
         java.util.Calendar cthreeDays = Calendar.getJavaCalendar();
         cthreeDays.add(java.util.Calendar.DATE, 3);
         threeDays = cthreeDays.getTime();
@@ -53,10 +49,9 @@ public class UserStorySubmitAuctionRequest {
         auction2Weeks1 = new Auction(new Contact("1u", "1n"), date2Weeks, "Co comment", null);
         auction2Weeks2 = new Auction(new Contact("2u", "2n"), date2Weeks, "Co comment", null);
         auction2Weeks3 = new Auction(new Contact("3u", "3n"), date2Weeks, "Co comment", null);
-        auctionTomorrow = new Auction(new Contact("2u", "2n"), Calendar.addDaysToDate(new Date(), 1), null, null);
+
         auction25Days = new Auction(new Contact("2u", "2n"), Calendar.addDaysToDate(new Date(), 25), null, null);
-        auction3Days = new Auction(new Contact("4u", "4u"), threeDays, "Co comment", null);
-        auction2Days= new Auction(new Contact("5u", "5u"), twoDays, "Co comment", null);
+
 
         java.util.Calendar c = java.util.Calendar.getInstance();
         c.add(java.util.Calendar.DATE, 8);
