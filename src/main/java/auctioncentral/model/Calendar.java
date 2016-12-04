@@ -272,7 +272,7 @@ public class Calendar implements ICalendar {
     }
 
 
-    private static final int CANCEL_MAX_DAYS_AWAY = 2;
+    public static final int CANCEL_MAX_DAYS_AWAY = 2;
 
     /**
      *
