@@ -29,7 +29,7 @@ public class StaffAdminMenu extends AbstractScreen {
 
     public StaffAdminMenu() {
         updateAuctions();
-        StaffName = new JLabel(((Staff) LoginManager.getInstance().getCurrentUser()).getName());
+        StaffName = new JLabel(((Staff) LoginManager.inst().getCurrentUser()).getName());
         currentMaxAuctions = new JLabel("Current Max Auctions allowed: " + Calendar.inst().getMaxAuctions());
         DateC = new JLabel(date.format(LocalDateTime.now()));
         EnterMax = new JLabel("Enter max auctions: ");

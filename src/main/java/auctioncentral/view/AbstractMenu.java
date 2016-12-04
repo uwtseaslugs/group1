@@ -45,7 +45,7 @@ public abstract class AbstractMenu {
      * @return returns the status of the user
      */
     public final String getStatus() {
-        User user = AuctionCentral.loginManager.getCurrentUser();
+        User user = LoginManager.inst().getCurrentUser();
         if (user == null) {
             return "Not Logged in";
         }

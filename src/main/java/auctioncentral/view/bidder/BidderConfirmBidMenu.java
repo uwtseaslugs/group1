@@ -9,6 +9,7 @@ package auctioncentral.view.bidder;
 import auctioncentral.AuctionCentral;
 import auctioncentral.model.Bidder;
 import auctioncentral.model.Item;
+import auctioncentral.model.LoginManager;
 import auctioncentral.view.*;
 
 import java.math.BigDecimal;
@@ -46,7 +47,7 @@ public class BidderConfirmBidMenu extends AbstractMenu {
     public void onResponse(Scanner scan) {
         switch (scan.nextLine()){
             case "1":
-                item.placeBid((Bidder) AuctionCentral.loginManager.getCurrentUser(), new BigDecimal(bid));
+                item.placeBid((Bidder) LoginManager.inst().getCurrentUser(), new BigDecimal(bid));
                 getParent().getParent().getParent().show();
             case "2":
                 getParent().getParent().getParent().show();

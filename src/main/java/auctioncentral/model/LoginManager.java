@@ -13,10 +13,8 @@ import java.util.Map;
  * @author Hunter
  */
 public class LoginManager implements ILoginManager, Serializable {
-
     private static LoginManager myInst = null;
-
-    public static LoginManager getInstance() {
+    public static LoginManager inst() {
         if (myInst == null) {
             myInst = new LoginManager();
         }
@@ -25,7 +23,7 @@ public class LoginManager implements ILoginManager, Serializable {
 
     public static void setInstance(LoginManager theInst) {
         if (myInst != null)
-            throw new IllegalStateException("Must call setInstance before getInstance");
+            throw new IllegalStateException("Must call setInstance before inst");
         myInst = theInst;
     }
 

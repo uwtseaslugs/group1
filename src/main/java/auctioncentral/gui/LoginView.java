@@ -31,9 +31,9 @@ public class LoginView extends AbstractScreen {
         add(loginButton, c);
 
         loginButton.addActionListener(a -> {
-            User user = LoginManager.getInstance().getUser(usernameField.getText());
+            User user = LoginManager.inst().getUser(usernameField.getText());
             if (user != null) {
-                LoginManager.getInstance().setCurrentUser(user);
+                LoginManager.inst().setCurrentUser(user);
                 if (user instanceof Staff) {
                     getRoot().addScreen(new StaffHomeView());
                 } else if (user instanceof Contact) {

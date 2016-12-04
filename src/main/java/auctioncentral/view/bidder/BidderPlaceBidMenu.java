@@ -44,7 +44,7 @@ public class BidderPlaceBidMenu  extends AbstractMenu {
         if (!item.isValidBid(bd)) {
             System.out.print("Error: invalid price\n> ");
             onResponse(scan);
-        } else if (item.getBid((Bidder) AuctionCentral.loginManager.getCurrentUser()) != null) {
+        } else if (item.getBid((Bidder) LoginManager.inst().getCurrentUser()) != null) {
             System.out.print("Error: you have already bid on this item\n> ");
             onResponse(scan);
         } else {

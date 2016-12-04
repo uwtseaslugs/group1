@@ -35,7 +35,7 @@ public class ContactNonprofitNameMenu extends AbstractMenu {
 
     @Override
     public void onResponse(Scanner response) {
-        AuctionCentral.loginManager.setCurrentUser(new Contact(username, name, response.nextLine()));
+        LoginManager.inst().setCurrentUser(new Contact(username, name, response.nextLine()));
         new ContactHomeMenu().show();
     }
 }

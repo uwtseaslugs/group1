@@ -25,14 +25,14 @@ public class ContactHomeMenu extends AbstractMenu {
     @Override
     public void show() {
         upcomingAuction = Calendar.inst().getAuctionsPastDate(new Date()).stream()
-                .filter(a -> a.getContact().equals(AuctionCentral.loginManager.getCurrentUser()))
+                .filter(a -> a.getContact().equals(LoginManager.inst().getCurrentUser()))
                 .findFirst().orElse(null);
         super.show();
     }
 
     public String getHeading() {
         String heading =  dateTimeFormatter.format(LocalDateTime.now()) + ".\n" +
-                ((Contact)AuctionCentral.loginManager.getCurrentUser()).getNonprofitName() + ".\n";
+                ((Contact)LoginManager.inst().getCurrentUser()).getNonprofitName() + ".\n";
         if (upcomingAuction == null) {
             heading += "You do not have an upcoming auction.";
         } else {

@@ -18,7 +18,7 @@ public class BidderHomeView extends AbstractScreen {
         viewAuctionsButton = new JButton("View upcoming auctions");
         viewPreviousBids = new JButton("View Previous Bids");
         exitButton = new JButton("Exit Auction Central");
-        user = new JLabel(((Bidder) LoginManager.getInstance().getCurrentUser()).getName());
+        user = new JLabel(((Bidder) LoginManager.inst().getCurrentUser()).getName());
         userLabel = new JLabel("Currently logged in as a Bidder");
         dateLabel = new JLabel(dateTimeFormatter.format(LocalDateTime.now()));
         auctionNumberLabel = new JLabel("Total Number of Upcoming Auctions: ");
