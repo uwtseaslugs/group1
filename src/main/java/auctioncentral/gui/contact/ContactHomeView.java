@@ -30,8 +30,10 @@ public class ContactHomeView extends AbstractScreen {
 
         if (auction != null) {
             auctionLabel = new JLabel("You have an upcoming auction on " + dateFormat.format(auction.getDate()));
+            addAuctionButton.setEnabled(false);
+            addAuctionButton.setToolTipText("You can only have one upcoming auction at a time");
         } else {
-            auctionLabel = new JLabel("You do not have any upcoming auctions");
+            auctionLabel = new JLabel("You do not have an upcoming auction");
             editAuctionButton.setEnabled(false);
         }
 
