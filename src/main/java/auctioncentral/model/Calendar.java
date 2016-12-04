@@ -286,6 +286,9 @@ public class Calendar extends SerializeOnExit implements ICalendar {
      * @return if auction has been previously scheduled with this Calendar and is at least 2 days in the future
      */
     public boolean canCancelAuction(Auction auction) {
+        if (auction == null) {
+            return false;
+        }
         Date now = new Date();
         java.util.Calendar target = getJavaCalendar();
         target.setTime(now);
@@ -296,11 +299,23 @@ public class Calendar extends SerializeOnExit implements ICalendar {
     /**
      * Cancels the auction if possible
      * @param auction
+     * @throws IllegalArgumentException if cannot cancel auction
      */
     public void cancelAuction(Auction auction) {
         if (canCancelAuction(auction)) {
             auctions.remove(auction);
+        } else {
+            throw new IllegalArgumentException();
         }
+    }
+
+    /**
+     *
+     * @param auction
+     * @return if this calendar contains auction
+     */
+    public boolean containsAuction(Auction auction) {
+        return auctions.contains(auction);
     }
 
     /**
