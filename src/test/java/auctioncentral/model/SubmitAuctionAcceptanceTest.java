@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
  *As a contact person for a non-profit organization, I want to submit an auction request.
 
  */
-public class UserStorySubmitAuctionRequest {
+public class SubmitAuctionAcceptanceTest {
 
     private ICalendar emptyCalendar;
     private Contact contact1;
@@ -81,12 +81,12 @@ public class UserStorySubmitAuctionRequest {
         Prior to submitting the auction, the non-profit has more than one future auction in the system -- Not Allowed
      */
     @Test
-    public void testAddAuctionOneFutureAution(){
+    public void testAddAuctionOnOneFutureAution(){
         emptyCalendar.addAuction(auction2Weeks1);
         assertEquals(false, emptyCalendar.canAddAuction(auction2Weeks1));
     }
     @Test
-    public void testAddAuctionTwoFutureAution(){
+    public void testAddAuctionOnTwoFutureAutions(){
         emptyCalendar.addAuction(auction2Weeks1);
         emptyCalendar.faddAuction(auction2Weeks1);
         assertEquals(false, emptyCalendar.canAddAuction(auction2Weeks1));
@@ -155,20 +155,20 @@ public class UserStorySubmitAuctionRequest {
         Prior to submitting the auction, there are exactly two auctions in the system scheduled for this day -- Not Allowed
         Prior to submitting the auction, there are more than two auctions in the system scheduled for this day -- Not Allowed
      */
-    public void testCanAddTwoAuctionsInOneDay(){
+    public void testAddAuctionTwiceInOneDay(){
         emptyCalendar.addAuction(auction2Weeks1);
         assertEquals(true, emptyCalendar.canAddAuction(auction2Weeks2));
         assertEquals(true, emptyCalendar.addAuction(auction2Weeks2));
     }
     @Test
-    public void testCannotAddMoreThanTwoAuctionsInOneDay(){
+    public void testAddAuctionMoreThanTwoInOneDay(){
         emptyCalendar.addAuction(auction2Weeks1);
         emptyCalendar.addAuction(auction2Weeks2);
         assertEquals(false, emptyCalendar.canAddAuction(auction2Weeks3));
         assertEquals(false, emptyCalendar.addAuction(auction2Weeks3));
     }
     @Test
-    public void testCannotAddMoreThanThreeAuctionsInOneDay(){
+    public void testAddAuctionThreeInOneDay(){
         emptyCalendar.addAuction(auction2Weeks1);
         emptyCalendar.addAuction(auction2Weeks2);
         emptyCalendar.faddAuction(auction2Weeks2);
@@ -183,12 +183,12 @@ public class UserStorySubmitAuctionRequest {
         Prior to submitting the auction, there are greater than 25 auctions in the system -- Not Allowed
      */
     @Test
-    public void testCanAddAuctionToEmptyCalendar() {
+    public void testAddAuctionToEmptyCalendar() {
         assertEquals(true, emptyCalendar.canAddAuction(auction2Weeks1));
         assertEquals(true, emptyCalendar.addAuction(auction2Weeks1));
     }
     @Test
-    public void testAddAuctionWith24Auctions() {
+    public void testAddAuctionToFullMinusOne() {
         assertEquals(true, calendarFullMinusOne.canAddAuction(auction25Days));
         assertEquals(true, calendarFullMinusOne.addAuction(auction25Days));
     }
@@ -236,11 +236,11 @@ public class UserStorySubmitAuctionRequest {
         All of the required fields are specified -- Allowed
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testNewAuctionNullDate(){
+    public void testNewAuctionWithNullDate(){
         new Auction(contact1,null, "Null date",1);
     }
     @Test(expected = IllegalArgumentException.class)
-    public void testNewAuctionNegativeNumberOfItems() {
+    public void testNewAuctionWithNegativeNumberOfItems() {
         new Auction(contact1,new Date(), "Negative Items",-3);
     }
     /*

@@ -11,8 +11,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         AuctionTest.class,
         CalendarTest.class,
-        ItemTest.class,
-
+        ItemTest.class
 })
 public class TestSuite {
 }

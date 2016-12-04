@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
         Auction is on current day or in the past -- Not Allowed
         Auction is in the future -- Allowed
  */
-public class UserStoryBidOnAuction {
+public class PlaceBidAcceptanceTest {
     private ICalendar emptyCalendar;
     private Item item50MinBid;
     private Bidder testBidder;
@@ -34,11 +34,11 @@ public class UserStoryBidOnAuction {
         Registered user tries to place a bid -- Allowed
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testAddingBidAsUnregistered() {
+    public void testPlaceBidAsUnregistered() {
         item50MinBid.placeBid((Bidder)testUser, new BigDecimal("65"));
     }
     @Test
-    public void testAddingBidAsRegistered() {
+    public void testPlaceBidAsRegistered() {
         item50MinBid.placeBid(testBidder, new BigDecimal("60"));
         assertEquals(item50MinBid.getBid(testBidder), new BigDecimal("60"));
     }
@@ -51,7 +51,7 @@ public class UserStoryBidOnAuction {
         User is a contact person for the non-profit associated with this auction -- Not Allowed
      */
     @Test
-    public void testAddingBidAsBidder() {
+    public void testPlaceBidAsBidder() {
         item50MinBid.placeBid(testBidder, new BigDecimal("71"));
         assertEquals(item50MinBid.getBid(testBidder), new BigDecimal("71"));
     }
@@ -61,7 +61,7 @@ public class UserStoryBidOnAuction {
     */
 
    @Test(expected = IllegalArgumentException.class)
-   public void testAddBidPlaceBidTwice() {
+   public void testPlaceBidTwice() {
        item50MinBid.placeBid(testBidder, new BigDecimal("60"));
        item50MinBid.placeBid(testBidder, new BigDecimal("65"));
    }
@@ -74,20 +74,20 @@ public class UserStoryBidOnAuction {
         Bidder places a bid for a positive price less than the minimum acceptable bid -- Not Allowed
     */
    @Test(expected = IllegalArgumentException.class)
-   public void testAddBidPlaceBidZero() {
+   public void testPlaceBidForZero() {
        item50MinBid.placeBid(testBidder, new BigDecimal("0"));
    }
    @Test(expected = IllegalArgumentException.class)
-    public void testPlaceBidNegative() {
+    public void testPlaceBidForNegative() {
         item50MinBid.placeBid(testBidder, new BigDecimal("-50"));
     }
     @Test
-    public void testPlaceBidEqualTonMin() {
+    public void testPlaceBidForEqualToMin() {
         item50MinBid.placeBid(testBidder, new BigDecimal("50"));
         assertEquals(item50MinBid.getBid(testBidder), new BigDecimal("50"));
     }
     @Test(expected = IllegalArgumentException.class)
-    public void testPlaceBidPositiveLessThanMin() {
+    public void testPlaceBidForPositiveLessThanMin() {
         item50MinBid.placeBid(testBidder, new BigDecimal("40"));
     }
     /*
