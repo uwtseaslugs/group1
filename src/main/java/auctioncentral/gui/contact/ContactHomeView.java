@@ -7,6 +7,7 @@ import auctioncentral.model.Contact;
 import auctioncentral.model.LoginManager;
 
 import javax.swing.*;
+import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -37,9 +38,15 @@ public class ContactHomeView extends AbstractScreen {
             editAuctionButton.setEnabled(false);
         }
 
-        add(auctionLabel);
-        add(editAuctionButton);
-        add(addAuctionButton);
+        setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridwidth = GridBagConstraints.REMAINDER;
+
+        add(auctionLabel, c);
+        add(Box.createRigidArea(new Dimension(0, 10)), c);
+        add(editAuctionButton, c);
+        add(Box.createRigidArea(new Dimension(0, 10)), c);
+        add(addAuctionButton, c);
 
         editAuctionButton.addActionListener(e -> {
             getRoot().addScreen(new ContactEditAuctionView(auction));

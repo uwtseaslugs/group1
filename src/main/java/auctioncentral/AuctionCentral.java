@@ -21,7 +21,7 @@ public class AuctionCentral /*implements Serializable*/ {
     private static String SER_SAVE_FILE = "last.ser";
 
     public static void main(String[] args) throws IOException {
-        //AuctionCentral ac = make24Auctions();
+        make24AuctionsSER();
 
 //        String serFileName = new String(Files.readAllBytes(Paths.get(CONFIG_FILE)), StandardCharsets.UTF_8);
 //        AuctionCentral ac = (AuctionCentral) deserializeFrom(serFileName);
@@ -68,6 +68,7 @@ public class AuctionCentral /*implements Serializable*/ {
     */
     private static void make24AuctionsSER() {
         LoginManager lm = new LoginManager();
+        LoginManager.setInstance(lm);
         for (int i = 0; i < 50; i++) {
             lm.register(new Bidder("bidder" + i, "bidder" + i + "name"));
             lm.register(new Staff("staff" + i, "staff" + i + "name"));
@@ -75,6 +76,7 @@ public class AuctionCentral /*implements Serializable*/ {
         }
         Random r = new Random();
         Calendar cal = new Calendar();
+        Calendar.setInst(cal);
         java.util.Calendar c = java.util.Calendar.getInstance();
         c.add(java.util.Calendar.DATE, 8);
         for (int i = 1; i <= 24; i++) {
