@@ -6,7 +6,6 @@ import auctioncentral.model.*;
 import auctioncentral.model.Calendar;
 import auctioncentral.gui.*;
 import auctioncentral.view.CalendarView;
-import sun.rmi.runtime.Log;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
