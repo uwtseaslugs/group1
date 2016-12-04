@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.util.*;
 import static org.junit.Assert.*;
 /**
- * Created by Jon on 12/3/2016.
+ *
  * As a bidder, I want to bid for an item in an auction.
     Additional test: Auction date
         Auction is on current day or in the past -- Not Allowed
