@@ -9,8 +9,6 @@ import auctioncentral.model.LoginManager;
 import javax.swing.*;
 import java.awt.*;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 
 public class ContactHomeView extends AbstractScreen {
@@ -51,6 +49,10 @@ public class ContactHomeView extends AbstractScreen {
         editAuctionButton.addActionListener(e -> {
             getRoot().addScreen(new ContactEditAuctionView(auction));
         });
+        addAuctionButton.addActionListener(e -> {
+            getRoot().addScreen(new ContactAddAuctionView());
+        });
+
     }
 
     @Override
