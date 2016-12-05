@@ -105,14 +105,16 @@ public class ContactEditAuctionView extends AbstractScreen {
    public void updateItems(){
        itemsPanel = new JPanel();
        itemsPane.setViewportView(itemsPanel);
-       itemsPanel.setLayout(new GridLayout(auction.getItems().size() + 2, 2, 10, 10));
-       itemsPanel.add(new JLabel("Item Name"));
-       itemsPanel.add(new JLabel("Min Bid"));
-       itemsPanel.add(new JLabel(""));
-       itemsPanel.add(new JLabel(""));
+       itemsPanel.setLayout(new GridLayout(auction.getItems().size() + 1, 3, 10, 10));
+       itemsPanel.add(new JLabel("<html><u>Id</u></html>"));
+       itemsPanel.add(new JLabel("<html><u>Item Name</u></html>"));
+       itemsPanel.add(new JLabel("<html><u>Min Bid</u></html>"));
+       int id = 0;
        for (Item item : auction.getItems()) {
+           itemsPanel.add(new JLabel("" + id));
            itemsPanel.add(new JLabel(item.getName()));
            itemsPanel.add(new JLabel("$" + item.getMinimumBid()));
+           id++;
        }
    }
     @Override
