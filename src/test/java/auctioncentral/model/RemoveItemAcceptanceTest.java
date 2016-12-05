@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * Created by Jon on 12/5/2016.
  */
-public class RemoveItemAccpetanceTest {
+public class RemoveItemAcceptanceTest {
 
     private Calendar emptyCalendar;
     private Contact contact1;

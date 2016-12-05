@@ -15,7 +15,7 @@ import org.junit.runners.Suite;
         AddItemAcceptanceTest.class,
         CancelAuctionAcceptanceTest.class,
         PlaceBidAcceptanceTest.class,
-        RemoveItemAccpetanceTest.class,
+        RemoveItemAcceptanceTest.class,
         SubmitAuctionAcceptanceTest.class,
 
 })

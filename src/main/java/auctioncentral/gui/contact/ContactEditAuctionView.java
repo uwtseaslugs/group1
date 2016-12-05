@@ -59,7 +59,13 @@ public class ContactEditAuctionView extends AbstractScreen {
         removeItemButton = new JButton("Remove Item");
         removeItemButton.addActionListener(e -> {
             String num = removeItemText.getText();
-            indexOfItem = Integer.parseInt(num);
+            try {
+                indexOfItem = Integer.parseInt(num);
+                if (indexOfItem < 0 || indexOfItem >= auction.getItems().size()) throw new NumberFormatException();
+            } catch (NumberFormatException e1) {
+                JOptionPane.showMessageDialog(this, "Invalid item number");
+                return;
+            }
 
             if (JOptionPane.showConfirmDialog(this, "Warning! Are you sure you want to remove item# " + indexOfItem
                 + " from this Auctiom") == JOptionPane.OK_OPTION) {
