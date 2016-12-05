@@ -10,6 +10,7 @@ package auctioncentral.model;
 
 import java.io.*;
 import java.util.*;
+import java.util.Calendar;
 
 /**
  * An Auction held by a non-profit. Contains Items to be sold.
@@ -75,6 +76,18 @@ public class Auction implements Serializable, Comparable<Auction> {
             throw new IllegalArgumentException();
         }
         items.add(newItem);
+    }
+    public boolean removeItem(Item i) {
+        Date now = new Date();
+        java.util.Calendar jCalendar = Calendar.getInstance();
+        jCalendar.setTime(now);
+        jCalendar.add(java.util.Calendar.DATE, 2);
+        Date twoDaysFromNow = jCalendar.getTime();
+        if (date.before(twoDaysFromNow)) {
+            return false;
+        } else{
+            return items.remove(i);
+        }
     }
 
     /**
