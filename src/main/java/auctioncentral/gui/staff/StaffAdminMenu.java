@@ -30,11 +30,11 @@ public class StaffAdminMenu extends AbstractScreen {
     public StaffAdminMenu() {
         updateAuctions();
         StaffName = new JLabel(((Staff) LoginManager.inst().getCurrentUser()).getName());
-        currentMaxAuctions = new JLabel("Current Max Auctions allowed: " + Calendar.inst().getMaxAuctions());
+        currentMaxAuctions = new JLabel("<html> Current Auctions: " + currentAuctions + "<br>Current Max Auctions allowed: " + currentNumMaxAuctions);
         DateC = new JLabel(date.format(LocalDateTime.now()));
         EnterMax = new JLabel("Enter max auctions: ");
         maxAuctions = new JTextField(3);
-        addMaxAuctions = new JButton("Add Max Auctions");
+        addMaxAuctions = new JButton("Change Max Auctions");
         returnToHome = new JButton("Return Home");
 
         GridBagLayout gbl = new GridBagLayout();
@@ -84,12 +84,17 @@ public class StaffAdminMenu extends AbstractScreen {
         addMaxAuctions.addActionListener(e -> {
             String num = maxAuctions.getText();
             numOfMaxAuctions = Integer.parseInt(num);
-            Calendar.inst().addMaxAuctions(numOfMaxAuctions);
-            updateAuctions();
-            if (currentNumMaxAuctions < currentAuctions) {
-                JOptionPane.showMessageDialog(this, "<html>Maximum Auctions is less than current auctions. <br>Clients will be unable to add new auctions until current auctions are completed<html>");
+            if (numOfMaxAuctions < currentAuctions) {
+                JOptionPane.showMessageDialog(this, "<html>Maximum Auctions is less than current auctions. <br>Clients will be unable to add new auctions until current auctions are completed.<html>");
             }
-            JOptionPane.showMessageDialog(this, "Successfully added " + numOfMaxAuctions +" to max amount of auctions.");
+            if (numOfMaxAuctions <= 0) {
+                JOptionPane.showMessageDialog(this, "<html>Maximum Auctions has been set to less than 0. <br>Changed to 0 maximum Auctions.<html>");
+                numOfMaxAuctions = 0;
+            } else {
+                JOptionPane.showMessageDialog(this, "Successfully changed to " + numOfMaxAuctions + " to max amount of auctions.");
+            }
+            Calendar.inst().changeMaxAuctions(numOfMaxAuctions);
+            updateAuctions();
             currentMaxAuctions.setText("<html>Current Auctions: " + currentAuctions + "<br>Current Max Auctions allowed:<html> " + currentNumMaxAuctions);
 
         });

@@ -333,8 +333,8 @@ public class Calendar extends SerializeOnExit implements ICalendar {
      *
      * @param addAuctions
      */
-    public void addMaxAuctions(int addAuctions) {
-        maxAuctions += addAuctions;
+    public void changeMaxAuctions(int addAuctions) {
+        maxAuctions = addAuctions;
     }
 
     public int getMaxAuctions(){

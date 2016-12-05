@@ -10,12 +10,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Observable;
 
 public class StaffHomeView extends AbstractScreen {
 
     private JButton viewCalendarButton;
     private JButton AdminButton;
+    private JButton exitButton;
     private JLabel StaffName;
     private JLabel currentMaxAuction;
     private JLabel DateLabel;
@@ -25,9 +27,10 @@ public class StaffHomeView extends AbstractScreen {
 
 
         StaffName = new JLabel(((Staff) LoginManager.inst().getCurrentUser()).getName());
-        currentMaxAuction = new JLabel("Current Max Auctions allowed: " + Calendar.inst().getMaxAuctions());
+        currentMaxAuction = new JLabel("<html>Current Auctions: " + Calendar.inst().getAuctionsPastDate(new Date()).size() + "<br>Current Max Auctions allowed<html>: " + Calendar.inst().getMaxAuctions());
         viewCalendarButton = new JButton("View Calendar");
         AdminButton = new JButton("Administrative functions");
+        exitButton = new JButton("Exit Auction Central");
         DateLabel = new JLabel(date.format(LocalDateTime.now()));
 
         GridBagLayout gbl = new GridBagLayout();
@@ -56,16 +59,21 @@ public class StaffHomeView extends AbstractScreen {
         gbl.setConstraints(viewCalendarButton, c);
         c.gridy = 5;
         gbl.setConstraints(AdminButton, c);
+        c.gridy = 6;
+        gbl.setConstraints(exitButton, c);
 
         add(currentMaxAuction);
         add(StaffName);
         add(DateLabel);
         add(viewCalendarButton);
         add(AdminButton);
+        add(exitButton);
 
         AdminButton.addActionListener(e -> {
            getRoot().addScreen(new StaffAdminMenu());
         });
+
+        exitButton.addActionListener(a -> System.exit(0));
     }
 
     @Override

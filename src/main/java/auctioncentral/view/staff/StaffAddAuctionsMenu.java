@@ -34,7 +34,7 @@ public class StaffAddAuctionsMenu extends AbstractMenu {
     @Override
     public void onResponse(Scanner scan) {
         int add = scan.nextInt();
-        Calendar.inst().addMaxAuctions(add);
+        Calendar.inst().changeMaxAuctions(add);
         System.out.print(Calendar.inst().getMaxAuctions());
     }
 }
