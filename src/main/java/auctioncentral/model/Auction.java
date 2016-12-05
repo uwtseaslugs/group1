@@ -78,10 +78,12 @@ public class Auction implements Serializable, Comparable<Auction> {
         items.add(newItem);
     }
 
+    public static final int REMOVE_ITEM_MIN_DAYS_AWAY = 2;
+
     /**
      *
      * @param i item to check if you can remove it.
-     * @return true of false if it follows buiness rules
+     * @return true or false if it follows business rules
      */
     public boolean canRemoveItem(Item i){
         if(i == null){
@@ -90,17 +92,16 @@ public class Auction implements Serializable, Comparable<Auction> {
         Date now = new Date();
         java.util.Calendar jCalendar = Calendar.getInstance();
         jCalendar.setTime(now);
-        jCalendar.add(java.util.Calendar.DATE, 2);
+        jCalendar.add(java.util.Calendar.DATE, REMOVE_ITEM_MIN_DAYS_AWAY);
         return jCalendar.getTime().before(date) && items.contains(i);
     }
 
     /**
      *
      * @param i item to remove
-     * throws illegal argument expection if can't remove
+     * @throws IllegalArgumentException if item cannot be removed
      */
     public void removeItem(Item i) {
-
         if (canRemoveItem(i)) {
             items.remove(i);
         } else{

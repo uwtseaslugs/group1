@@ -48,7 +48,7 @@ public class ContactEditAuctionView extends AbstractScreen {
                     JOptionPane.showMessageDialog(this, "Auction cancelled successfully");
                     getRoot().addScreen(new StatusBorder(new ContactHomeView()));
                 } else {
-                    JOptionPane.showMessageDialog(this, "Auctions can only be cancelled if they are " + Calendar.CANCEL_MAX_DAYS_AWAY +
+                    JOptionPane.showMessageDialog(this, "Auctions can only be cancelled if they are " + Calendar.CANCEL_MIN_DAYS_AWAY +
                             "+ days away");
                 }
             }
@@ -74,7 +74,7 @@ public class ContactEditAuctionView extends AbstractScreen {
                     updateItems();
                     JOptionPane.showMessageDialog(this, "Item has been removed successfully");
                 }else{
-                    JOptionPane.showMessageDialog(this, "Auctions can only be cancelled if they are " + Calendar.CANCEL_MAX_DAYS_AWAY +
+                    JOptionPane.showMessageDialog(this, "Items can only be removed if auction is " + Auction.REMOVE_ITEM_MIN_DAYS_AWAY +
                             "+ days away");
                 }
             }
