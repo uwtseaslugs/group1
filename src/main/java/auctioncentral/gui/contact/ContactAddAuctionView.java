@@ -24,6 +24,7 @@ public class ContactAddAuctionView extends AbstractScreen {
 
     private Auction newAuction;
 
+    private JLabel titleLabel;
     private JLabel auctionTitle;
     private JLabel CommentLabel;
     private JLabel numOfItemsLabel;
@@ -45,6 +46,7 @@ public class ContactAddAuctionView extends AbstractScreen {
 
 
     public ContactAddAuctionView(){
+        titleLabel = new JLabel("Requesting new auction");
         auctionTitle = new JLabel("Date and Time of Auction: (MM/DD/YYYY)");
         hourCombo = new JComboBox<>(IntStream.range(1, 13).mapToObj(a -> "" + a).collect(Collectors.toList()).toArray(new String[0]));
         amPmCombo = new JComboBox<>(new String[]{"AM", "PM"});
@@ -124,6 +126,8 @@ public class ContactAddAuctionView extends AbstractScreen {
         row3.add(Box.createRigidArea(new Dimension(205, 0)));
         row3.add(Box.createGlue());
         row3.add(numOfItemsText);
+        vertBox.add(titleLabel);
+        vertBox.add(Box.createRigidArea(new Dimension(0, 20)));
         vertBox.add(row1);
         vertBox.add(Box.createRigidArea(new Dimension(0, 5)));
         vertBox.add(row2);

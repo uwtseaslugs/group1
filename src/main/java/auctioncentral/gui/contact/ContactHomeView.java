@@ -29,7 +29,7 @@ public class ContactHomeView extends AbstractScreen {
 
 
         editAuctionButton = new JButton("Edit auction");
-        addAuctionButton = new JButton("Add new auction");
+        addAuctionButton = new JButton("Request new auction");
 
         if (auction != null) {
             auctionLabel = new JLabel("You have an upcoming auction on " + dateFormat.format(auction.getDate()));

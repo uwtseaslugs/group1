@@ -8,6 +8,7 @@ import auctioncentral.model.Item;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
 import java.util.Observable;
 
 /**
@@ -15,8 +16,11 @@ import java.util.Observable;
  */
 public class ContactEditAuctionView extends AbstractScreen {
 
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh a");
+
     private Auction auction;
 
+    private JLabel auctionLabel;
     private JScrollPane itemsPane;
     private JPanel itemsPanel;
     private JButton addItemButton;
@@ -30,6 +34,7 @@ public class ContactEditAuctionView extends AbstractScreen {
 
     public ContactEditAuctionView(Auction auction) {
         this.auction = auction;
+        auctionLabel = new JLabel("Editing auction on " + dateFormat.format(auction.getDate()));
         itemsPane = new JScrollPane(itemsPanel);
         updateItems();
 
@@ -88,6 +93,8 @@ public class ContactEditAuctionView extends AbstractScreen {
         GridBagConstraints c = new GridBagConstraints();
         c.gridwidth = GridBagConstraints.REMAINDER;
 
+        add(auctionLabel, c);
+        add(Box.createRigidArea(new Dimension(0, 10)), c);
         add(itemsPane, c);
         add(Box.createRigidArea(new Dimension(0, 10)), c);
         c.gridwidth = 1;
