@@ -126,7 +126,7 @@ public class ContactAddAuctionView extends AbstractScreen {
         add(vertBox);
 
     }
-
+    @Override
     public void update(Observable o, Object arg) {
 
     }
