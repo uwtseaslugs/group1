@@ -12,6 +12,9 @@ import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Observable;
 
+/**
+ * @author Hunter
+ */
 public class ContactHomeView extends AbstractScreen {
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh a");

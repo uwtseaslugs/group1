@@ -56,7 +56,7 @@ public class ContactAddItemView extends AbstractScreen {
         itemCommentLabel = new JLabel("Comment for staff (Optional)");
         itemCommentField = new JTextField(40);
         addItemButton = new JButton("Add Item");
-        cancelButton = new JButton("Cancel");
+        cancelButton = new JButton("Back");
         itemSizeCombo.setToolTipText(Stream.of(ItemSize.values()).map(s -> s.name() + ": " + s.getDescription() + ". ").collect(Collectors.joining()));
 
         Box vertBox = Box.createVerticalBox();
@@ -126,6 +126,10 @@ public class ContactAddItemView extends AbstractScreen {
                 JOptionPane.showMessageDialog(this, "Item added successfully");
                 getRoot().addScreen(new StatusBorder(new ContactEditAuctionView(auction)));
             }
+        });
+
+        cancelButton.addActionListener(e -> {
+            getRoot().addScreen(new StatusBorder(new ContactEditAuctionView(auction)));
         });
     }
 

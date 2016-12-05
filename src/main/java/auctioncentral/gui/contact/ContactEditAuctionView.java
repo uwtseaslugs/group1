@@ -10,6 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
 
+/**
+ * @author Hunter, Jon
+ */
 public class ContactEditAuctionView extends AbstractScreen {
 
     private Auction auction;

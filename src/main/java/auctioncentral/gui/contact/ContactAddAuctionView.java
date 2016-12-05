@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * Created by Jon
+ * @author Jon
  */
 public class ContactAddAuctionView extends AbstractScreen {
 
@@ -34,7 +34,7 @@ public class ContactAddAuctionView extends AbstractScreen {
     private JTextField commentsText;
     private JTextField numOfItemsText;
 
-    private JButton ComfirmButton;
+    private JButton confirmButton;
     private JButton returnHomeButton;
 
     private Date dateParsed;
@@ -55,10 +55,10 @@ public class ContactAddAuctionView extends AbstractScreen {
         commentsText = new JTextField(10);
         numOfItemsText = new JTextField(3);
 
-        ComfirmButton = new JButton("Request Auction");
-        returnHomeButton = new JButton("Return Home");
+        confirmButton = new JButton("Request Auction");
+        returnHomeButton = new JButton("Back");
 
-        ComfirmButton.addActionListener(e -> {
+        confirmButton.addActionListener(e -> {
             SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy hh a");
             date = dateText.getText();
             comments = commentsText.getText();
@@ -132,9 +132,9 @@ public class ContactAddAuctionView extends AbstractScreen {
         vertBox.add(Box.createRigidArea(new Dimension(0, 5)));
         Box buttonRow = Box.createHorizontalBox();
         buttonRow.add(Box.createRigidArea(new Dimension(60, 0)));
-        buttonRow.add(ComfirmButton);
-        buttonRow.add(Box.createGlue());
         buttonRow.add(returnHomeButton);
+        buttonRow.add(Box.createGlue());
+        buttonRow.add(confirmButton);
         buttonRow.add(Box.createRigidArea(new Dimension(60, 0)));
         vertBox.add(Box.createRigidArea(new Dimension(0, 20)));
         vertBox.add(buttonRow);
