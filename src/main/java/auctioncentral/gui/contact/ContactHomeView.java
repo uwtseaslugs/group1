@@ -1,6 +1,7 @@
 package auctioncentral.gui.contact;
 
 import auctioncentral.gui.AbstractScreen;
+import auctioncentral.gui.StatusBorder;
 import auctioncentral.model.Auction;
 import auctioncentral.model.Calendar;
 import auctioncentral.model.Contact;
@@ -47,10 +48,10 @@ public class ContactHomeView extends AbstractScreen {
         add(addAuctionButton, c);
 
         editAuctionButton.addActionListener(e -> {
-            getRoot().addScreen(new ContactEditAuctionView(auction));
+            getRoot().addScreen(new StatusBorder(new ContactEditAuctionView(auction)));
         });
         addAuctionButton.addActionListener(e -> {
-            getRoot().addScreen(new ContactAddAuctionView());
+            getRoot().addScreen(new StatusBorder(new ContactAddAuctionView()));
         });
 
     }

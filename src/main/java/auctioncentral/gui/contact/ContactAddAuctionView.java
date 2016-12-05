@@ -2,6 +2,7 @@ package auctioncentral.gui.contact;
 
 
 import auctioncentral.gui.AbstractScreen;
+import auctioncentral.gui.StatusBorder;
 import auctioncentral.model.Auction;
 import auctioncentral.model.Calendar;
 import auctioncentral.model.Contact;
@@ -24,7 +25,6 @@ public class ContactAddAuctionView extends AbstractScreen {
     private Auction newAuction;
 
     private JLabel auctionTitle;
-    private JLabel DateLabel;
     private JLabel CommentLabel;
     private JLabel numOfItemsLabel;
 
@@ -100,11 +100,11 @@ public class ContactAddAuctionView extends AbstractScreen {
             }else{
                 JOptionPane.showMessageDialog(this,"Successfully added your Auction on: " + date);
                 Calendar.inst().addAuction(newAuction);
-                getRoot().addScreen(new ContactHomeView());
+                getRoot().addScreen(new StatusBorder(new ContactHomeView()));
             }
         });
         returnHomeButton.addActionListener(e -> {
-            getRoot().addScreen(new ContactHomeView());
+            getRoot().addScreen(new StatusBorder(new ContactHomeView()));
         });
 
         Box vertBox = Box.createVerticalBox();

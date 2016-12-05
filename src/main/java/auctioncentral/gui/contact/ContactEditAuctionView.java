@@ -1,6 +1,7 @@
 package auctioncentral.gui.contact;
 
 import auctioncentral.gui.AbstractScreen;
+import auctioncentral.gui.StatusBorder;
 import auctioncentral.model.Auction;
 import auctioncentral.model.Calendar;
 import auctioncentral.model.Item;
@@ -31,12 +32,12 @@ public class ContactEditAuctionView extends AbstractScreen {
 
         addItemButton = new JButton("Add new Item");
         addItemButton.addActionListener(e -> {
-            getRoot().addScreen(new ContactAddItemView(auction));
+            getRoot().addScreen(new StatusBorder(new ContactAddItemView(auction)));
         });
 
         homeButton = new JButton("Back");
         homeButton.addActionListener(e -> {
-            getRoot().addScreen(new ContactHomeView());
+            getRoot().addScreen(new StatusBorder(new ContactHomeView()));
         });
 
         cancelAuctionButton = new JButton("Cancel Auction");
@@ -45,7 +46,7 @@ public class ContactEditAuctionView extends AbstractScreen {
                 if (Calendar.inst().canCancelAuction(auction)) {
                     Calendar.inst().cancelAuction(auction);
                     JOptionPane.showMessageDialog(this, "Auction cancelled successfully");
-                    getRoot().addScreen(new ContactHomeView());
+                    getRoot().addScreen(new StatusBorder(new ContactHomeView()));
                 } else {
                     JOptionPane.showMessageDialog(this, "Auctions can only be cancelled if they are " + Calendar.CANCEL_MAX_DAYS_AWAY +
                             "+ days away");

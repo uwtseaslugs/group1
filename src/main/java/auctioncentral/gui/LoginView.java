@@ -37,7 +37,7 @@ public class LoginView extends AbstractScreen {
                 if (user instanceof Staff) {
                     getRoot().addScreen(new StaffHomeView());
                 } else if (user instanceof Contact) {
-                    getRoot().addScreen(new ContactHomeView());
+                    getRoot().addScreen(new StatusBorder(new ContactHomeView()));
                 } else if (user instanceof Bidder) {
                     getRoot().addScreen(new BidderHomeView());
                 }

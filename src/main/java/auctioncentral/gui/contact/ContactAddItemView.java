@@ -1,6 +1,7 @@
 package auctioncentral.gui.contact;
 
 import auctioncentral.gui.AbstractScreen;
+import auctioncentral.gui.StatusBorder;
 import auctioncentral.model.Auction;
 import auctioncentral.model.Item;
 import auctioncentral.model.ItemCondition;
@@ -123,7 +124,7 @@ public class ContactAddItemView extends AbstractScreen {
                         comment)
                 );
                 JOptionPane.showMessageDialog(this, "Item added successfully");
-                getRoot().addScreen(new ContactEditAuctionView(auction));
+                getRoot().addScreen(new StatusBorder(new ContactEditAuctionView(auction)));
             }
         });
     }
