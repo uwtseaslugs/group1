@@ -29,7 +29,7 @@ public class StaffAdminMenu extends AbstractMenu {
     @Override
     public String getBody() {
         return "What would you like to do in the Admin Menu?\n" +
-                "1. Add Maximum number of Auctionaas\n" +
+                "1. Add Maximum number of Auctions\n" +
                 "2. Exit AuctionCentral";
     }
 
