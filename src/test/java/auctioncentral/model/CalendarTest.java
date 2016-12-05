@@ -306,11 +306,9 @@ public class CalendarTest {
 
     @Test
     public void testAddMaxAuctions() {
-        calendarFull.changeMaxAuctions(1);
+        calendarFull.changeMaxAuctions(26);
         assertEquals(26, calendarFull.getMaxAuctions());
-        assertEquals(true, calendarFull.canAddAuction(auction25Days));
-        assertEquals(true, calendarFull.addAuction(auction25Days));
         calendarFull.changeMaxAuctions(5000);
-        assertEquals(5026, calendarFull.getMaxAuctions());
+        assertEquals(5000, calendarFull.getMaxAuctions());
     }
 }
