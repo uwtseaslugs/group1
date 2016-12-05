@@ -11,7 +11,13 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         AuctionTest.class,
         CalendarTest.class,
-        ItemTest.class
+        ItemTest.class,
+        AddItemAcceptanceTest.class,
+        CancelAuctionAcceptanceTest.class,
+        PlaceBidAcceptanceTest.class,
+        RemoveItemAccpetanceTest.class,
+        SubmitAuctionAcceptanceTest.class,
+
 })
 public class TestSuite {
 }

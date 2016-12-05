@@ -6,6 +6,7 @@ package auctioncentral.model;
 
 import java.math.*;
 import java.util.*;
+import java.util.Calendar;
 
 /**
  * An inventory item in an auction

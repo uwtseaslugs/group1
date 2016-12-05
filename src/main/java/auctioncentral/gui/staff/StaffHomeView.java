@@ -1,5 +1,7 @@
 package auctioncentral.gui.staff;
-
+/**
+ * @author Jon
+ */
 
 import auctioncentral.gui.*;
 import auctioncentral.model.Calendar;
