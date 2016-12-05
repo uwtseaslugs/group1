@@ -81,23 +81,24 @@ public class ContactEditAuctionView extends AbstractScreen {
         add(itemsPane, c);
         add(Box.createRigidArea(new Dimension(0, 10)), c);
         c.gridwidth = 1;
+        c.anchor = GridBagConstraints.LINE_START;
         add(homeButton, c);
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.anchor = GridBagConstraints.LINE_END;
         add(addItemButton, c);
 
-        c.anchor = GridBagConstraints.CENTER;
         c.gridwidth = GridBagConstraints.REMAINDER;
-        add(Box.createRigidArea(new Dimension(0, 40)), c);
+        add(Box.createRigidArea(new Dimension(0, 10)), c);
         add(cancelAuctionButton, c);
+        add(Box.createRigidArea(new Dimension(0, 10)), c);
 
-        c.anchor = GridBagConstraints.SOUTH;
-        add(removeItemLabel);
-        add(removeItemText);
+        c.gridwidth = 1;
+
+        c.anchor = GridBagConstraints.LINE_END;
+        add(removeItemLabel, c);
+        add(removeItemText, c);
         add(removeItemButton,c);
-
-
-
+        
         itemsPane.setPreferredSize(new Dimension(400, 250));
     }
 
