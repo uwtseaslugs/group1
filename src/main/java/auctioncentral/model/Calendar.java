@@ -334,6 +334,9 @@ public class Calendar extends SerializeOnExit implements ICalendar {
      * @param addAuctions
      */
     public void changeMaxAuctions(int addAuctions) {
+        if (addAuctions <= 0) {
+            addAuctions = 0;
+        }
         maxAuctions = addAuctions;
     }
 
