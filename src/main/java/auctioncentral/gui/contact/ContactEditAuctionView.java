@@ -18,10 +18,14 @@ public class ContactEditAuctionView extends AbstractScreen {
     private JButton addItemButton;
     private JButton homeButton;
     private JButton cancelAuctionButton;
+    private JButton removeItemButton;
+    private JTextField removeItemText;
+    private JLabel removeItemLabel;
+
+    private int indexOfItem;
 
     public ContactEditAuctionView(Auction auction) {
         this.auction = auction;
-
         itemsPanel = new JPanel();
         itemsPane = new JScrollPane(itemsPanel);
         itemsPanel.setLayout(new GridLayout(auction.getItems().size() + 2, 2, 10, 10));
@@ -29,10 +33,7 @@ public class ContactEditAuctionView extends AbstractScreen {
         itemsPanel.add(new JLabel("Min Bid"));
         itemsPanel.add(new JLabel(""));
         itemsPanel.add(new JLabel(""));
-        for (Item item : auction.getItems()) {
-            itemsPanel.add(new JLabel(item.getName()));
-            itemsPanel.add(new JLabel("$" + item.getMinimumBid()));
-        }
+        updateItems();
 
         addItemButton = new JButton("Add new Item");
         addItemButton.addActionListener(e -> {
@@ -58,6 +59,26 @@ public class ContactEditAuctionView extends AbstractScreen {
             }
 
         });
+        removeItemText = new JTextField(3);
+        removeItemLabel = new JLabel("Enter Index of Item to be removed: ");
+        removeItemButton = new JButton("Remove Item");
+        removeItemButton.addActionListener(e -> {
+            String num = removeItemText.getText();
+            indexOfItem = Integer.parseInt(num);
+
+            if (JOptionPane.showConfirmDialog(this, "Warning! Are you sure you want to remove item# " + indexOfItem
+                + " from this Auctiom") == JOptionPane.OK_OPTION) {
+                if(auction.canRemoveItem(auction.getItems().get(indexOfItem))){
+                    auction.removeItem(auction.getItems().get(indexOfItem));
+                    updateItems();
+                    JOptionPane.showMessageDialog(this, "Item has been removed successfully");
+                }else{
+                    JOptionPane.showMessageDialog(this, "Auctions can only be cancelled if they are " + Calendar.CANCEL_MAX_DAYS_AWAY +
+                            "+ days away");
+                }
+            }
+
+        });
 
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -76,9 +97,22 @@ public class ContactEditAuctionView extends AbstractScreen {
         add(Box.createRigidArea(new Dimension(0, 40)), c);
         add(cancelAuctionButton, c);
 
+        c.anchor = GridBagConstraints.SOUTH;
+        add(removeItemLabel);
+        add(removeItemText);
+        add(removeItemButton,c);
+
+
+
         itemsPane.setPreferredSize(new Dimension(400, 250));
     }
 
+   public void updateItems(){
+       for (Item item : auction.getItems()) {
+           itemsPanel.add(new JLabel(item.getName()));
+           itemsPanel.add(new JLabel("$" + item.getMinimumBid()));
+       }
+   }
     @Override
     public void update(Observable o, Object arg) {
 

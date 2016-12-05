@@ -77,16 +77,34 @@ public class Auction implements Serializable, Comparable<Auction> {
         }
         items.add(newItem);
     }
-    public boolean removeItem(Item i) {
+
+    /**
+     *
+     * @param i item to check if you can remove it.
+     * @return true of false if it follows buiness rules
+     */
+    public boolean canRemoveItem(Item i){
+        if(i == null){
+            return false;
+        }
         Date now = new Date();
         java.util.Calendar jCalendar = Calendar.getInstance();
         jCalendar.setTime(now);
         jCalendar.add(java.util.Calendar.DATE, 2);
-        Date twoDaysFromNow = jCalendar.getTime();
-        if (date.before(twoDaysFromNow)) {
-            return false;
+        return jCalendar.getTime().before(date) && items.contains(i);
+    }
+
+    /**
+     *
+     * @param i item to remove
+     * throws illegal argument expection if can't remove
+     */
+    public void removeItem(Item i) {
+
+        if (canRemoveItem(i)) {
+            items.remove(i);
         } else{
-            return items.remove(i);
+            throw new IllegalArgumentException();
         }
     }
 
