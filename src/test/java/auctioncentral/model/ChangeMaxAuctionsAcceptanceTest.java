@@ -24,28 +24,28 @@ public class ChangeMaxAuctionsAcceptanceTest {
     /*
      * BR: Can change max auctions to a number higher than 0.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testChangeMaxAuctionAboveZero(){
         emptyCalendar.changeMaxAuctions(1);
-        assertEquals(emptyCalendar.inst().getMaxAuctions(), 1);
+        assertEquals(emptyCalendar.getMaxAuctions(), 1);
     }
 
     /*
     * BR: Can change max auctions to 0.
     */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testChangeMaxAuctionZero(){
         emptyCalendar.changeMaxAuctions(0);
-        assertEquals(emptyCalendar.inst().getMaxAuctions(), 0);
+        assertEquals(emptyCalendar.getMaxAuctions(), 0);
     }
 
     /*
     * BR: Cannot change max auctions to a number lesser than 0.
     */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testChangeMaxAuctionLessThanZero(){
         emptyCalendar.changeMaxAuctions(-1);
-        assertEquals(emptyCalendar.inst().getMaxAuctions(), 0);
+        assertEquals(emptyCalendar.getMaxAuctions(), 0);
     }
 
 }
