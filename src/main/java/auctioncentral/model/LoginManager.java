@@ -12,7 +12,7 @@ import java.util.Map;
  * Handles the authentication and storage of Users
  * @author Hunter
  */
-public class LoginManager implements ILoginManager, Serializable {
+public class LoginManager extends SerializeOnExit implements ILoginManager, Serializable {
     private static LoginManager myInst = null;
     public static LoginManager inst() {
         if (myInst == null) {
@@ -33,6 +33,11 @@ public class LoginManager implements ILoginManager, Serializable {
 
     public LoginManager() {
         users = new HashMap<>();
+    }
+
+    @Override
+    public String getSerializedName() {
+        return "loginmanager";
     }
 
     /**

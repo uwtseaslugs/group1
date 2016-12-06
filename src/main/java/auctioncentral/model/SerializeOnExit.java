@@ -1,8 +1,10 @@
 package auctioncentral.model;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.ArrayList;
-//import java.io.Serializable;
 import java.io.*;
 
 public abstract class SerializeOnExit implements Serializable {
