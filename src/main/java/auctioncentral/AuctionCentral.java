@@ -21,12 +21,12 @@ public class AuctionCentral {
     private static String SER_SAVE_FILE_PREFIX = "last";
 
     public static void main(String[] args) throws IOException {
-        make24AuctionsSER();
+//        make24AuctionsSER();
 
-//        String fileText = new String(Files.readAllBytes(Paths.get(CONFIG_FILE)), StandardCharsets.UTF_8);
-//        String[] fileNames = fileText.split("\n");
-//        Calendar.setInst((Calendar) deserializeFrom(fileNames[0].trim()));
-//        LoginManager.setInstance((LoginManager) deserializeFrom(fileNames[1].trim()));
+        String fileText = new String(Files.readAllBytes(Paths.get(CONFIG_FILE)), StandardCharsets.UTF_8);
+        String[] fileNames = fileText.split("\n");
+        Calendar.setInst((Calendar) deserializeFrom(fileNames[0].trim()));
+        LoginManager.setInstance((LoginManager) deserializeFrom(fileNames[1].trim()));
 
         Window window = new Window();
         window.addScreen(new LoginView(window));
