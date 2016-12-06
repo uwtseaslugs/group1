@@ -97,6 +97,9 @@ public class AuctionCentral {
         cc.setTime(new Date());
         Contact within2days = ((Contact) lm.getUser("contact47"));
         cc.add(java.util.Calendar.DATE, 1);
-        cal.faddAuction(new Auction(within2days, cc.getTime(), null, null));
+        Auction aa = new Auction(within2days, cc.getTime(), null, null);
+        cal.faddAuction(aa);
+        aa.addItem(new Item("itemname", ItemCondition.ACCEPTABLE, ItemSize.LARGE, 5, null, null, null));
+
     }
 }
