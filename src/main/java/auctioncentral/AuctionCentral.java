@@ -15,19 +15,18 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class AuctionCentral /*implements Serializable*/ {
+public class AuctionCentral {
 
-    private static String CONFIG_FILE = "config.txt";
-    private static String SER_SAVE_FILE = "last.ser";
+    private static final String CONFIG_FILE = "config.txt";
+    private static String SER_SAVE_FILE_PREFIX = "last";
 
     public static void main(String[] args) throws IOException {
         make24AuctionsSER();
 
-//        String serFileName = new String(Files.readAllBytes(Paths.get(CONFIG_FILE)), StandardCharsets.UTF_8);
-//        AuctionCentral ac = (AuctionCentral) deserializeFrom(serFileName);
-
-        //LoginManager.setInstance(ac.getLoginManager());
-        //Calendar.setInst(ac.getCalendar());
+//        String fileText = new String(Files.readAllBytes(Paths.get(CONFIG_FILE)), StandardCharsets.UTF_8);
+//        String[] fileNames = fileText.split("\n");
+//        Calendar.setInst((Calendar) deserializeFrom(fileNames[0].trim()));
+//        LoginManager.setInstance((LoginManager) deserializeFrom(fileNames[1].trim()));
 
         Window window = new Window();
         window.addScreen(new LoginView(window));
@@ -35,22 +34,9 @@ public class AuctionCentral /*implements Serializable*/ {
         window.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                //serializeTo(this, SER_SAVE_FILE);
-                SerializeOnExit.execute("last");
+                SerializeOnExit.execute(SER_SAVE_FILE_PREFIX);
             }
         });
-    }
-    /*
-    private static void serializeTo(Object o, String fileName) {
-        try {
-            FileOutputStream fos = new FileOutputStream(fileName);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(o);
-            oos.close();
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private static Object deserializeFrom(String fileName) {
@@ -66,7 +52,7 @@ public class AuctionCentral /*implements Serializable*/ {
             return null;
         }
     }
-    */
+
     private static void make24AuctionsSER() {
         LoginManager lm = new LoginManager();
         LoginManager.setInstance(lm);
@@ -93,6 +79,15 @@ public class AuctionCentral /*implements Serializable*/ {
                 c.add(java.util.Calendar.DATE, 1);
             }
         }
-        //return new AuctionCentral(lm, cal);
+
+        java.util.Calendar cc = java.util.Calendar.getInstance();
+        cc.setTime(new Date());
+        cc.add(java.util.Calendar.YEAR, -2);
+        Contact contact2YrsAgo = ((Contact) lm.getUser("contact49"));
+        cal.faddAuction(new Auction(contact2YrsAgo, cc.getTime(), null, null));
+        Contact contact11MonthsAgo = ((Contact) lm.getUser("contact48"));
+        cc.add(java.util.Calendar.YEAR, 1);
+        cc.add(java.util.Calendar.MONTH, 1);
+        cal.faddAuction(new Auction(contact11MonthsAgo, cc.getTime(), null, null));
     }
 }
