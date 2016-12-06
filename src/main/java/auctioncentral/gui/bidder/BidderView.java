@@ -35,18 +35,18 @@ public abstract class BidderView extends AbstractScreen{
         c.anchor = GridBagConstraints.FIRST_LINE_START;
         setGrid(0,0);
         gbl.setConstraints(user, c);
-        setGrid(1,0);
-        gbl.setConstraints(userLabel, c);
         setGrid(0,1);
+        gbl.setConstraints(userLabel, c);
+        setGrid(1,0);
         gbl.setConstraints(dateLabel, c);
         setGrid(1,1);
         gbl.setConstraints(auctionLabel, c);
-        setGrid(2,1);
-        setWeight(1,1);
+        setGrid(1,2);
+//        setWeight(0.5,0.5);
         gbl.setConstraints(auctionNumberLabel, c);
-        setWeight(0,0);
+//        setWeight(0.0,0.0);
         c.anchor = GridBagConstraints.LAST_LINE_END;
-        setGrid(3,5);
+        setGrid(5,4);
         gbl.setConstraints(exitButton, c);
 
         add(user);
@@ -60,14 +60,14 @@ public abstract class BidderView extends AbstractScreen{
 
     }
 
-    public void setGrid(int x, int y){
-        c.gridx = x;
+    public void setGrid(int y, int x){
         c.gridy = y;
+        c.gridx = x;
     }
 
-    public void setWeight(int xWeight, int yWeight){
-        c.weightx = xWeight;
+    public void setWeight(double yWeight,double xWeight){
         c.weighty = yWeight;
+        c.weightx = xWeight;
     }
 
 }
