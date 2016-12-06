@@ -1,18 +1,26 @@
 package auctioncentral.gui.contact;
 
 import auctioncentral.gui.AbstractScreen;
+import auctioncentral.gui.StatusBorder;
 import auctioncentral.model.Auction;
 import auctioncentral.model.Calendar;
 import auctioncentral.model.Item;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
 import java.util.Observable;
 
+/**
+ * @author Hunter, Jon
+ */
 public class ContactEditAuctionView extends AbstractScreen {
+
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh a");
 
     private Auction auction;
 
+    private JLabel auctionLabel;
     private JScrollPane itemsPane;
     private JPanel itemsPanel;
     private JButton addItemButton;
@@ -26,17 +34,18 @@ public class ContactEditAuctionView extends AbstractScreen {
 
     public ContactEditAuctionView(Auction auction) {
         this.auction = auction;
+        auctionLabel = new JLabel("Editing auction on " + dateFormat.format(auction.getDate()));
         itemsPane = new JScrollPane(itemsPanel);
         updateItems();
 
         addItemButton = new JButton("Add new Item");
         addItemButton.addActionListener(e -> {
-            getRoot().addScreen(new ContactAddItemView(auction));
+            getRoot().addScreen(new StatusBorder(new ContactAddItemView(auction)));
         });
 
         homeButton = new JButton("Back");
         homeButton.addActionListener(e -> {
-            getRoot().addScreen(new ContactHomeView());
+            getRoot().addScreen(new StatusBorder(new ContactHomeView()));
         });
 
         cancelAuctionButton = new JButton("Cancel Auction");
@@ -45,9 +54,9 @@ public class ContactEditAuctionView extends AbstractScreen {
                 if (Calendar.inst().canCancelAuction(auction)) {
                     Calendar.inst().cancelAuction(auction);
                     JOptionPane.showMessageDialog(this, "Auction cancelled successfully");
-                    getRoot().addScreen(new ContactHomeView());
+                    getRoot().addScreen(new StatusBorder(new ContactHomeView()));
                 } else {
-                    JOptionPane.showMessageDialog(this, "Auctions can only be cancelled if they are " + Calendar.CANCEL_MAX_DAYS_AWAY +
+                    JOptionPane.showMessageDialog(this, "Auctions can only be cancelled if they are " + Calendar.CANCEL_MIN_DAYS_AWAY +
                             "+ days away");
                 }
             }
@@ -58,7 +67,13 @@ public class ContactEditAuctionView extends AbstractScreen {
         removeItemButton = new JButton("Remove Item");
         removeItemButton.addActionListener(e -> {
             String num = removeItemText.getText();
-            indexOfItem = Integer.parseInt(num);
+            try {
+                indexOfItem = Integer.parseInt(num);
+                if (indexOfItem < 0 || indexOfItem >= auction.getItems().size()) throw new NumberFormatException();
+            } catch (NumberFormatException e1) {
+                JOptionPane.showMessageDialog(this, "Invalid item number");
+                return;
+            }
 
             if (JOptionPane.showConfirmDialog(this, "Warning! Are you sure you want to remove item# " + indexOfItem
                 + " from this Auctiom") == JOptionPane.OK_OPTION) {
@@ -67,7 +82,7 @@ public class ContactEditAuctionView extends AbstractScreen {
                     updateItems();
                     JOptionPane.showMessageDialog(this, "Item has been removed successfully");
                 }else{
-                    JOptionPane.showMessageDialog(this, "Auctions can only be cancelled if they are " + Calendar.CANCEL_MAX_DAYS_AWAY +
+                    JOptionPane.showMessageDialog(this, "Items can only be removed if auction is " + Auction.REMOVE_ITEM_MIN_DAYS_AWAY +
                             "+ days away");
                 }
             }
@@ -78,6 +93,8 @@ public class ContactEditAuctionView extends AbstractScreen {
         GridBagConstraints c = new GridBagConstraints();
         c.gridwidth = GridBagConstraints.REMAINDER;
 
+        add(auctionLabel, c);
+        add(Box.createRigidArea(new Dimension(0, 10)), c);
         add(itemsPane, c);
         add(Box.createRigidArea(new Dimension(0, 10)), c);
         c.gridwidth = 1;

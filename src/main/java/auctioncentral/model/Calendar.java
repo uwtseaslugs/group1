@@ -278,7 +278,7 @@ public class Calendar extends SerializeOnExit implements ICalendar {
     }
 
 
-    public static final int CANCEL_MAX_DAYS_AWAY = 2;
+    public static final int CANCEL_MIN_DAYS_AWAY = 2;
 
     /**
      *
@@ -292,7 +292,7 @@ public class Calendar extends SerializeOnExit implements ICalendar {
         Date now = new Date();
         java.util.Calendar target = getJavaCalendar();
         target.setTime(now);
-        target.add(java.util.Calendar.DATE, CANCEL_MAX_DAYS_AWAY);
+        target.add(java.util.Calendar.DATE, CANCEL_MIN_DAYS_AWAY);
         return target.getTime().before(auction.getDate()) && auctions.contains(auction);
     }
 
@@ -334,6 +334,9 @@ public class Calendar extends SerializeOnExit implements ICalendar {
      * @param addAuctions
      */
     public void changeMaxAuctions(int addAuctions) {
+        if (addAuctions <= 0) {
+            addAuctions = 0;
+        }
         maxAuctions = addAuctions;
     }
 

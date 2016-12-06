@@ -29,7 +29,7 @@ public class AuctionCentral /*implements Serializable*/ {
         //LoginManager.setInstance(ac.getLoginManager());
         //Calendar.setInst(ac.getCalendar());
 
-        Window window = new Window(new LoginView());
+        Window window = new Window(new StatusBorder(new LoginView()));
         window.start();
         window.addWindowListener(new WindowAdapter() {
             @Override
@@ -70,9 +70,9 @@ public class AuctionCentral /*implements Serializable*/ {
         LoginManager lm = new LoginManager();
         LoginManager.setInstance(lm);
         for (int i = 0; i < 50; i++) {
-            lm.register(new Bidder("bidder" + i, "bidder" + i + "name"));
-            lm.register(new Staff("staff" + i, "staff" + i + "name"));
-            lm.register(new Contact("contact" + i, "contact" + i + "name", "nonprofit" + i));
+            lm.register(new Bidder("bidder" + i, "Bidder" + i + "Name"));
+            lm.register(new Staff("staff" + i, "Staff" + i + "Name"));
+            lm.register(new Contact("contact" + i, "Contact" + i + "Name", "Nonprofit" + i + "Name"));
         }
         Random r = new Random();
         Calendar cal = new Calendar();

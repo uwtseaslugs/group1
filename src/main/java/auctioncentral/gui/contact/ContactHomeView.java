@@ -1,6 +1,7 @@
 package auctioncentral.gui.contact;
 
 import auctioncentral.gui.AbstractScreen;
+import auctioncentral.gui.StatusBorder;
 import auctioncentral.model.Auction;
 import auctioncentral.model.Calendar;
 import auctioncentral.model.Contact;
@@ -11,6 +12,9 @@ import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Observable;
 
+/**
+ * @author Hunter
+ */
 public class ContactHomeView extends AbstractScreen {
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh a");
@@ -25,7 +29,7 @@ public class ContactHomeView extends AbstractScreen {
 
 
         editAuctionButton = new JButton("Edit auction");
-        addAuctionButton = new JButton("Add new auction");
+        addAuctionButton = new JButton("Request new auction");
 
         if (auction != null) {
             auctionLabel = new JLabel("You have an upcoming auction on " + dateFormat.format(auction.getDate()));
@@ -47,10 +51,10 @@ public class ContactHomeView extends AbstractScreen {
         add(addAuctionButton, c);
 
         editAuctionButton.addActionListener(e -> {
-            getRoot().addScreen(new ContactEditAuctionView(auction));
+            getRoot().addScreen(new StatusBorder(new ContactEditAuctionView(auction)));
         });
         addAuctionButton.addActionListener(e -> {
-            getRoot().addScreen(new ContactAddAuctionView());
+            getRoot().addScreen(new StatusBorder(new ContactAddAuctionView()));
         });
 
     }

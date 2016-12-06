@@ -1,6 +1,7 @@
 package auctioncentral.gui.contact;
 
 import auctioncentral.gui.AbstractScreen;
+import auctioncentral.gui.StatusBorder;
 import auctioncentral.model.Auction;
 import auctioncentral.model.Item;
 import auctioncentral.model.ItemCondition;
@@ -8,6 +9,7 @@ import auctioncentral.model.ItemSize;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Observable;
 import java.util.stream.Collectors;
@@ -20,6 +22,9 @@ public class ContactAddItemView extends AbstractScreen {
 
     private Auction auction;
 
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh a");
+
+    private JLabel auctionLabel;
     private JLabel itemNameLabel;
     private JTextField itemNameField;
     private JLabel itemConditionLabel;
@@ -40,6 +45,7 @@ public class ContactAddItemView extends AbstractScreen {
     public ContactAddItemView(Auction auction) {
         this.auction = auction;
 
+        auctionLabel = new JLabel("Adding item to auction on " + dateFormat.format(auction.getDate()));
         itemNameLabel = new JLabel("Name");
         itemNameField = new JTextField(20);
         itemConditionLabel = new JLabel("Condition");
@@ -55,7 +61,7 @@ public class ContactAddItemView extends AbstractScreen {
         itemCommentLabel = new JLabel("Comment for staff (Optional)");
         itemCommentField = new JTextField(40);
         addItemButton = new JButton("Add Item");
-        cancelButton = new JButton("Cancel");
+        cancelButton = new JButton("Back");
         itemSizeCombo.setToolTipText(Stream.of(ItemSize.values()).map(s -> s.name() + ": " + s.getDescription() + ". ").collect(Collectors.joining()));
 
         Box vertBox = Box.createVerticalBox();
@@ -76,6 +82,8 @@ public class ContactAddItemView extends AbstractScreen {
         row4.add(itemMinBidLabel);
         row4.add(Box.createGlue());
         row4.add(itemMinBidSpinner);
+        vertBox.add(auctionLabel);
+        vertBox.add(Box.createRigidArea(new Dimension(0, 20)));
         vertBox.add(row1);
         vertBox.add(Box.createRigidArea(new Dimension(0, 5)));
         vertBox.add(row2);
@@ -123,8 +131,12 @@ public class ContactAddItemView extends AbstractScreen {
                         comment)
                 );
                 JOptionPane.showMessageDialog(this, "Item added successfully");
-                getRoot().addScreen(new ContactEditAuctionView(auction));
+                getRoot().addScreen(new StatusBorder(new ContactEditAuctionView(auction)));
             }
+        });
+
+        cancelButton.addActionListener(e -> {
+            getRoot().addScreen(new StatusBorder(new ContactEditAuctionView(auction)));
         });
     }
 

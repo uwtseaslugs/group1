@@ -91,9 +91,8 @@ public class StaffAdminMenu extends AbstractScreen {
             }
             if (numOfMaxAuctions <= 0) {
                 JOptionPane.showMessageDialog(this, "<html>Maximum Auctions has been set to less than 0. <br>Changed to 0 maximum Auctions.<html>");
-                numOfMaxAuctions = 0;
             } else {
-                JOptionPane.showMessageDialog(this, "Successfully changed to " + numOfMaxAuctions + " to max amount of auctions.");
+                JOptionPane.showMessageDialog(this, "Successfully changed to " + numOfMaxAuctions + " max amount of auctions.");
             }
             Calendar.inst().changeMaxAuctions(numOfMaxAuctions);
             updateAuctions();
