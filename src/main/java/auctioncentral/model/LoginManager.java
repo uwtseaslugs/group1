@@ -32,7 +32,7 @@ public class LoginManager extends SerializeOnExit implements ILoginManager, Seri
 
     private transient User currentUser;
 
-    private Map<String, User> users;
+    public Map<String, User> users;
 
     public LoginManager() {
         users = new HashMap<>();
