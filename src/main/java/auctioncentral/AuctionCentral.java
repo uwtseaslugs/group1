@@ -79,5 +79,15 @@ public class AuctionCentral {
                 c.add(java.util.Calendar.DATE, 1);
             }
         }
+
+        java.util.Calendar cc = java.util.Calendar.getInstance();
+        cc.setTime(new Date());
+        cc.add(java.util.Calendar.YEAR, -2);
+        Contact contact2YrsAgo = ((Contact) lm.getUser("contact49"));
+        cal.faddAuction(new Auction(contact2YrsAgo, cc.getTime(), null, null));
+        Contact contact11MonthsAgo = ((Contact) lm.getUser("contact48"));
+        cc.add(java.util.Calendar.YEAR, 1);
+        cc.add(java.util.Calendar.MONTH, 1);
+        cal.faddAuction(new Auction(contact11MonthsAgo, cc.getTime(), null, null));
     }
 }
