@@ -18,7 +18,7 @@ import java.util.List;
 public class BidderAuctionsView extends AbstractScreen {
     private final int BUTTON_X_DIM = 200;
     private final int BUTTON_Y_DIM = 20;
-    private JButton submit, exitButton;
+    private JButton submit, exitButton, backButton;
     private List<Auction> aList;
     private DefaultListModel listModel;
     private JList list;
@@ -33,7 +33,9 @@ public class BidderAuctionsView extends AbstractScreen {
 
         submit = new JButton("Select Auction");
         submit.setPreferredSize(new Dimension(BUTTON_X_DIM, BUTTON_Y_DIM));
-        exitButton = new JButton("Back");
+        backButton = new JButton("Back to Main Menu");
+        backButton.setPreferredSize(new Dimension(BUTTON_X_DIM, BUTTON_Y_DIM));
+        exitButton = new JButton("Exit ");
         exitButton.setPreferredSize(new Dimension(BUTTON_X_DIM, BUTTON_Y_DIM));
 
         aList = Calendar.inst().getAuctionsPastDate(new Date());
@@ -51,11 +53,14 @@ public class BidderAuctionsView extends AbstractScreen {
         c.gridwidth = GridBagConstraints.REMAINDER;
         add(Box.createVerticalGlue());
         add(listScroll, c);
-        add(Box.createRigidArea(new Dimension(0, 50)), c);
+        add(Box.createRigidArea(new Dimension(0, 30)), c);
 
         add(submit, c);
         add(Box.createRigidArea(new Dimension(0, 5)), c);
 
+        add(backButton, c);
+        backButton.addActionListener(a -> getRoot().addScreen(new BidderHomeView(getRoot())));
+        add(Box.createRigidArea(new Dimension(0, 5)), c);
         list.addListSelectionListener(event -> {
             if (list.getSelectedIndex() != -1)
                 selectedAuction = aList.get(list.getSelectedIndex());
@@ -68,7 +73,8 @@ public class BidderAuctionsView extends AbstractScreen {
         });
 
         add(exitButton, c);
-        exitButton.addActionListener(a -> getRoot().addScreen(new BidderHomeView(getRoot())));
+        exitButton.addActionListener(a -> System.exit(0));
+
 
     }
 

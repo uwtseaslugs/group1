@@ -72,12 +72,10 @@ public class BidderAuctionItemsView extends AbstractScreen {
         });
 
         add(backButton, c);
-        add(Box.createRigidArea(new Dimension(0, 10)), c);
         backButton.addActionListener(a -> getRoot().addScreen(new BidderAuctionsView(w)));
-
+        add(Box.createRigidArea(new Dimension(0, 5)), c);
         add(exitButton, c);
         exitButton.addActionListener(a -> System.exit(0));
-
     }
 
 }
