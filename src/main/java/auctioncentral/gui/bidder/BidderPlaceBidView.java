@@ -38,7 +38,7 @@ public class BidderPlaceBidView extends AbstractScreen {
         placeBidButton = new JButton("Place Bid");
         placeBidButton.setPreferredSize(new Dimension(BUTTON_X_DIM, BUTTON_Y_DIM));
 
-        exitButton = new JButton("Exit Auction Central");
+        exitButton = new JButton("Back");
         exitButton.setPreferredSize(new Dimension(BUTTON_X_DIM, BUTTON_Y_DIM));
 
         c.gridwidth = GridBagConstraints.REMAINDER;
@@ -65,7 +65,7 @@ public class BidderPlaceBidView extends AbstractScreen {
         });
 
         add(exitButton, c);
-        exitButton.addActionListener(a -> System.exit(0));
+        exitButton.addActionListener(a -> getRoot().addScreen(new BidderAuctionItemsView(auction, getRoot())));
     }
 
 }

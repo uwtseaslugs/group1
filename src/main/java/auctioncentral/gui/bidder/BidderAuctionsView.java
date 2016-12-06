@@ -33,7 +33,7 @@ public class BidderAuctionsView extends AbstractScreen {
 
         submit = new JButton("Select Auction");
         submit.setPreferredSize(new Dimension(BUTTON_X_DIM, BUTTON_Y_DIM));
-        exitButton = new JButton("Exit Auction Central");
+        exitButton = new JButton("Back");
         exitButton.setPreferredSize(new Dimension(BUTTON_X_DIM, BUTTON_Y_DIM));
 
         aList = Calendar.inst().getAuctionsPastDate(new Date());
@@ -68,7 +68,7 @@ public class BidderAuctionsView extends AbstractScreen {
         });
 
         add(exitButton, c);
-        exitButton.addActionListener(a -> System.exit(0));
+        exitButton.addActionListener(a -> getRoot().addScreen(new BidderHomeView(getRoot())));
 
     }
 
