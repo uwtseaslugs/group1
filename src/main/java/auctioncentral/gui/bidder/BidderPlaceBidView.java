@@ -1,22 +1,28 @@
 package auctioncentral.gui.bidder;
 
+import auctioncentral.gui.AbstractScreen;
+import auctioncentral.model.Bidder;
 import auctioncentral.model.Item;
-
+import auctioncentral.model.LoginManager;
 import auctioncentral.gui.Window;
-
 import javax.swing.*;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
+import java.awt.*;
+import java.math.BigDecimal;
 import java.util.Observable;
 
-public class BidderPlaceBidView extends BidderView {
+public class BidderPlaceBidView extends AbstractScreen {
+    private final int BUTTON_X_DIM = 200;
+    private final int BUTTON_Y_DIM = 20;
     private JLabel itemNameLabel, itemName, minBidLabel, minBid, itemConditionLabel, itemCondition, inputLabel;
     private JSpinner bidSpinner;
-    private JButton placeBidButton;
+    private JButton placeBidButton, exitButton;
 
-        public BidderPlaceBidView(Item item, Window w) {
-                super(w);
-        setDisplay();
+    public BidderPlaceBidView(Item item, Window w) {
+        super(w);
+        GridBagLayout gbl = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        setLayout(gbl);
+
         int minBidAmt = item.getMinimumBid();
         itemNameLabel = new JLabel("Item Name");
         itemName = new JLabel(item.getName());
@@ -26,42 +32,37 @@ public class BidderPlaceBidView extends BidderView {
         minBid = new JLabel(Integer.toString(minBidAmt));
         inputLabel = new JLabel("Enter Bid Amount");
         bidSpinner = new JSpinner(new SpinnerNumberModel(minBidAmt, minBidAmt, 1_000_000, 1));
+
         placeBidButton = new JButton("Place Bid");
+        placeBidButton.setPreferredSize(new Dimension(BUTTON_X_DIM, BUTTON_Y_DIM));
 
-        c.anchor = GridBagConstraints.FIRST_LINE_START;
-        setGrid(2,1);
-        gbl.setConstraints(itemNameLabel, c);
-        setGrid(2,2);
-        gbl.setConstraints(itemName, c);
+        exitButton = new JButton("Exit Auction Central");
+        exitButton.setPreferredSize(new Dimension(BUTTON_X_DIM, BUTTON_Y_DIM));
 
-        setGrid(3,1);
-        gbl.setConstraints(itemConditionLabel, c);
-        setGrid(3,2);
-        gbl.setConstraints(itemCondition, c);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.anchor = GridBagConstraints.WEST;
 
-        setGrid(4,1);
-        gbl.setConstraints(minBidLabel, c);
-        setGrid(4,2);
-        gbl.setConstraints(minBid, c);
-        setGrid(5,1);
-        gbl.setConstraints(inputLabel, c);
-        setGrid(5,2);
-        gbl.setConstraints(bidSpinner, c);
-        setGrid(5,3);
-        gbl.setConstraints(placeBidButton, c);
+        add(itemNameLabel, c);
+        add(itemName, c);
+        add(itemCondition, c);
+        add(itemConditionLabel, c);
+        add(minBid, c);
+        add(minBidLabel, c);
+        add(inputLabel, c);
+        add(bidSpinner, c);
+        add(placeBidButton, c);
 
-        setWeight(1.0,1.0);
+        placeBidButton.addActionListener(a -> {
+            if (JOptionPane.showConfirmDialog(null, "Confirm Bid", "Do you want to place bid?", JOptionPane.YES_NO_OPTION) ==
+                    JOptionPane.YES_OPTION){
+                item.placeBid((Bidder) LoginManager.inst().getCurrentUser(), new BigDecimal((int) bidSpinner.getValue()));
+                getRoot().popScreen();
+            }
 
-        add(itemNameLabel);
-        add(itemName);
-        add(itemCondition);
-        add(itemConditionLabel);
-        add(minBid);
-        add(minBidLabel);
-        add(inputLabel);
-        add(bidSpinner);
-        add(placeBidButton);
+        });
 
-        placeBidButton.addActionListener(a -> getRoot().popScreen());
+        add(exitButton, c);
+        exitButton.addActionListener(a -> System.exit(0));
     }
+
 }
