@@ -70,7 +70,7 @@ public class AuctionCentral {
         Calendar.setInst(cal);
         java.util.Calendar c = java.util.Calendar.getInstance();
         c.add(java.util.Calendar.DATE, 8);
-        for (int i = 1; i <= 24; i++) {
+        for (int i = 2; i <= 24; i++) {
             Auction a = new Auction((Contact) lm.getUser("contact" + i),
                     c.getTime(), null, null);
             cal.addAuction(a);
@@ -93,5 +93,10 @@ public class AuctionCentral {
         cc.add(java.util.Calendar.YEAR, 1);
         cc.add(java.util.Calendar.MONTH, 1);
         cal.faddAuction(new Auction(contact11MonthsAgo, cc.getTime(), null, null));
+
+        cc.setTime(new Date());
+        Contact within2days = ((Contact) lm.getUser("contact47"));
+        cc.add(java.util.Calendar.DATE, 1);
+        cal.faddAuction(new Auction(within2days, cc.getTime(), null, null));
     }
 }
