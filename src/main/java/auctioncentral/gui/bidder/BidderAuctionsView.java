@@ -9,6 +9,11 @@ import java.awt.*;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author Jason
+ *
+ *
+ */
 
 public class BidderAuctionsView extends AbstractScreen {
     private final int BUTTON_X_DIM = 200;

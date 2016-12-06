@@ -1,3 +1,8 @@
+/**
+ * @author Jason
+ *
+ *
+ */
 package auctioncentral.gui.bidder;
 
 import auctioncentral.gui.AbstractScreen;
@@ -6,7 +11,6 @@ import auctioncentral.gui.Window;
 import javax.swing.*;
 import java.awt.*;
 import java.math.BigDecimal;
-import java.util.Observable;
 
 public class BidderPlaceBidView extends AbstractScreen {
     private final int BUTTON_X_DIM = 200;

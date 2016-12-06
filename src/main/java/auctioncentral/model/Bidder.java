@@ -1,10 +1,7 @@
-/*
-    Deliverable 2 
-    TCSS 360
-    Created by: Sea Slugs
-    
-    Bidder class takes in username and name of the bidder and has a git title class
-
+/**
+ *  Created by: Sea Slugs
+ *
+ *  Bidder class takes in username and name of the bidder and has a git title class
  */
 package auctioncentral.model;
 
