@@ -94,7 +94,12 @@ public class StaffAdminMenu extends AbstractScreen {
 
         addMaxAuctions.addActionListener(e -> {
             String num = maxAuctions.getText();
-            numOfMaxAuctions = Integer.parseInt(num);
+            try {
+                numOfMaxAuctions = Integer.parseInt(num);
+            } catch (NumberFormatException e1) {
+                JOptionPane.showMessageDialog(this, "Input must be a number");
+                return;
+            }
             if (numOfMaxAuctions < currentAuctions) {
                 JOptionPane.showMessageDialog(this, "<html>Maximum Auctions is less than current auctions. <br>Clients will be unable to add new auctions until current auctions are completed.<html>");
             }
