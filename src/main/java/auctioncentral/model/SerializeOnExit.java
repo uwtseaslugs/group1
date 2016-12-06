@@ -17,6 +17,13 @@ public abstract class SerializeOnExit implements Serializable {
 
     public abstract String getSerializedName();
 
+    public void add() {
+        if (!theList.contains(this)) {
+            theList.add(this);
+        }
+
+    }
+
     public static void execute(String prefix) {
         for (SerializeOnExit element : theList) {
             String fname = prefix + "_" + element.getSerializedName() + ".ser";

@@ -13,6 +13,9 @@ import java.util.Map;
  * @author Hunter
  */
 public class LoginManager extends SerializeOnExit implements ILoginManager, Serializable {
+
+    private final long serialVersionUID = 4433452L;
+
     private static LoginManager myInst = null;
     public static LoginManager inst() {
         if (myInst == null) {

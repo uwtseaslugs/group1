@@ -27,6 +27,9 @@ public class AuctionCentral {
         String[] fileNames = fileText.split("\n");
         Calendar.setInst((Calendar) deserializeFrom(fileNames[0].trim()));
         LoginManager.setInstance((LoginManager) deserializeFrom(fileNames[1].trim()));
+        Calendar.inst().add();
+        LoginManager.inst().add();
+
 
         Window window = new Window();
         window.addScreen(new LoginView(window));
@@ -52,6 +55,7 @@ public class AuctionCentral {
             return null;
         }
     }
+
 
     private static void make24AuctionsSER() {
         LoginManager lm = new LoginManager();

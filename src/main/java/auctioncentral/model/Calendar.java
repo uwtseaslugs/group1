@@ -14,6 +14,8 @@ import java.util.stream.*;
 
 public class Calendar extends SerializeOnExit implements ICalendar {
 
+    private final long serialVersionUID = 4433452L;
+
     private TreeSet<Auction> auctions;
     private int maxAuctions;
 

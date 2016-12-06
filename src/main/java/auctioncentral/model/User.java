@@ -40,4 +40,9 @@ public abstract class User implements Serializable {
      * @return a description of the type of user
      */
     public abstract String getTitle();
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof User && ((User)obj).getUsername().equals(getUsername());
+    }
 }
