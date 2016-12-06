@@ -9,7 +9,11 @@ import auctioncentral.model.Contact;
 import auctioncentral.model.LoginManager;
 
 import javax.swing.*;
-import java.awt.*;
+
+import auctioncentral.gui.Window;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -45,7 +49,8 @@ public class ContactAddAuctionView extends AbstractScreen {
     private Integer amountOfItems;
 
 
-    public ContactAddAuctionView(){
+    public ContactAddAuctionView(Window w){
+        super(w);
         titleLabel = new JLabel("Requesting new auction");
         auctionTitle = new JLabel("Date and Time of Auction: (MM/DD/YYYY)");
         hourCombo = new JComboBox<>(IntStream.range(1, 13).mapToObj(a -> "" + a).collect(Collectors.toList()).toArray(new String[0]));
@@ -102,11 +107,11 @@ public class ContactAddAuctionView extends AbstractScreen {
             }else{
                 JOptionPane.showMessageDialog(this,"Successfully added your Auction on: " + date);
                 Calendar.inst().addAuction(newAuction);
-                getRoot().addScreen(new StatusBorder(new ContactHomeView()));
+                getRoot().addScreen(new ContactHomeView(w));
             }
         });
         returnHomeButton.addActionListener(e -> {
-            getRoot().addScreen(new StatusBorder(new ContactHomeView()));
+                getRoot().addScreen(new ContactHomeView(getRoot()));
         });
 
         Box vertBox = Box.createVerticalBox();
@@ -146,10 +151,6 @@ public class ContactAddAuctionView extends AbstractScreen {
         GridBagLayout gbl = new GridBagLayout();
         setLayout(gbl);
         add(vertBox);
-
-    }
-    @Override
-    public void update(Observable o, Object arg) {
 
     }
 }

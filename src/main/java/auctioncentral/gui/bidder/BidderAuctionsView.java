@@ -3,8 +3,10 @@ package auctioncentral.gui.bidder;
 import auctioncentral.model.Auction;
 import auctioncentral.model.Calendar;
 
+import auctioncentral.gui.Window;
+
 import javax.swing.*;
-import java.awt.*;
+import java.awt.GridBagConstraints;
 import java.util.Date;
 import java.util.List;
 import java.util.Observable;
@@ -17,7 +19,8 @@ public class BidderAuctionsView extends BidderView {
     private Auction selectedAuction;
     private JScrollPane listScroll;
 
-    public BidderAuctionsView() {
+    public BidderAuctionsView(Window w) {
+        super(w);
         setDisplay();
         submit = new JButton("Select Auction");
         aList = Calendar.inst().getAuctionsPastDate(new Date());
@@ -42,11 +45,6 @@ public class BidderAuctionsView extends BidderView {
         add(submit);
 
         list.addListSelectionListener(event -> selectedAuction = aList.get(list.getSelectedIndex()));
-        submit.addActionListener(a -> getRoot().addScreen(new BidderAuctionItemsView(selectedAuction)));
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-
+        submit.addActionListener(a -> getRoot().addScreen(new BidderAuctionItemsView(selectedAuction, w)));
     }
 }

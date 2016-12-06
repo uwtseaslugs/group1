@@ -12,7 +12,10 @@ import java.util.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.Observable;
 public class StaffAdminMenu extends AbstractScreen {
     private JButton addMaxAuctions;
@@ -29,7 +32,8 @@ public class StaffAdminMenu extends AbstractScreen {
 
 
 
-    public StaffAdminMenu() {
+    public StaffAdminMenu(Window w) {
+        super(w);
         updateAuctions();
         StaffName = new JLabel(((Staff) LoginManager.inst().getCurrentUser()).getName());
         currentMaxAuctions = new JLabel("<html> Current Auctions: " + currentAuctions + "<br>Current Max Auctions allowed: " + currentNumMaxAuctions);
@@ -101,7 +105,7 @@ public class StaffAdminMenu extends AbstractScreen {
         });
 
         returnToHome.addActionListener(e -> {
-            getRoot().addScreen(new StaffHomeView());
+                getRoot().addScreen(new StaffHomeView(getRoot()));
         });
 
 
@@ -109,10 +113,5 @@ public class StaffAdminMenu extends AbstractScreen {
     public void updateAuctions(){
         currentNumMaxAuctions = Calendar.inst().getMaxAuctions();
         currentAuctions = Calendar.inst().getAuctionsPastDate(new Date()).size();
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-
     }
 }

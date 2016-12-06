@@ -7,7 +7,12 @@ import auctioncentral.model.Calendar;
 import auctioncentral.model.Item;
 
 import javax.swing.*;
-import java.awt.*;
+
+import auctioncentral.gui.Window;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
 import java.text.SimpleDateFormat;
 import java.util.Observable;
 
@@ -32,7 +37,8 @@ public class ContactEditAuctionView extends AbstractScreen {
 
     private int indexOfItem;
 
-    public ContactEditAuctionView(Auction auction) {
+    public ContactEditAuctionView(Auction auction, Window w) {
+        super(w);
         this.auction = auction;
         auctionLabel = new JLabel("Editing auction on " + dateFormat.format(auction.getDate()));
         itemsPane = new JScrollPane(itemsPanel);
@@ -40,12 +46,12 @@ public class ContactEditAuctionView extends AbstractScreen {
 
         addItemButton = new JButton("Add new Item");
         addItemButton.addActionListener(e -> {
-            getRoot().addScreen(new StatusBorder(new ContactAddItemView(auction)));
+                getRoot().addScreen(new ContactAddItemView(auction, getRoot()));
         });
 
         homeButton = new JButton("Back");
         homeButton.addActionListener(e -> {
-            getRoot().addScreen(new StatusBorder(new ContactHomeView()));
+                getRoot().addScreen(new ContactHomeView(getRoot()));
         });
 
         cancelAuctionButton = new JButton("Cancel Auction");
@@ -54,7 +60,7 @@ public class ContactEditAuctionView extends AbstractScreen {
                 if (Calendar.inst().canCancelAuction(auction)) {
                     Calendar.inst().cancelAuction(auction);
                     JOptionPane.showMessageDialog(this, "Auction cancelled successfully");
-                    getRoot().addScreen(new StatusBorder(new ContactHomeView()));
+                    getRoot().addScreen(new ContactHomeView(getRoot()));
                 } else {
                     JOptionPane.showMessageDialog(this, "Auctions can only be cancelled if they are " + Calendar.CANCEL_MIN_DAYS_AWAY +
                             "+ days away");
@@ -134,8 +140,4 @@ public class ContactEditAuctionView extends AbstractScreen {
            id++;
        }
    }
-    @Override
-    public void update(Observable o, Object arg) {
-
-    }
 }

@@ -14,7 +14,8 @@ public class StatusBorder extends AbstractScreen {
 
     private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMMM d, uuuu");
 
-    public StatusBorder(AbstractScreen screen) {
+    public StatusBorder(AbstractScreen screen, Window w) {
+        super(w);
         JLabel loginLabel;
         JLabel dateLabel = new JLabel(" " + dateTimeFormatter.format(LocalDateTime.now()));
         User currentUser = LoginManager.inst().getCurrentUser();
@@ -31,10 +32,5 @@ public class StatusBorder extends AbstractScreen {
         box.add(dateLabel);
         add(box, BorderLayout.NORTH);
         add(screen, BorderLayout.CENTER);
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-
     }
 }

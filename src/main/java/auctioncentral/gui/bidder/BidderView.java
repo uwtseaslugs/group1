@@ -1,11 +1,16 @@
 package auctioncentral.gui.bidder;
 
+import auctioncentral.gui.Window;
 import auctioncentral.gui.AbstractScreen;
 import auctioncentral.model.Calendar;
 import auctioncentral.model.LoginManager;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -13,12 +18,16 @@ import java.util.Date;
 /**
  * Created by Office on 12/3/2016.
  */
-public abstract class BidderView extends AbstractScreen{
+public class BidderView extends AbstractScreen {
     private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMMM d, uuuu");
     private JButton exitButton;
     private JLabel userLabel, user, dateLabel, auctionLabel, auctionNumberLabel;
     GridBagLayout gbl = new GridBagLayout();
     GridBagConstraints c = new GridBagConstraints();
+
+    public BidderView(Window w) {
+        super(w);
+    }
 
     public void setDisplay(){
         user = new JLabel((LoginManager.inst().getCurrentUser()).getName());

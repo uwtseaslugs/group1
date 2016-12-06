@@ -29,7 +29,8 @@ public class AuctionCentral /*implements Serializable*/ {
         //LoginManager.setInstance(ac.getLoginManager());
         //Calendar.setInst(ac.getCalendar());
 
-        Window window = new Window(new StatusBorder(new LoginView()));
+        Window window = new Window();
+        window.addScreen(new LoginView(window));
         window.start();
         window.addWindowListener(new WindowAdapter() {
             @Override

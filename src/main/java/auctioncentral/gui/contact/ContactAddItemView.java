@@ -1,5 +1,6 @@
 package auctioncentral.gui.contact;
 
+import auctioncentral.gui.Window;
 import auctioncentral.gui.AbstractScreen;
 import auctioncentral.gui.StatusBorder;
 import auctioncentral.model.Auction;
@@ -8,7 +9,9 @@ import auctioncentral.model.ItemCondition;
 import auctioncentral.model.ItemSize;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Observable;
@@ -42,7 +45,8 @@ public class ContactAddItemView extends AbstractScreen {
     private JButton addItemButton;
     private JButton cancelButton;
 
-    public ContactAddItemView(Auction auction) {
+    public ContactAddItemView(Auction auction, Window w) {
+        super(w);
         this.auction = auction;
 
         auctionLabel = new JLabel("Adding item to auction on " + dateFormat.format(auction.getDate()));
@@ -131,17 +135,12 @@ public class ContactAddItemView extends AbstractScreen {
                         comment)
                 );
                 JOptionPane.showMessageDialog(this, "Item added successfully");
-                getRoot().addScreen(new StatusBorder(new ContactEditAuctionView(auction)));
+                getRoot().addScreen(new ContactEditAuctionView(auction, getRoot()));
             }
         });
 
         cancelButton.addActionListener(e -> {
-            getRoot().addScreen(new StatusBorder(new ContactEditAuctionView(auction)));
+                getRoot().addScreen(new ContactEditAuctionView(auction, getRoot()));
         });
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-
     }
 }
