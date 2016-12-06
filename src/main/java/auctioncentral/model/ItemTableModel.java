@@ -9,7 +9,7 @@ public class ItemTableModel extends AbstractTableModel {
     private Object[][] data;
 
     public ItemTableModel(Auction auction){
-        colNames = new String[]{"Item Name", "Minimum Bid", "Item Condition"};
+        colNames = new String[]{"Item Name", "Minimum Bid", "Item Condition", "Previous Bid"};
         itemList = auction.getItems();
         data = new Object[itemList.size()][colNames.length];
         tableInit();
@@ -23,6 +23,7 @@ public class ItemTableModel extends AbstractTableModel {
             data[i][0] = item.getName();
             data[i][1] = item.getMinimumBid();
             data[i][2] = item.getCondition();
+            data[i][3] = item.getBid((Bidder) LoginManager.inst().getCurrentUser());
         }
     }
 
@@ -42,6 +43,10 @@ public class ItemTableModel extends AbstractTableModel {
 
     public Object getValueAt(int row, int col) {
         return data[row][col];
+    }
+
+    public Item getItem(int index){
+        return itemList.get(index);
     }
 
 }

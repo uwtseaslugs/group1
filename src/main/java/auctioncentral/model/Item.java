@@ -138,4 +138,9 @@ public class Item implements IItem {
         }
         bids.put(bidder, price);
     }
+
+    public void removeBid(Bidder bidder){
+        bids.remove(bidder);
+    }
+
 }

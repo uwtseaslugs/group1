@@ -2,9 +2,7 @@ package auctioncentral.gui.bidder;
 
 import auctioncentral.gui.AbstractScreen;
 import auctioncentral.gui.Window;
-import auctioncentral.model.Auction;
-import auctioncentral.model.Item;
-import auctioncentral.model.ItemTableModel;
+import auctioncentral.model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +10,7 @@ import java.awt.*;
 public class BidderAuctionItemsView extends AbstractScreen {
     private final int BUTTON_X_DIM = 200;
     private final int BUTTON_Y_DIM = 20;
-    private JButton submit, exitButton;
+    private JButton submitButton, exitButton, backButton;
     private JTable itemTable;
     private Item item;
     JScrollPane tableScroll;
@@ -23,8 +21,10 @@ public class BidderAuctionItemsView extends AbstractScreen {
         GridBagConstraints c = new GridBagConstraints();
         setLayout(gbl);
 
-        submit = new JButton("Select Item");
-        submit.setPreferredSize(new Dimension(BUTTON_X_DIM, BUTTON_Y_DIM));
+        submitButton = new JButton("Select Item");
+        submitButton.setPreferredSize(new Dimension(BUTTON_X_DIM, BUTTON_Y_DIM));
+        backButton = new JButton("Back to Available Auctions");
+        backButton.setPreferredSize(new Dimension(BUTTON_X_DIM, BUTTON_Y_DIM));
         exitButton = new JButton("Exit Auction Central");
         exitButton.setPreferredSize(new Dimension(BUTTON_X_DIM, BUTTON_Y_DIM));
 
@@ -42,16 +42,29 @@ public class BidderAuctionItemsView extends AbstractScreen {
 
         tableScroll = new JScrollPane(itemTable);
         add(tableScroll, c);
+        add(Box.createRigidArea(new Dimension(0, 50)), c);
         itemTable.getSelectionModel().addListSelectionListener(event ->
                 item = auction.getItems().get(itemTable.getSelectedRow()));
 
-        add(submit, c);
-        submit.addActionListener(a -> {
-            if (item != null)
-                getRoot().addScreen(new BidderPlaceBidView(item, w));
-            else
-                JOptionPane.showMessageDialog(this, "No Item Selected");
+        add(submitButton, c);
+        add(Box.createRigidArea(new Dimension(0, 20)), c);
+        submitButton.addActionListener(a -> {
+            if (item == null ) {
+                JOptionPane.showMessageDialog(this, "No Item Selected!!");
+            } else if (item.getBid((Bidder) LoginManager.inst().getCurrentUser()) != null){
+                if (JOptionPane.showConfirmDialog(null, "Do you want to cancel your bid ?", "Cancel Bid",
+                        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    item.removeBid((Bidder) LoginManager.inst().getCurrentUser());
+                    getRoot().addScreen(new BidderAuctionItemsView(auction, w));
+                }
+            } else
+                getRoot().addScreen(new BidderPlaceBidView(auction, itemTable.getSelectedRow(), w));
+
         });
+
+        add(backButton, c);
+        add(Box.createRigidArea(new Dimension(0, 10)), c);
+        backButton.addActionListener(a -> getRoot().addScreen(new BidderAuctionsView(w)));
 
         add(exitButton, c);
         exitButton.addActionListener(a -> System.exit(0));
