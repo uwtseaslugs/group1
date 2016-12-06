@@ -35,9 +35,9 @@ public class StaffAdminMenu extends AbstractScreen {
     public StaffAdminMenu(Window w) {
         super(w);
         updateAuctions();
-        StaffName = new JLabel(((Staff) LoginManager.inst().getCurrentUser()).getName());
+//        StaffName = new JLabel(((Staff) LoginManager.inst().getCurrentUser()).getName());
         currentMaxAuctions = new JLabel("<html> Current Auctions: " + currentAuctions + "<br>Current Max Auctions allowed: " + currentNumMaxAuctions);
-        DateC = new JLabel(date.format(LocalDateTime.now()));
+//        DateC = new JLabel(date.format(LocalDateTime.now()));
         EnterMax = new JLabel("Enter max auctions: ");
         maxAuctions = new JTextField(3);
         addMaxAuctions = new JButton("Change Max Auctions");
@@ -52,39 +52,44 @@ public class StaffAdminMenu extends AbstractScreen {
         c.anchor = GridBagConstraints.FIRST_LINE_START;
         c.gridx = 0;
         c.gridy = 0;
-        gbl.setConstraints(StaffName, c);
+//        gbl.setConstraints(StaffName, c);
         c.gridy = 1;
-        gbl.setConstraints(currentMaxAuctions,c);
+//        gbl.setConstraints(currentMaxAuctions,c);
         c.gridy = 2;
         c.weightx = 1.0;
         c.weighty = 1.0;
-        gbl.setConstraints(DateC,c);
+//        gbl.setConstraints(DateC,c);
 
         c.weighty = 0.0;
         c.weightx = 0.0;
-        c.anchor = GridBagConstraints.CENTER;
-        c.gridx = 1;
-        c.gridy = 3;
-        gbl.setConstraints(EnterMax,c);
-        c.gridx = 2;
-        gbl.setConstraints(maxAuctions,c);
-        c.gridx = 3;
-        gbl.setConstraints(addMaxAuctions,c);
+//        c.anchor = GridBagConstraints.CENTER;
+//        c.gridx = 1;
+//        c.gridy = 3;
+//        gbl.setConstraints(EnterMax,c);
+//        c.gridx = 2;
+//        gbl.setConstraints(maxAuctions,c);
+//        c.gridx = 3;
+//        gbl.setConstraints(addMaxAuctions,c);
 
         c.weighty = 0.0;
         c.weightx = 0.0;
         c.gridx = 3;
         c.gridy = 5;
         c.anchor = GridBagConstraints.LAST_LINE_END;
-        gbl.setConstraints(returnToHome,c);
+//        gbl.setConstraints(returnToHome,c);
 
-        add(currentMaxAuctions);
-        add(StaffName);
-        add(DateC);
-        add(EnterMax);
-        add(maxAuctions);
-        add(addMaxAuctions);
-        add(returnToHome);
+        c = new GridBagConstraints();
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        add(currentMaxAuctions, c);
+//        add(StaffName);
+//        add(DateC);
+        add(Box.createRigidArea(new Dimension(0, 60)), c);
+        add(EnterMax,c);
+        add(maxAuctions,c);
+        add(Box.createRigidArea(new Dimension(0, 60)), c);
+        add(addMaxAuctions,c);
+        add(Box.createRigidArea(new Dimension(0, 5)), c);
+        add(returnToHome,c);
 
 
         addMaxAuctions.addActionListener(e -> {

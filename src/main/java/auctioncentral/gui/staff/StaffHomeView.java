@@ -31,12 +31,12 @@ public class StaffHomeView extends AbstractScreen {
     public StaffHomeView(Window w) {
         super(w);
         
-        StaffName = new JLabel(((Staff) LoginManager.inst().getCurrentUser()).getName());
+//        StaffName = new JLabel(((Staff) LoginManager.inst().getCurrentUser()).getName());
         currentMaxAuction = new JLabel("<html>Current Auctions: " + Calendar.inst().getAuctionsPastDate(new Date()).size() + "<br>Current Max Auctions allowed<html>: " + Calendar.inst().getMaxAuctions());
         viewCalendarButton = new JButton("View Calendar");
         AdminButton = new JButton("Administrative functions");
         exitButton = new JButton("Exit Auction Central");
-        DateLabel = new JLabel(date.format(LocalDateTime.now()));
+//        DateLabel = new JLabel(date.format(LocalDateTime.now()));
 
         GridBagLayout gbl = new GridBagLayout();
         setLayout(gbl);
@@ -47,14 +47,14 @@ public class StaffHomeView extends AbstractScreen {
         c.anchor = GridBagConstraints.FIRST_LINE_START;
         c.gridx = 0;
         c.gridy = 0;
-        gbl.setConstraints(StaffName, c);
+//        gbl.setConstraints(StaffName, c);
         c.gridy = 1;
         gbl.setConstraints(currentMaxAuction,c);
         c.gridy = 2;
 
         c.weightx = 1.0;
         c.weighty = 1.0;
-        gbl.setConstraints(DateLabel,c);
+//        gbl.setConstraints(DateLabel,c);
 
         c.gridx = 3;
         c.weighty = 0.0;
@@ -67,12 +67,18 @@ public class StaffHomeView extends AbstractScreen {
         c.gridy = 6;
         gbl.setConstraints(exitButton, c);
 
-        add(currentMaxAuction);
-        add(StaffName);
-        add(DateLabel);
-        add(viewCalendarButton);
-        add(AdminButton);
-        add(exitButton);
+        c = new GridBagConstraints();
+        c.gridwidth = GridBagConstraints.REMAINDER;
+
+        add(currentMaxAuction, c);
+//        add(StaffName);
+//        add(DateLabel);
+        add(Box.createRigidArea(new Dimension(0, 40)), c);
+        add(viewCalendarButton, c);
+        add(Box.createRigidArea(new Dimension(0, 5)), c);
+        add(AdminButton, c);
+        add(Box.createRigidArea(new Dimension(0, 5)), c);
+        add(exitButton, c);
 
         AdminButton.addActionListener(e -> {
                 getRoot().addScreen(new StaffAdminMenu(getRoot()));
