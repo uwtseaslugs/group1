@@ -93,7 +93,7 @@ public class StaffAdminMenu extends AbstractScreen {
             if (numOfMaxAuctions < currentAuctions) {
                 JOptionPane.showMessageDialog(this, "<html>Maximum Auctions is less than current auctions. <br>Clients will be unable to add new auctions until current auctions are completed.<html>");
             }
-            if (numOfMaxAuctions <= 0) {
+            if (numOfMaxAuctions < 0) {
                 JOptionPane.showMessageDialog(this, "<html>Maximum Auctions has been set to less than 0. <br>Changed to 0 maximum Auctions.<html>");
             } else {
                 JOptionPane.showMessageDialog(this, "Successfully changed to " + numOfMaxAuctions + " max amount of auctions.");
