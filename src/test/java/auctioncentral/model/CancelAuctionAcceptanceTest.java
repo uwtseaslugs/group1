@@ -6,8 +6,9 @@ import static org.junit.Assert.*;
 
 import java.util.Date;
 
-/*
+/**
     As a contact person for a non-profit organization, I want to cancel an auction request.
+    @author Hunter
  */
 public class CancelAuctionAcceptanceTest {
 

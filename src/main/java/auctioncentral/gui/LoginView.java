@@ -11,6 +11,9 @@ import java.awt.GridBagConstraints;
 import java.util.*;
 import javax.swing.*;
 
+/**
+ * @author Hunter
+ */
 public class LoginView extends AbstractScreen {
 
     private JLabel enterUsernamelabel;

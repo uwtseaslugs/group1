@@ -10,6 +10,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 
+/**
+ * @author Hunter
+ */
 public class StatusBorder extends AbstractScreen {
 
     private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMMM d, uuuu");

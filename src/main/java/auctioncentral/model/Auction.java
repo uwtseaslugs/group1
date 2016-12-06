@@ -14,6 +14,7 @@ import java.util.Calendar;
 
 /**
  * An Auction held by a non-profit. Contains Items to be sold.
+ * @author Hunter, Jon
  */
 public class Auction implements Serializable, Comparable<Auction> {
 

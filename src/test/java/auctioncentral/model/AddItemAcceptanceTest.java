@@ -5,9 +5,10 @@ import java.math.BigDecimal;
 import java.util.*;
 import static org.junit.Assert.*;
 
-/*
+/**
     As the contact person for the non-profit organization associated with an auction,
     I want to add an inventory item for this auction.
+    @author Hunter
  */
 public class AddItemAcceptanceTest {
 
