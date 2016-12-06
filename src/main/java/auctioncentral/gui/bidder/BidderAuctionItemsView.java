@@ -7,6 +7,11 @@ import auctioncentral.model.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author Jason
+ *
+ */
+
 public class BidderAuctionItemsView extends AbstractScreen {
     private final int BUTTON_X_DIM = 200;
     private final int BUTTON_Y_DIM = 20;
@@ -54,8 +59,12 @@ public class BidderAuctionItemsView extends AbstractScreen {
             } else if (item.getBid((Bidder) LoginManager.inst().getCurrentUser()) != null){
                 if (JOptionPane.showConfirmDialog(null, "Do you want to cancel your bid ?", "Cancel Bid",
                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    item.removeBid((Bidder) LoginManager.inst().getCurrentUser());
-                    getRoot().addScreen(new BidderAuctionItemsView(auction, w));
+                    if (!auction.canRemoveItem(item)) {
+                        JOptionPane.showMessageDialog(this, "Cannot cancel Bid within 2 days of Auction!");
+                    } else {
+                        item.removeBid((Bidder) LoginManager.inst().getCurrentUser());
+                        getRoot().addScreen(new BidderAuctionItemsView(auction, w));
+                    }
                 }
             } else
                 getRoot().addScreen(new BidderPlaceBidView(auction, itemTable.getSelectedRow(), w));

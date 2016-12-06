@@ -1,3 +1,8 @@
+/**
+ * @author Jason
+ *
+ *
+ */
 package auctioncentral.model;
 
 import javax.swing.table.AbstractTableModel;
@@ -45,8 +50,6 @@ public class ItemTableModel extends AbstractTableModel {
         return data[row][col];
     }
 
-    public Item getItem(int index){
-        return itemList.get(index);
-    }
+
 
 }

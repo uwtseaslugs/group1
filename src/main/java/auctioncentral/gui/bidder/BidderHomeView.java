@@ -5,6 +5,12 @@ import auctioncentral.gui.Window;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author Jason
+ *
+ *
+ */
+
 public class BidderHomeView extends AbstractScreen {
     private JButton viewAuctionsButton, viewPreviousBidsButton, exitButton;
     private final int BUTTON_X_DIM = 200;
