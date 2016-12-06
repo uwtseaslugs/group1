@@ -80,6 +80,8 @@ public class StaffHomeView extends AbstractScreen {
         add(Box.createRigidArea(new Dimension(0, 5)), c);
         add(exitButton, c);
 
+        viewCalendarButton.addActionListener(a -> getRoot().addScreen(new StaffCalendarView(getRoot())));
+
         AdminButton.addActionListener(e -> {
                 getRoot().addScreen(new StaffAdminMenu(getRoot()));
         });
