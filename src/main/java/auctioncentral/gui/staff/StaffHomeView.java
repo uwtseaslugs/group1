@@ -9,7 +9,10 @@ import auctioncentral.model.LoginManager;
 import auctioncentral.model.Staff;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -25,9 +28,9 @@ public class StaffHomeView extends AbstractScreen {
     private JLabel DateLabel;
     private static DateTimeFormatter date = DateTimeFormatter.ofPattern("MMMM d, uuuu");
 
-    public StaffHomeView() {
-
-
+    public StaffHomeView(Window w) {
+        super(w);
+        
         StaffName = new JLabel(((Staff) LoginManager.inst().getCurrentUser()).getName());
         currentMaxAuction = new JLabel("<html>Current Auctions: " + Calendar.inst().getAuctionsPastDate(new Date()).size() + "<br>Current Max Auctions allowed<html>: " + Calendar.inst().getMaxAuctions());
         viewCalendarButton = new JButton("View Calendar");
@@ -72,15 +75,9 @@ public class StaffHomeView extends AbstractScreen {
         add(exitButton);
 
         AdminButton.addActionListener(e -> {
-           getRoot().addScreen(new StaffAdminMenu());
+                getRoot().addScreen(new StaffAdminMenu(getRoot()));
         });
 
         exitButton.addActionListener(a -> System.exit(0));
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-
-
     }
 }

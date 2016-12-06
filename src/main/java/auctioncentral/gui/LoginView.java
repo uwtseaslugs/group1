@@ -5,7 +5,9 @@ import auctioncentral.gui.contact.ContactHomeView;
 import auctioncentral.gui.staff.StaffHomeView;
 import auctioncentral.model.*;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 import java.util.*;
 import javax.swing.*;
 
@@ -15,7 +17,8 @@ public class LoginView extends AbstractScreen {
     private JTextField usernameField;
     private JButton loginButton;
 
-    public LoginView() {
+    public LoginView(Window w) {
+        super(w);
         enterUsernamelabel = new JLabel("Enter username:");
         usernameField = new JTextField(20);
         loginButton = new JButton("Login");
@@ -35,20 +38,15 @@ public class LoginView extends AbstractScreen {
             if (user != null) {
                 LoginManager.inst().setCurrentUser(user);
                 if (user instanceof Staff) {
-                    getRoot().addScreen(new StaffHomeView());
+                    getRoot().addScreen(new StaffHomeView(w));
                 } else if (user instanceof Contact) {
-                    getRoot().addScreen(new StatusBorder(new ContactHomeView()));
+                    getRoot().addScreen(new ContactHomeView(w));
                 } else if (user instanceof Bidder) {
-                    getRoot().addScreen(new BidderHomeView());
+                    getRoot().addScreen(new BidderHomeView(w));
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid username");
             }
         });
-    }
-
-    @Override
-    public void update(Observable o, Object p) {
-        
     }
 }

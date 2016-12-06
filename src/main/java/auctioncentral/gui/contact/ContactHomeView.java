@@ -8,7 +8,11 @@ import auctioncentral.model.Contact;
 import auctioncentral.model.LoginManager;
 
 import javax.swing.*;
-import java.awt.*;
+import auctioncentral.gui.Window;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
 import java.text.SimpleDateFormat;
 import java.util.Observable;
 
@@ -24,7 +28,8 @@ public class ContactHomeView extends AbstractScreen {
     private JButton editAuctionButton;
     private JButton addAuctionButton;
 
-    public ContactHomeView() {
+    public ContactHomeView(Window w) {
+        super(w);
         auction = Calendar.inst().getNextAuctionBy((Contact) LoginManager.inst().getCurrentUser());
 
 
@@ -51,16 +56,11 @@ public class ContactHomeView extends AbstractScreen {
         add(addAuctionButton, c);
 
         editAuctionButton.addActionListener(e -> {
-            getRoot().addScreen(new StatusBorder(new ContactEditAuctionView(auction)));
+                getRoot().addScreen(new ContactEditAuctionView(auction, w));
         });
         addAuctionButton.addActionListener(e -> {
-            getRoot().addScreen(new StatusBorder(new ContactAddAuctionView()));
+            getRoot().addScreen(new ContactAddAuctionView(w));
         });
-
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
 
     }
 }

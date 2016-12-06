@@ -1,13 +1,16 @@
 package auctioncentral.gui.bidder;
 
+import auctioncentral.gui.Window;
+
 import javax.swing.*;
-import java.awt.*;
+import java.awt.GridBagConstraints;
 import java.util.Observable;
 
 public class BidderHomeView extends BidderView {
     private JButton viewAuctionsButton, viewPreviousBids;
 
-    public BidderHomeView() {
+    public BidderHomeView(Window w) {
+            super(w);
         setDisplay();
         viewAuctionsButton = new JButton("View upcoming auctions");
         viewPreviousBids = new JButton("View Previous Bids");
@@ -22,12 +25,7 @@ public class BidderHomeView extends BidderView {
         add(viewAuctionsButton);
         add(viewPreviousBids);
 
-        viewAuctionsButton.addActionListener(a -> getRoot().addScreen(new BidderAuctionsView()));
-        viewPreviousBids.addActionListener(a -> getRoot().addScreen(new BidderHomeView()));
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-
+        viewAuctionsButton.addActionListener(a -> getRoot().addScreen(new BidderAuctionsView(w)));
+        viewPreviousBids.addActionListener(a -> getRoot().addScreen(new BidderHomeView(w)));
     }
 }

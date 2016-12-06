@@ -4,8 +4,11 @@ import auctioncentral.model.Auction;
 import auctioncentral.model.Item;
 import auctioncentral.model.ItemTableModel;
 
+import auctioncentral.gui.Window;
+import java.awt.GridBagConstraints;
+import java.awt.Dimension;
+
 import javax.swing.*;
-import java.awt.*;
 import java.util.Observable;
 
 public class BidderAuctionItemsView extends BidderView {
@@ -14,7 +17,8 @@ public class BidderAuctionItemsView extends BidderView {
     private Item item;
     JScrollPane tableScroll;
 
-    public BidderAuctionItemsView(Auction auction) {
+    public BidderAuctionItemsView(Auction auction, Window w) {
+        super(w);
         setDisplay();
         submit = new JButton("Select Item");
         itemTable = new JTable(new ItemTableModel(auction));
@@ -40,12 +44,6 @@ public class BidderAuctionItemsView extends BidderView {
         add(submit);
         itemTable.getSelectionModel().addListSelectionListener(event ->
                 item = auction.getItems().get(itemTable.getSelectedRow()));
-        submit.addActionListener(a -> getRoot().addScreen(new BidderPlaceBidView(item)));
-
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-
+        submit.addActionListener(a -> getRoot().addScreen(new BidderPlaceBidView(item, w)));
     }
 }

@@ -5,24 +5,22 @@ import javax.swing.*;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 
-public class Window
-    extends JFrame
-    implements Observer/*, ActionListener*/ {
+public class Window extends JFrame {
     
     private Deque<AbstractScreen> myScreenHistory;
     
-    public Window(AbstractScreen initialScreen) {
+    public Window() {
         super("Auction Central");
         myScreenHistory = new LinkedList<AbstractScreen>();
-        initView(initialScreen);
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+        initView();
     }
 
-    private void initView(AbstractScreen initialScreen) {
+    private void initView() {
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setLocationByPlatform(true);
         setPreferredSize(new Dimension(640, 480));
         pack();
-        addScreen(initialScreen);
+        setVisible(true);
     }
 
     public void popScreen() {
@@ -31,18 +29,15 @@ public class Window
     }
 
     public void addScreen(AbstractScreen screen) {
+        screen = new StatusBorder(screen, this);
         myScreenHistory.push(screen);
         switchScreen(screen);
     }
 
     private void switchScreen(AbstractScreen screen) {
         setContentPane(screen);
+        pack();
         setVisible(true);
-    }
-
-    @Override
-    public void update(Observable o, Object p) {
-        
     }
 
     private void guiEntryPoint() {

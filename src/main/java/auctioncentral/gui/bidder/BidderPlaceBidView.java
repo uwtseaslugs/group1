@@ -2,8 +2,11 @@ package auctioncentral.gui.bidder;
 
 import auctioncentral.model.Item;
 
+import auctioncentral.gui.Window;
+
 import javax.swing.*;
-import java.awt.*;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 import java.util.Observable;
 
 public class BidderPlaceBidView extends BidderView {
@@ -11,7 +14,8 @@ public class BidderPlaceBidView extends BidderView {
     private JSpinner bidSpinner;
     private JButton placeBidButton;
 
-    public BidderPlaceBidView(Item item) {
+        public BidderPlaceBidView(Item item, Window w) {
+                super(w);
         setDisplay();
         int minBidAmt = item.getMinimumBid();
         itemNameLabel = new JLabel("Item Name");
@@ -59,10 +63,5 @@ public class BidderPlaceBidView extends BidderView {
         add(placeBidButton);
 
         placeBidButton.addActionListener(a -> getRoot().popScreen());
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-
     }
 }
