@@ -31,7 +31,7 @@ public class BidderPlaceBidView extends AbstractScreen {
         int minBidAmt = item.getMinimumBid();
         itemNameLabel = new JLabel("Item Name:          " + item.getName());
         itemConditionLabel = new JLabel("Item Condition:     " + item.getCondition().toString());
-        minBidLabel = new JLabel("Minimum Bid:       "  + Integer.toString(minBidAmt));
+        minBidLabel = new JLabel("Minimum Bid:       $"  + Integer.toString(minBidAmt));
         inputLabel = new JLabel("Enter Bid Amount:");
         bidSpinner = new JSpinner(new SpinnerNumberModel(minBidAmt, minBidAmt, 1_000_000, 1));
 
@@ -57,7 +57,7 @@ public class BidderPlaceBidView extends AbstractScreen {
         add(placeBidButton, c);
         add(Box.createRigidArea(new Dimension(0, 5)), c);
         placeBidButton.addActionListener(a -> {
-            if (JOptionPane.showConfirmDialog(null, "Do you want to bid " + bidSpinner.getValue()
+            if (JOptionPane.showConfirmDialog(null, "Do you want to bid $" + bidSpinner.getValue()
                             + " for " + item.getName() + "?",
                     "Confirm Bid", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                 item.placeBid((Bidder) LoginManager.inst().getCurrentUser(), new BigDecimal((int) bidSpinner.getValue()));
