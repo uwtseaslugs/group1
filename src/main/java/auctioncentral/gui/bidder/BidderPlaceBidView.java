@@ -17,7 +17,7 @@ public class BidderPlaceBidView extends AbstractScreen {
     private final int BUTTON_Y_DIM = 20;
     private JLabel itemNameLabel, minBidLabel, itemConditionLabel, inputLabel;
     private JSpinner bidSpinner;
-    private JButton placeBidButton, exitButton;
+    private JButton placeBidButton, backButton, exitButton;
     private Auction auction;
 
     public BidderPlaceBidView(Auction auction, int index, Window w) {
@@ -37,8 +37,9 @@ public class BidderPlaceBidView extends AbstractScreen {
 
         placeBidButton = new JButton("Place Bid");
         placeBidButton.setPreferredSize(new Dimension(BUTTON_X_DIM, BUTTON_Y_DIM));
-
-        exitButton = new JButton("Back");
+        backButton = new JButton("Back to Available Items");
+        backButton.setPreferredSize(new Dimension(BUTTON_X_DIM, BUTTON_Y_DIM));
+        exitButton = new JButton("Exit");
         exitButton.setPreferredSize(new Dimension(BUTTON_X_DIM, BUTTON_Y_DIM));
 
         c.gridwidth = GridBagConstraints.REMAINDER;
@@ -54,7 +55,7 @@ public class BidderPlaceBidView extends AbstractScreen {
         add(bidSpinner, c);
         add(Box.createRigidArea(new Dimension(0, 50)), c);
         add(placeBidButton, c);
-        add(Box.createRigidArea(new Dimension(0, 10)), c);
+        add(Box.createRigidArea(new Dimension(0, 5)), c);
         placeBidButton.addActionListener(a -> {
             if (JOptionPane.showConfirmDialog(null, "Do you want to bid " + bidSpinner.getValue()
                             + " for " + item.getName() + "?",
@@ -64,8 +65,11 @@ public class BidderPlaceBidView extends AbstractScreen {
             }
         });
 
+        add(backButton, c);
+        backButton.addActionListener(a -> getRoot().addScreen(new BidderAuctionItemsView(auction, getRoot())));
+        add(Box.createRigidArea(new Dimension(0, 5)), c);
         add(exitButton, c);
-        exitButton.addActionListener(a -> getRoot().addScreen(new BidderAuctionItemsView(auction, getRoot())));
+        exitButton.addActionListener(a -> System.exit(0));
     }
 
 }
